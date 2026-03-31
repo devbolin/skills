@@ -1,0 +1,45 @@
+id: invoice-extractor
+name: Invoice Extractor
+version: 1.0.0
+status: active
+summary: extract structured fields from invoices
+owners:
+  - finance-platform
+
+inputs:
+  - name: file
+    type: pdf
+    required: true
+  - name: locale
+    type: string
+    required: false
+
+outputs:
+  - name: invoice_json
+    type: json
+
+runtime:
+  type: python
+  entry: scripts/run.py
+
+permissions:
+  network: false
+  connectors:
+    - storage:read
+
+compatibility:
+  agents:
+    - name: copilot-chat-agent
+      mode: prompt
+      entry: .github/skills/invoice-extractor/SKILL.md
+    - name: openai-chat
+      mode: tool
+      entry: skills/invoice-extractor/adapters/tool/tool.json
+
+release:
+  channel: stable
+  artifact: invoice-extractor-1.0.0.zip
+
+observability:
+  emit_metrics: true
+  emit_trace: true

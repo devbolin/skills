@@ -1,0 +1,29 @@
+name: skill-ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Basic structure check
+        run: |
+          test -f templates/phase1/skills-finance/repo.yaml
+          test -f templates/phase1/skills-finance/skills/invoice-extractor/skill.yaml
+          test -f templates/phase1/skills-finance/skills/invoice-extractor/adapters/tool/tool.json
+
+      - name: Validate JSON files
+        run: |
+          python3 -m json.tool templates/phase1/skills-finance/skills/invoice-extractor/adapters/tool/tool.json > /dev/null
+          python3 -m json.tool templates/phase1/catalog/index.json > /dev/null
+          python3 -m json.tool templates/phase1/catalog/skills/invoice-extractor.json > /dev/null
+
+      - name: Placeholder tests
+        run: |
+          echo "Add per-skill tests in phase 1 project repositories"

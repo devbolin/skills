@@ -1,0 +1,17 @@
+{
+  "version": "1",
+  "generated_at": "2026-03-31T12:00:00Z",
+  "skills": [
+    {
+      "skill_id": "invoice-extractor",
+      "repo_id": "finance-skills",
+      "repo": "org/skills-finance",
+      "path": "skills/invoice-extractor",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/invoice-extractor.json"
+    }
+  ]
+}

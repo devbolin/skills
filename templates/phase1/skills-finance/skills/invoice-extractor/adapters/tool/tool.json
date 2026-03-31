@@ -1,0 +1,12 @@
+{
+  "name": "invoice-extractor",
+  "description": "Extract invoice fields and return normalized JSON",
+  "input_schema": {
+    "type": "object",
+    "required": ["file"],
+    "properties": {
+      "file": { "type": "string", "description": "Input file path or object id" },
+      "locale": { "type": "string" }
+    }
+  }
+}
