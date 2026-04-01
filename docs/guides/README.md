@@ -4,7 +4,8 @@
 
 | 文档 | 说明 |
 |------|------|
-| [SKILL_AUTHORING.md](./SKILL_AUTHORING.md) | 技能编写与发布完整指南 |
+| [SKILL_AUTHORING.md](./SKILL_AUTHORING.md) | Skill 编写与发布指南（pack.yaml + plugin-first） |
+| [SUBAGENT_AUTHORING.md](./SUBAGENT_AUTHORING.md) | Subagent 设计、配置与协作指南 |
 
 ## 快速链接
 
