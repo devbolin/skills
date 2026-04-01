@@ -2,35 +2,76 @@
 
 本文档对应 `templates/phase1/` 下的模板文件。
 
-## 1. `pack.yaml` 关键字段
-- `id/name/version/owners`: Pack 基础元信息。
-- `distribution.default`: 默认分发模式，固定为 `plugin`。
-- `distribution.enable_skill_artifacts`: 是否允许生成单 Skill artifact（默认 `false`）。
-- `defaults.permissions`: 默认权限边界。
-- `skills`: Skill 列表，最小必需字段为 `id/path/mode/entry`。
+## 1. `pack.yaml` 字段手册
+
+| 字段 | 必需 | 默认值 | 影响流程节点 | 说明 |
+|---|---|---|---|---|
+| `id` | 是 | 无 | 发布、catalog、审计 | Pack 稳定标识 |
+| `name` | 是 | 无 | 文档、发布元数据 | Pack 可读名称 |
+| `version` | 是 | 无 | tag/release/catalog | 版本标识 |
+| `owners` | 是 | 无 | 审核、责任归属 | 维护者列表 |
+| `distribution.default` | 是 | `plugin` | 发布、调用 | 默认分发模式 |
+| `distribution.enable_skill_artifacts` | 是 | `false` | 发布、catalog、调用 | 是否生成单 Skill 产物 |
+| `defaults.permissions` | 是 | 最小权限 | 执行、审计 | 默认权限边界 |
+| `skills[].id` | 是 | 无 | resolve、执行 | Skill 标识 |
+| `skills[].path` | 是 | 无 | CI、打包 | Skill 目录 |
+| `skills[].mode` | 是 | 无 | 执行路由 | prompt/tool/workflow/mcp |
+| `skills[].entry` | 是 | 无 | 执行入口 | 入口文件路径 |
+| `skills[].description` | 否 | 无 | discoverability | 可读描述 |
+| `skills[].adapters` | 否 | 无 | 多工具接入 | 适配器路径映射 |
+
+最小必需字段口径：`skills[]` 仅要求 `id/path/mode/entry`。
 
 ## 2. `SKILL.md` 关键字段
 - `name`: Skill 名称（建议与目录一致）。
 - `description`: 激活描述与触发关键词。
 - 正文：使用场景、边界、调用方式。
 
-## 3. workflow 说明
-- `ci.yml`:
-  - 检查 `pack.yaml` 存在
-  - 校验 skills 入口文件存在
-  - 预留测试入口
-- `release.yml`:
-  - 基于 tag 触发
-  - 默认打包 plugin artifact
-  - 生成 manifest/checksums
-  - 可选生成单 Skill artifact
+## 3. catalog 字段手册
 
-## 4. catalog 说明
-- `index.json` 是入口。
-- 每个 skill 对应单独 `skills/<skill-id>.json`。
-- 记录 `plugin_ref`（默认）与可选 `skill_ref`。
+### 3.1 `index.json`
 
-## 5. 约束建议
+| 字段 | 必需 | 说明 |
+|---|---|---|
+| `version` | 是 | catalog 版本 |
+| `generated_at` | 是 | 生成时间 |
+| `distribution_default` | 是 | 默认分发模式（应为 `plugin`） |
+| `skills[].skill_id` | 是 | Skill 标识 |
+| `skills[].pack_id` | 是 | 归属 Pack |
+| `skills[].channels` | 是 | 通道到版本映射 |
+| `skills[].catalog_entry` | 是 | skill 明细索引路径 |
+| `skills[].plugin_ref` | 是 | 默认消费产物 |
+
+### 3.2 `skills/<skill-id>.json`
+
+| 字段 | 必需 | 说明 |
+|---|---|---|
+| `skill_id` | 是 | Skill 标识 |
+| `pack_id` | 建议 | 归属 Pack（推荐与 index 一致） |
+| `versions.<ver>.channel` | 是 | 所属通道 |
+| `versions.<ver>.plugin_artifact` 或 `artifact` | 是 | 默认发布产物引用 |
+| `versions.<ver>.skill_ref` | 否 | 单 Skill 产物引用 |
+| `versions.<ver>.compatibility` | 建议 | Agent 兼容信息 |
+| `versions.<ver>.permissions` | 建议 | 运行权限声明 |
+
+## 4. workflow 参数说明
+
+| 参数 | 位置 | 默认值 | 影响 |
+|---|---|---|---|
+| `ENABLE_SKILL_ARTIFACTS` | `release.yml` env | `false` | 是否额外生成单 Skill artifact |
+| Tag 触发规则 | `release.yml` on.push.tags | `v*.*.*` | 控制发布触发时机 |
+| CI 分支触发 | `ci.yml` on.push.branches | `main` | 控制结构校验执行 |
+
+## 5. 参数到行为映射
+
+| 条件 | 行为 |
+|---|---|
+| `distribution.default=plugin` | 发布 plugin artifact，resolver 优先使用 `plugin_ref` |
+| `ENABLE_SKILL_ARTIFACTS=false` | 跳过单 Skill 打包 |
+| `ENABLE_SKILL_ARTIFACTS=true` | 增加单 Skill 打包，并在 catalog 增量写入 `skill_ref` |
+| 缺失 `plugin_ref` | resolve 失败，阻断执行 |
+
+## 6. 约束建议
 - 生产消费默认使用 plugin artifact。
 - 单 Skill 分发必须显式开关启用。
 - 所有入口路径必须可解析到仓库文件。
