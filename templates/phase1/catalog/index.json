@@ -1,17 +1,19 @@
 {
   "version": "1",
   "generated_at": "2026-03-31T12:00:00Z",
+  "distribution_default": "plugin",
   "skills": [
     {
       "skill_id": "invoice-extractor",
-      "repo_id": "finance-skills",
-      "repo": "org/skills-finance",
+      "pack_id": "finance-pack",
+      "repo": "org/skills-finance-pack",
       "path": "skills/invoice-extractor",
       "status": "active",
       "channels": {
         "stable": "1.0.0"
       },
-      "catalog_entry": "skills/invoice-extractor.json"
+      "catalog_entry": "skills/invoice-extractor.json",
+      "plugin_ref": "releases/finance-pack-1.0.0-plugin.zip"
     }
   ]
 }

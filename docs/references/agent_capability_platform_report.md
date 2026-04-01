@@ -1,5 +1,8 @@
 # 多 Agent 能力包管理方案汇报
 
+> 状态：历史调研材料（非当前规范）。
+> 当前规范以 `docs/phase1/` 为准，阶段一采用 `pack.yaml` + Plugin-first 分发。
+
 ## 1. 背景与目标
 
 我们当前要解决的问题，不是“如何存几份 prompt”，而是如何用一套统一方式管理一组可复用能力，并让不同 agent/runtime 共同消费。这些能力至少包括两层：第一层是 **skill**，代表最小可复用能力；第二层是 **agent**，代表带角色与技能组合的执行单元。第一阶段要求尽量轻量，只通过 GitHub 落地，同时为后续接入 VS Code Copilot、Claude Code、Gemini CLI 以及更多 MCP 客户端保留演进空间。

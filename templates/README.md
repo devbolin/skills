@@ -1,76 +1,44 @@
 # 模板指南
 
-本目录包含阶段一实现的完整模板。
+本目录包含阶段一 Plugin-first 模板。
 
 ## 目录结构
 
-```
+```text
 templates/phase1/
-├── skills-finance/              # 领域仓库模板
-│   ├── repo.yaml               # 仓库元数据
-│   ├── .github/
-│   │   └── workflows/
-│   │       ├── ci.yml         # PR 校验
-│   │       └── release.yml    # 发布流程
+├── skills-finance/
+│   ├── pack.yaml                  # Pack 级清单（唯一真相源）
+│   ├── repo.yaml                  # 兼容文件（可选，建议迁移后删除）
+│   ├── .github/workflows/
+│   │   ├── ci.yml
+│   │   └── release.yml
 │   └── skills/
-│       └── invoice-extractor/ # 示例技能
-│           ├── skill.yaml
+│       └── invoice-extractor/
 │           ├── SKILL.md
-│           ├── scripts/
-│           ├── adapters/
-│           └── tests/
-├── schemas/                     # JSON Schema
-│   ├── repo.schema.json
-│   └── skill.schema.json
-└── catalog/                     # Skill Catalog 模板
-    ├── index.json
-    └── skills/
+│           ├── skill.yaml         # generated manifest 示例（非手工维护）
+│           └── adapters/
+├── schemas/
+└── catalog/
 ```
 
 ## 使用方法
 
 ### 1. 创建领域仓库
-
 ```bash
-# 复制模板
 cp -r templates/phase1/skills-finance my-skills-<domain>
-
-# 修改 repo.yaml 中的 repo_id 和 name
 ```
 
-### 2. 创建新 Skill
+### 2. 维护 Pack 清单
+编辑 `pack.yaml`：
+- `distribution.default: plugin`
+- `distribution.enable_skill_artifacts: false`
+- `skills[]` 中的入口和适配器声明
 
-```bash
-# 在 skills/ 下创建目录
-mkdir -p skills/<skill-id>/{scripts,adapters,tests}
+### 3. 维护 Skill 文档
+- 编辑 `skills/<skill-id>/SKILL.md`
+- 按需维护 `adapters/` 与 `scripts/`
 
-# 创建必需文件
-touch skills/<skill-id>/skill.yaml
-touch skills/<skill-id>/SKILL.md
-touch skills/<skill-id>/scripts/run.py
-```
-
-### 3. 配置 CI/CD
-
-模板中的 GitHub Actions workflow 已配置好：
-- `ci.yml` - PR 时自动校验 schema 和测试
-- `release.yml` - 合并后自动发布
-
-## Schema 文件（阶段二预置）
-
-| 文件 | 用途 |
-|------|------|
-| `repo.schema.json` | 校验 `repo.yaml` |
-| `skill.schema.json` | 校验 `skill.yaml` |
-
-> 注：Schema 校验为阶段二特性，Phase 1 模板中预置但暂不强制启用。
-
-## 示例
-
-参考 `skills-finance/skills/invoice-extractor/` 了解完整结构。
-
-## 自定义
-
-- 修改 `repo.yaml` 中的 owners 和 visibility
-- 修改 `skill.yaml` 中的权限和兼容性配置
-- 更新 `.github/CODEOWNERS` 设置审核人
+### 4. 发布
+- 打 tag 触发 `release.yml`
+- 默认仅生成 plugin artifact
+- 可选开启单 Skill artifact

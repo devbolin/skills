@@ -1,0 +1,24 @@
+id: finance-pack
+name: Finance Pack
+version: 1.0.0
+owners:
+  - finance-platform
+
+distribution:
+  default: plugin
+  enable_skill_artifacts: false
+
+defaults:
+  permissions:
+    network: false
+    connectors:
+      - storage:read
+
+skills:
+  - id: invoice-extractor
+    path: skills/invoice-extractor
+    description: Extract structured fields from invoices
+    mode: prompt
+    entry: skills/invoice-extractor/SKILL.md
+    adapters:
+      tool: skills/invoice-extractor/adapters/tool/tool.json

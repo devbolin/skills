@@ -1,4 +1,4 @@
-name: skill-ci
+name: pack-ci
 
 on:
   pull_request:
@@ -14,8 +14,8 @@ jobs:
 
       - name: Basic structure check
         run: |
-          test -f templates/phase1/skills-finance/repo.yaml
-          test -f templates/phase1/skills-finance/skills/invoice-extractor/skill.yaml
+          test -f templates/phase1/skills-finance/pack.yaml
+          test -f templates/phase1/skills-finance/skills/invoice-extractor/SKILL.md
           test -f templates/phase1/skills-finance/skills/invoice-extractor/adapters/tool/tool.json
 
       - name: Validate JSON files
@@ -26,4 +26,4 @@ jobs:
 
       - name: Placeholder tests
         run: |
-          echo "Add per-skill tests in phase 1 project repositories"
+          echo "Add per-pack and per-skill tests"

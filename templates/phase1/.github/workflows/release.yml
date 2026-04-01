@@ -1,4 +1,4 @@
-name: skill-release
+name: pack-release
 
 on:
   push:
@@ -8,30 +8,38 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      ENABLE_SKILL_ARTIFACTS: "false"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Package artifact
+      - name: Package plugin artifact (default)
         run: |
           mkdir -p dist
+          zip -r dist/finance-pack-1.0.0-plugin.zip templates/phase1/skills-finance
+
+      - name: Optional package skill artifact
+        if: env.ENABLE_SKILL_ARTIFACTS == 'true'
+        run: |
           zip -r dist/invoice-extractor-1.0.0.zip templates/phase1/skills-finance/skills/invoice-extractor
 
       - name: Generate manifest/checksum
         run: |
           cat > dist/manifest.json <<'MANIFEST'
           {
-            "skill_id": "invoice-extractor",
+            "pack_id": "finance-pack",
             "version": "1.0.0",
-            "artifact": "invoice-extractor-1.0.0.zip"
+            "plugin_artifact": "finance-pack-1.0.0-plugin.zip",
+            "skill_artifacts_enabled": false
           }
           MANIFEST
-          (cd dist && shasum -a 256 invoice-extractor-1.0.0.zip > checksums.txt)
+          (cd dist && shasum -a 256 finance-pack-1.0.0-plugin.zip > checksums.txt)
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/invoice-extractor-1.0.0.zip
+            dist/finance-pack-1.0.0-plugin.zip
             dist/manifest.json
             dist/checksums.txt
