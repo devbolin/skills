@@ -53,7 +53,7 @@
 - `distribution.default: plugin`
 - `distribution.enable_skill_artifacts: false`（默认）
 - `defaults.permissions`
-- `skills[]`：`id/path/description/mode/entry/adapters`
+- `skills[]`：最小必需 `id/path/mode/entry`（`description/adapters` 可选）
 
 ## 5. 安全与治理基线
 - 默认最小权限：`defaults.permissions.network=false`。

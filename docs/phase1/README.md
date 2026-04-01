@@ -29,4 +29,4 @@
 ## 相关资源
 
 - [模板目录](../../templates/phase1/) - Domain Polyrepo 模板
-- [Schema 定义](../../templates/phase1/schemas/) - 兼容/扩展校验（包含 repo/skill 示例 Schema）
+- [Schema 定义](../../templates/phase1/schemas/) - 兼容/扩展校验（当前阶段一以 `pack.yaml` 为主，schema 作为可选增强）

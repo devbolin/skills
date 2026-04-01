@@ -93,12 +93,14 @@ tags: ["tag1", "tag2"]    # 可选
 - L3 不在初始提示中全量展开，按任务再读
 
 ## 五、pack.yaml 中的 Skill 声明
-Pack 通过 `pack.yaml` 统一声明 Skill 入口，建议至少包含：
+Pack 通过 `pack.yaml` 统一声明 Skill 入口，最小必需字段：
 - `id`
 - `path`
-- `description`
 - `mode`
 - `entry`
+
+可选扩展字段：
+- `description`
 - `adapters`
 
 示例：

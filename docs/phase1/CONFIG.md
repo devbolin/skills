@@ -7,7 +7,7 @@
 - `distribution.default`: 默认分发模式，固定为 `plugin`。
 - `distribution.enable_skill_artifacts`: 是否允许生成单 Skill artifact（默认 `false`）。
 - `defaults.permissions`: 默认权限边界。
-- `skills`: Skill 列表，至少包含 `id/path/mode/entry`。
+- `skills`: Skill 列表，最小必需字段为 `id/path/mode/entry`。
 
 ## 2. `SKILL.md` 关键字段
 - `name`: Skill 名称（建议与目录一致）。
