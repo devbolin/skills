@@ -8,32 +8,41 @@
 **平台原则**：
 - **Repo** 是维护与发布边界
 - **Skill** 是解析与调用边界
+- **Agent** 是 Skill 的消费者
 - **Adapter** 是工具接入的统一契约
 
 ---
 
 ## 快速开始
 
+- [模板使用指南](./templates/README.md) - 如何使用项目模板
 - [阶段一设计](./docs/phase1/DESIGN.md) - GitHub-only MVP 架构
-- [快速上手指南](./docs/phase1/) - 模板使用与配置
 - [技能编写指南](./docs/guides/SKILL_AUTHORING.md) - 如何编写和发布 Skill
+- [最佳实践](./docs/references/SKILL_BEST_PRACTICES.md) - SKILL.md 编写规范
 
 ---
 
 ## 文档结构
 
 ```
-docs/
-├── phase1/          # 阶段一实现文档
-│   ├── README.md   # 阶段一索引
-│   ├── DESIGN.md   # 阶段一设计
-│   ├── FLOW.md     # 开发到发布流程
-│   ├── CONFIG.md   # 配置指南
-│   └── VALIDATION.md # 验证报告
-├── guides/          # 用户指南
-│   └── SKILL_AUTHORING.md # 技能编写指南
-├── schemas/         # JSON Schema 参考
-└── references/      # 参考资料
+skill-management/
+├── README.md                      # 项目入口
+├── ARCHITECTURE.md                # 架构概述
+├── templates/                      # 实现模板
+│   └── README.md                  # 模板使用指南
+│   └── phase1/                    # 阶段一模板
+│
+└── docs/
+    ├── phase1/                   # 阶段一实现文档
+    │   ├── DESIGN.md             # 阶段一设计
+    │   ├── FLOW.md              # 开发到发布流程
+    │   ├── CONFIG.md            # 配置指南
+    │   └── VALIDATION.md        # 验证报告
+    ├── guides/                   # 用户指南
+    │   └── SKILL_AUTHORING.md   # 技能编写指南
+    └── references/               # 参考资料
+        ├── SKILL_BEST_PRACTICES.md  # 最佳实践
+        └── AGENT_PLUGINS.md      # 各工具插件支持
 ```
 
 ---
