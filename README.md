@@ -39,6 +39,20 @@
 - Skill 对特定工具的适配层。
 - 支持 `prompt/tool/workflow/mcp`。
 
+### Agent
+- Skill 的消费者。
+- 通过 adapter 消费 Skill。
+
+---
+
+## 文档结构
+
+- [ARCHITECTURE.md](./ARCHITECTURE.md) - 架构详细说明
+- [templates/README.md](./templates/README.md) - 模板使用指南
+- [docs/references/SKILL_BEST_PRACTICES.md](./docs/references/SKILL_BEST_PRACTICES.md) - SKILL.md 最佳实践
+- [docs/references/AGENT_PLUGINS.md](./docs/references/AGENT_PLUGINS.md) - 各工具插件支持
+- [docs/references/agent_capability_platform_report.md](./docs/references/agent_capability_platform_report.md) - 需求调研报告
+
 ---
 
 ## 分阶段路线
