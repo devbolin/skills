@@ -30,11 +30,13 @@ flowchart TD
 
 ## 2. 调用流程
 
+调用配置细节见 [AGENT_CONSUMPTION.md](./AGENT_CONSUMPTION.md)，本文仅保留统一流程与失败分支。
+
 ```mermaid
 flowchart TD
-  A[Agent Request resolve skill_id and channel] --> B[Resolver Read Catalog]
+  A[Agent Request skill_id and channel_or_version] --> B[Agent or Runtime Read Catalog]
   B --> C{plugin_ref exists}
-  C -- No --> X[Resolve Failed]
+  C -- No --> X[Fail with catalog error]
   C -- Yes --> D[Select Plugin Artifact]
   D --> E{force skill mode and skill_ref exists}
   E -- No --> F[Load Skill from Plugin]
@@ -45,7 +47,7 @@ flowchart TD
 ```
 
 失败分支规则：
-- 无 `plugin_ref`：直接 resolve 失败。
+- 无 `plugin_ref`：直接失败。
 - `skill_ref` 缺失：回退 plugin 执行，不中断主流程。
 - 权限冲突：拒绝执行并记录审计事件。
 - 运行时异常：返回错误码并落库指标。
@@ -61,7 +63,7 @@ flowchart TD
   D -- false --> F[Skip skill_ref rollback]
   E --> G[Publish Updated Catalog]
   F --> G
-  G --> H[Resolver Picks Rolled-back Version]
+  G --> H[Agent or Runtime Uses Rolled-back Version]
   H --> I[Runtime Recovery]
 ```
 

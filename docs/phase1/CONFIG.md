@@ -66,12 +66,18 @@
 
 | 条件 | 行为 |
 |---|---|
-| `distribution.default=plugin` | 发布 plugin artifact，resolver 优先使用 `plugin_ref` |
+| `distribution.default=plugin` | 发布 plugin artifact，运行时默认使用 `plugin_ref` |
 | `ENABLE_SKILL_ARTIFACTS=false` | 跳过单 Skill 打包 |
 | `ENABLE_SKILL_ARTIFACTS=true` | 增加单 Skill 打包，并在 catalog 增量写入 `skill_ref` |
-| 缺失 `plugin_ref` | resolve 失败，阻断执行 |
+| 缺失 `plugin_ref` | 运行时读取 catalog 失败并阻断执行 |
 
 ## 6. 约束建议
 - 生产消费默认使用 plugin artifact。
 - 单 Skill 分发必须显式开关启用。
 - 所有入口路径必须可解析到仓库文件。
+
+
+## 7. Agent 消费配置入口
+- 具体 Agent 消费规范与示例见 [AGENT_CONSUMPTION.md](./AGENT_CONSUMPTION.md)。
+- 本文仅保留统一字段口径：`skills[]` 最小必需 `id/path/mode/entry`。
+- Agent 路由以 `mode + entry` 为准，默认消费 `plugin_ref`，可选 `skill_ref` 回退策略见专文。

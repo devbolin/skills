@@ -36,7 +36,7 @@
 - 开启时生成单 Skill 产物并写入可选 `skill_ref`
 
 4. 运行链路验证
-- resolver 默认优先 `plugin_ref`
+- Agent/Runtime 默认优先 `plugin_ref`
 - 指定策略且存在 `skill_ref` 时可切换执行
 
 ## 4. 备注

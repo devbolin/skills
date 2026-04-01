@@ -8,6 +8,7 @@
 - Skill 的模型消费入口是 `SKILL.md`
 - `skill.yaml` 不是手工维护必需项，可作为构建期 generated manifest
 - Subagent 规范已拆分到 [`SUBAGENT_AUTHORING.md`](./SUBAGENT_AUTHORING.md)
+- Agent 侧接入与配置步骤见 [`AGENT_CONFIGURATION.md`](./AGENT_CONFIGURATION.md)
 
 ## 二、Skill 目录结构
 
