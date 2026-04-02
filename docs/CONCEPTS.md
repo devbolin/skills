@@ -99,13 +99,44 @@ Agent 就像一个"AI 员工"，它可以：
 | **Gemini CLI** | Google | 命令行 Agent，支持 MCP |
 | **Junie** | JetBrains | IDE 内嵌的 AI 编程助手 |
 
-#### Agent 类型
+#### Agent 消费模式
 
-| Agent | 消费模式 | 入口 |
-|-------|----------|------|
-| Copilot | `mode=prompt` | `SKILL.md` |
-| OpenAI Tool | `mode=tool` | `tool.json` |
-| MCP 客户端 | `mode=mcp` | `server.json` |
+Agent 通过不同的模式接入 Skill：
+
+| 消费模式 | 说明 | 入口文件 |
+|----------|------|----------|
+| **Prompt 模式** | AI 模型直接消费 SKILL.md 中的自然语言指令 | `SKILL.md` |
+| **Tool 模式** | AI 模型通过工具调用协议消费结构化工具定义 | `tool.json` |
+| **MCP 模式** | AI 通过 MCP 协议连接外部工具和服务 | `server.json` |
+
+#### Agent 如何使用 Skill
+
+```
+用户任务 → Agent → [1.发现] → [2.激活] → [3.执行]
+                ↓
+         1. 发现：扫描 SKILL.md description，匹配关键词
+         2. 激活：加载对应 SKILL.md 内容
+         3. 执行：按 Skill 定义的步骤调用工具/脚本
+```
+
+**发现机制**：Agent 通过 Skill 的 `description` 字段自动检测何时激活
+**激活时机**：用户任务触发描述匹配时，加载完整 SKILL.md
+**执行方式**：按 Skill 定义的步骤调用内部脚本或外部工具
+
+#### Agent 如何使用 Plugin
+
+Plugin 是多个 Skill 的**整仓分发包**：
+
+```
+Pack 发布 → plugin.zip → Catalog 注册 → Agent 发现
+                                        ↓
+                              plugin_ref 指向产物位置
+```
+
+| 消费方式 | 说明 |
+|----------|------|
+| **plugin_ref**（默认） | Agent 通过 Catalog 获取 plugin artifact 路径，整体加载 |
+| **skill_ref**（可选） | Agent 可精确加载单个 Skill artifact |
 
 > 参考：[Claude Code](https://code.claude.com/docs)、[VS Code Copilot](https://code.visualstudio.com/docs/copilot/overview)
 
@@ -119,14 +150,39 @@ Subagent 是 Agent 团队中的"专业成员"。当一个大任务需要多种�
 
 就像项目经理把任务分配给专业团队成员：主 Agent 负责协调，Subagent 负责执行专业任务。
 
+#### Agent 如何决定委托给哪个 Subagent
+
+```
+用户任务 → 主 Agent（协调者）
+              ↓ 分析任务类型
+              ├─→ "需要代码审查" → code-reviewer Subagent
+              ├─→ "需要发版" → release Subagent
+              └─→ "需要数据库操作" → db-admin Subagent
+              ↓
+         Subagent 返回结果 → 主 Agent 整合 → 用户
+```
+
+| 决策步骤 | 说明 |
+|----------|------|
+| **1. 任务分析** | 主 Agent 分析用户任务，判断复杂度与所需能力 |
+| **2. 能力匹配** | 对照 Subagent 的 description（能力描述），找匹配项 |
+| **3. 边界判断** | 确认任务在 Subagent 职责范围内（委托边界） |
+| **4. 显式委托** | Agent 通过配置文件中的 Subagent 定义发起调用 |
+| **5. 结果回收** | Subagent 在独立上下文中执行，返回结果给主 Agent |
+
+**委托触发示例：**
+- 用户说"帮我审查这个 PR" → 匹配 `code-reviewer` Subagent
+- 用户说"准备下周发布" → 匹配 `release` Subagent
+- 任务涉及"多文件修改 + 测试验证" → 主 Agent 判断需要专业 Subagent
+
 #### 与 Skill 的区别
 
 | 维度 | Skill | Subagent |
 |------|-------|----------|
 | 定位 | 可复用能力单元（定义"怎么做"） | 运行时委托机制（执行者） |
 | 定义位置 | `SKILL.md` + `pack.yaml` | Agent 配置文件 |
-| 触发方式 | AI 自动检测或手动调用 | Agent 显式委托 |
-| 上下文 | 依赖主对话 | 独立上下文，不污染主对话 |
+| 触发方式 | AI 自动检测 description 关键词 | Agent 显式分析后委托 |
+| 上下文 | 共享主对话 | 独立上下文，不污染主对话 |
 | 思考能力 | 按指令执行 | 可独立思考和决策 |
 
 #### 委托边界设计
