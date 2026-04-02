@@ -30,6 +30,7 @@ docs/
 
 | 文档 | 说明 |
 |------|------|
-| Agent 支持对比 | 主流 Agent 工具功能对比 |
-| MCP 生态 | Model Context Protocol 资源 |
-| Skills 市场 | Skills 市场与资源链接 |
+| [AGENT_PLUGINS.md](./references/AGENT_PLUGINS.md) | 主流 Agent 工具功能对比 |
+| [SKILL_BEST_PRACTICES.md](./references/SKILL_BEST_PRACTICES.md) | SKILL.md 编写最佳实践 |
+| MCP 生态 | Model Context Protocol 资源（整理中） |
+| Skills 市场 | Skills 市场与资源链接（整理中） |

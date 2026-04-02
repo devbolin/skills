@@ -1,8 +1,9 @@
 # 阶段一模板验证报告
 
-> 说明：本报告基于旧版模板（skill artifact 示例）生成，当前阶段一规范已切换为 Plugin-first。
+> ⚠️ **历史文档**：本报告基于 Phase 1 早期验证生成，可能与当前规范不一致。
+> 当前 Plugin-first 验证需待 CI 流水线完善后重跑。
 
-## 1. 历史验证记录（保留）
+## 1. 历史验证记录
 - 验证时间: 2026-03-31 13:33:00 +0800
 - 仓库: /Users/zhangbolin/vibe-coding/skill-management
 - 范围: docs/phase1 + templates/phase1
