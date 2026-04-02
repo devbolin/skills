@@ -4,16 +4,16 @@
   "distribution_default": "plugin",
   "skills": [
     {
-      "skill_id": "invoice-extractor",
-      "pack_id": "finance-pack",
-      "repo": "org/skills-finance-pack",
-      "path": "skills/invoice-extractor",
+      "skill_id": "code-review",
+      "pack_id": "devtools-pack",
+      "repo": "org/skills-devtools",
+      "path": "skills/code-review",
       "status": "active",
       "channels": {
         "stable": "1.0.0"
       },
-      "catalog_entry": "skills/invoice-extractor.json",
-      "plugin_ref": "releases/finance-pack-1.0.0-plugin.zip"
+      "catalog_entry": "skills/code-review.json",
+      "plugin_ref": "releases/devtools-pack-1.0.0-plugin.zip"
     }
   ]
 }

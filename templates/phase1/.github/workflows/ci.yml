@@ -14,15 +14,13 @@ jobs:
 
       - name: Basic structure check
         run: |
-          test -f templates/phase1/skills-finance/pack.yaml
-          test -f templates/phase1/skills-finance/skills/invoice-extractor/SKILL.md
-          test -f templates/phase1/skills-finance/skills/invoice-extractor/adapters/tool/tool.json
+          test -f templates/phase1/skills-devtools/pack.yaml
+          test -f templates/phase1/skills-devtools/skills/code-review/SKILL.md
 
       - name: Validate JSON files
         run: |
-          python3 -m json.tool templates/phase1/skills-finance/skills/invoice-extractor/adapters/tool/tool.json > /dev/null
           python3 -m json.tool templates/phase1/catalog/index.json > /dev/null
-          python3 -m json.tool templates/phase1/catalog/skills/invoice-extractor.json > /dev/null
+          python3 -m json.tool templates/phase1/catalog/skills/code-review.json > /dev/null
 
       - name: Placeholder tests
         run: |

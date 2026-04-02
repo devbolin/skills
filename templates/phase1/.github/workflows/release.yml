@@ -17,29 +17,29 @@ jobs:
       - name: Package plugin artifact (default)
         run: |
           mkdir -p dist
-          zip -r dist/finance-pack-1.0.0-plugin.zip templates/phase1/skills-finance
+          zip -r dist/devtools-pack-1.0.0-plugin.zip templates/phase1/skills-devtools
 
       - name: Optional package skill artifact
         if: env.ENABLE_SKILL_ARTIFACTS == 'true'
         run: |
-          zip -r dist/invoice-extractor-1.0.0.zip templates/phase1/skills-finance/skills/invoice-extractor
+          zip -r dist/code-review-1.0.0.zip templates/phase1/skills-devtools/skills/code-review
 
       - name: Generate manifest/checksum
         run: |
           cat > dist/manifest.json <<'MANIFEST'
           {
-            "pack_id": "finance-pack",
+            "pack_id": "devtools-pack",
             "version": "1.0.0",
-            "plugin_artifact": "finance-pack-1.0.0-plugin.zip",
+            "plugin_artifact": "devtools-pack-1.0.0-plugin.zip",
             "skill_artifacts_enabled": false
           }
           MANIFEST
-          (cd dist && shasum -a 256 finance-pack-1.0.0-plugin.zip > checksums.txt)
+          (cd dist && shasum -a 256 devtools-pack-1.0.0-plugin.zip > checksums.txt)
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/finance-pack-1.0.0-plugin.zip
+            dist/devtools-pack-1.0.0-plugin.zip
             dist/manifest.json
             dist/checksums.txt
