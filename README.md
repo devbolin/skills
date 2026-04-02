@@ -28,6 +28,8 @@
 
 ## 核心概念
 
+> 详细概念解释见 [docs/CONCEPTS.md](./docs/CONCEPTS.md)
+
 ### Polyrepo
 - 以 domain pack 为边界拆分仓库与模板，不是单一 skill 仓库。
 - phase1 模板目录同时包含：catalog、schema、多个 pack 示例。

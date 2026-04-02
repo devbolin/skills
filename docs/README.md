@@ -7,8 +7,15 @@ docs/
 ├── phase1/          # 阶段一实现文档
 ├── guides/          # 用户指南
 ├── schemas/         # JSON Schema 参考
-└── references/      # 参考资料
+├── references/      # 参考资料
+└── CONCEPTS.md     # 基本概念（术语解释）
 ```
+
+## 基本概念
+
+| 文档 | 说明 |
+|------|------|
+| [CONCEPTS.md](./CONCEPTS.md) | 核心概念与术语解释（Pack、Skill、Plugin、Agent、Subagent 等） |
 
 ## 阶段一实现文档
 
