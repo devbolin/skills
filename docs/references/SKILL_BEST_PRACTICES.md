@@ -204,12 +204,14 @@ Subagent 是运行在独立上下文窗口中的专业化 AI 助手：
 
 ## 七、相关资源
 
-| 资源 | 链接 |
-|------|------|
-| Claude Code 最佳实践 | code.claude.com/docs/en/best-practices |
-| Agent Skills 开放标准 | agentskills.io |
-| Anthropic Skills | github.com/anthropics/skills |
-| Awesome Agent Skills | VoltAgent/awesome-agent-skills |
+| 资源 | 原始文档 | 说明 |
+|------|----------|------|
+| [Claude Code 最佳实践](https://code.claude.com/docs/en/best-practices) | code.claude.com/docs/en/best-practices | Claude Code 官方最佳实践指南 |
+| [Anthropic Skills 示例](https://github.com/anthropics/skills) | github.com/anthropics/skills | Anthropic 官方 Skills 示例仓库 |
+| [Awesome Agent Skills](https://github.com/VoltAgent/awesome-agent-skills) | VoltAgent/awesome-agent-skills | 社区收集的 Agent Skills 列表 |
+| [Agent Skills 开放标准](https://agentskills.io) | agentskills.io | Agent Skills 开放标准规范 |
+| [Anthropic Claude 文档](https://docs.anthropic.com) | docs.anthropic.com | Claude API 和工具使用文档 |
+| [Model Context Protocol](https://modelcontextprotocol.io) | modelcontextprotocol.io | MCP 官方规范和实现指南 |
 
 ---
 

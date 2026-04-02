@@ -19,6 +19,8 @@ docs/
 | 文档 | 说明 |
 |------|------|
 | [SKILL_AUTHORING.md](./guides/SKILL_AUTHORING.md) | 技能编写与发布指南 |
+| [SUBAGENT_AUTHORING.md](./guides/SUBAGENT_AUTHORING.md) | Subagent 设计、配置与协作指南 |
+| [AGENT_CONFIGURATION.md](./guides/AGENT_CONFIGURATION.md) | Agent 侧 plugin 集成操作手册 |
 
 ## Schema 参考
 
@@ -28,9 +30,10 @@ docs/
 
 ## 参考资料
 
-| 文档 | 说明 |
-|------|------|
-| [AGENT_PLUGINS.md](./references/AGENT_PLUGINS.md) | 主流 Agent 工具功能对比 |
-| [SKILL_BEST_PRACTICES.md](./references/SKILL_BEST_PRACTICES.md) | SKILL.md 编写最佳实践 |
-| MCP 生态 | Model Context Protocol 资源（整理中） |
-| Skills 市场 | Skills 市场与资源链接（整理中） |
+| 文档 | 说明 | 原始文档 |
+|------|------|----------|
+| [AGENT_PLUGINS.md](./references/AGENT_PLUGINS.md) | 主流 Agent 工具插件系统对比 | - |
+| [SKILL_BEST_PRACTICES.md](./references/SKILL_BEST_PRACTICES.md) | SKILL.md 编写最佳实践 | [Claude Code 最佳实践](https://code.claude.com/docs/en/best-practices)、[Anthropic Skills](https://github.com/anthropics/skills)、[MCP 规范](https://modelcontextprotocol.io) |
+| [Model Context Protocol](https://modelcontextprotocol.io) | MCP 官方规范和实现指南 | modelcontextprotocol.io |
+| [Claude Code 文档](https://code.claude.com/docs) | Claude Code 官方文档 | code.claude.com/docs |
+| [VS Code Copilot](https://code.visualstudio.com/docs/copilot) | VS Code Copilot 和 Agent 插件文档 | code.visualstudio.com/docs/copilot |
