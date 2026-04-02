@@ -6,8 +6,9 @@
 
 | 文档 | 说明 |
 |------|------|
+| [HUMAN_WORKFLOW.md](./HUMAN_WORKFLOW.md) | 人类视角完整工作流程（开发→发布→Agent 集成→回滚） |
 | [DESIGN.md](./DESIGN.md) | 阶段一架构设计与决策主文档 |
-| [FLOW.md](./FLOW.md) | 发布/调用/回滚流程规范 |
+| [FLOW.md](./FLOW.md) | 发布/调用/回滚流程规范（系统视角） |
 | [CONFIG.md](./CONFIG.md) | 配置字段操作手册 |
 | [VALIDATION.md](./VALIDATION.md) | 模板验证报告与差异说明 |
 | [AGENT_CONSUMPTION.md](./AGENT_CONSUMPTION.md) | Agent 消费规范与配置示例 |
@@ -16,6 +17,7 @@
 
 | 图示 | 位置 | 说明 |
 |---|---|---|
+| 人类活动总览图 | [HUMAN_WORKFLOW.md](./HUMAN_WORKFLOW.md) | 从 Author 到 Agent 集成的完整人类旅程 |
 | Phase1 架构总览图 | [DESIGN.md](./DESIGN.md) | Author/CI/Release/Catalog/Runtime 关系 |
 | 配置关系图 | [DESIGN.md](./DESIGN.md) | `pack.yaml`、`SKILL.md`、artifact、catalog 依赖 |
 | 发布流程图 | [FLOW.md](./FLOW.md) | PR 到发布与 catalog 更新 |
@@ -24,11 +26,12 @@
 | Agent 消费总览图 | [AGENT_CONSUMPTION.md](./AGENT_CONSUMPTION.md) | catalog 到 mode/entry 路由与执行 |
 
 ## 阅读顺序
-1. [DESIGN.md](./DESIGN.md)：先确认架构决策与边界。
-2. [CONFIG.md](./CONFIG.md)：再确认字段和参数语义。
-3. [AGENT_CONSUMPTION.md](./AGENT_CONSUMPTION.md)：确认各 Agent 消费配置与回退规则。
-4. [FLOW.md](./FLOW.md)：最后看发布、调用、回滚流程。
-5. [VALIDATION.md](./VALIDATION.md)：确认验证现状与重跑项。
+1. [HUMAN_WORKFLOW.md](./HUMAN_WORKFLOW.md)：先看人类视角完整工作流程（推荐优先阅读）。
+2. [DESIGN.md](./DESIGN.md)：确认架构决策与边界。
+3. [CONFIG.md](./CONFIG.md)：确认字段和参数语义。
+4. [AGENT_CONSUMPTION.md](./AGENT_CONSUMPTION.md)：确认各 Agent 消费配置与回退规则。
+5. [FLOW.md](./FLOW.md)：再看发布、调用、回滚系统流程。
+6. [VALIDATION.md](./VALIDATION.md)：确认验证现状与重跑项。
 
 ## 里程碑
 
