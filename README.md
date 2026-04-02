@@ -10,6 +10,7 @@
 - 默认分发模式为 **Plugin-first（整仓分发）**。
 - 保留单 Skill 分发能力，但默认关闭，仅作为可选模式。
 - `skill.yaml` 不作为手工维护真相源，仅可作为生成产物。
+- **Polyrepo 目录模型保留**：`catalog/`、`schemas/` 与多个 domain pack（如 `skills-*`）并存。
 
 > 当前权威规范文档：`docs/phase1/`。
 
@@ -26,6 +27,10 @@
 ---
 
 ## 核心概念
+
+### Polyrepo
+- 以 domain pack 为边界拆分仓库与模板，不是单一 skill 仓库。
+- phase1 模板目录同时包含：catalog、schema、多个 pack 示例。
 
 ### Pack
 - 仓库级能力包，由 `pack.yaml` 描述。
@@ -44,6 +49,23 @@
 - Pack/Skill 的消费者。
 - 默认通过 catalog 的 `plugin_ref` 消费 plugin artifact。
 - 仅在显式开启并可用时使用 `skill_ref`。
+
+---
+
+## Polyrepo 目录结构（阶段一模板）
+
+```text
+templates/phase1/
+├── .github/workflows/         # CI/Release
+├── catalog/                   # index + skill entries
+├── schemas/                   # schema 定义
+└── skills-devtools/           # domain pack 示例
+```
+
+说明：
+- `skills-*` 目录表示多个 domain pack，并非单一 skill。
+- 每个 pack 内再维护各自的 `skills/` 与 `pack.yaml`。
+- 发布与消费通过 `catalog` 聚合索引。
 
 ---
 

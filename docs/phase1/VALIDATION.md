@@ -13,9 +13,9 @@
 3. 发布最小打包流程（zip + manifest + checksum）: 通过
 
 ### 历史产物
-- zip: tmp/phase1-verify/dist/invoice-extractor-1.0.0.zip
+- zip: tmp/phase1-verify/dist/devtools-pack-1.0.0-plugin.zip
 - manifest: tmp/phase1-verify/dist/manifest.json
-- checksum: 061602673e248d6edd3b8c98b3675f78204fc5439ca85f9ae6c1914e4aaf572b  invoice-extractor-1.0.0.zip
+- checksum: sha256:example  devtools-pack-1.0.0-plugin.zip
 
 ## 2. 当前规范差异说明
 - 当前默认分发应为 plugin artifact，而非单 Skill artifact。

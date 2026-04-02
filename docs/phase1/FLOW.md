@@ -14,7 +14,7 @@ flowchart TD
   H --> I[Release Workflow]
   I --> J[Build Plugin Artifact]
   I --> K[Generate Manifest and Checksum]
-  I --> L{enable_skill_artifacts}
+  I --> L{ENABLE_SKILL_ARTIFACTS=true?}
   L -- true --> M[Build Skill Artifact]
   L -- false --> N[Skip Skill Artifact]
   J --> O[Update Catalog plugin_ref]

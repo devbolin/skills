@@ -24,7 +24,6 @@ docs/
 
 | 文档 | 说明 |
 |------|------|
-| [repo.schema.json](../templates/phase1/schemas/repo.schema.json) | 仓库元数据 Schema |
 | [skill.schema.json](../templates/phase1/schemas/skill.schema.json) | 技能定义 Schema |
 
 ## 参考资料

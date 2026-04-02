@@ -18,7 +18,7 @@
 
 ### 2.1 单真相源
 - 仓库级只保留一个清单文件：`pack.yaml`。
-- 不并列维护 `repo.yaml` 与 `pack.yaml`。
+- 不并列维护 `repo.yaml` 与 `pack.yaml`（`repo.yaml` 为早期探索阶段遗留，已废弃）。
 
 ### 2.2 元数据分层
 - `SKILL.md`：模型消费层（触发、边界、指令）。

@@ -38,9 +38,11 @@
 | `distribution_default` | 是 | 默认分发模式（应为 `plugin`） |
 | `skills[].skill_id` | 是 | Skill 标识 |
 | `skills[].pack_id` | 是 | 归属 Pack |
+| `skills[].repo` | 建议 | GitHub 仓库路径（org/repo） |
+| `skills[].path` | 是 | Skill 相对于仓库根的路径 |
 | `skills[].channels` | 是 | 通道到版本映射 |
 | `skills[].catalog_entry` | 是 | skill 明细索引路径 |
-| `skills[].plugin_ref` | 是 | 默认消费产物 |
+| `skills[].plugin_ref` | 是 | 默认消费产物（releases 路径） |
 
 ### 3.2 `skills/<skill-id>.json`
 
@@ -49,7 +51,7 @@
 | `skill_id` | 是 | Skill 标识 |
 | `pack_id` | 建议 | 归属 Pack（推荐与 index 一致） |
 | `versions.<ver>.channel` | 是 | 所属通道 |
-| `versions.<ver>.plugin_artifact` 或 `artifact` | 是 | 默认发布产物引用 |
+| `versions.<ver>.plugin_artifact` | 是 | Plugin artifact 引用 |
 | `versions.<ver>.skill_ref` | 否 | 单 Skill 产物引用 |
 | `versions.<ver>.compatibility` | 建议 | Agent 兼容信息 |
 | `versions.<ver>.permissions` | 建议 | 运行权限声明 |

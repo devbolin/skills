@@ -13,18 +13,11 @@
 ### 必需文件
 
 每个 Skill 必须包含：
-- `skill.yaml` - 技能元数据
-- `SKILL.md` - Agent 使用文档
-- `scripts/` - 实现代码目录
+- `SKILL.md` - Agent 使用文档（YAML frontmatter + Markdown）
+- `pack.yaml` - Pack 级清单（阶段一唯一真相源）
+- `scripts/` - 实现代码目录（可选）
 
-### skill.yaml 必需字段
-
-```yaml
-id: <唯一标识>
-name: <显示名称>
-version: <语义版本>
-summary: <简短描述>
-```
+> 注意：`skill.yaml` 是 generated manifest（构建期产物），不作为手工维护真相源。
 
 ### SKILL.md 必需 frontmatter
 

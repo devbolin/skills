@@ -6,26 +6,21 @@
 
 ```text
 templates/phase1/
-├── skills-finance/
-│   ├── pack.yaml                  # Pack 级清单（唯一真相源）
-│   ├── repo.yaml                  # 兼容文件（可选，建议迁移后删除）
-│   ├── .github/workflows/
-│   │   ├── ci.yml
-│   │   └── release.yml
-│   └── skills/
-│       └── invoice-extractor/
-│           ├── SKILL.md
-│           ├── skill.yaml         # generated manifest 示例（非手工维护）
-│           └── adapters/
-├── schemas/
-└── catalog/
+├── .github/workflows/         # CI/Release
+├── catalog/                   # index + skill entries
+├── schemas/                   # schema 定义
+└── skills-devtools/           # domain pack 示例
+    ├── pack.yaml              # Pack 级清单（唯一真相源）
+    └── skills/
+        └── code-review/
+            └── SKILL.md
 ```
 
 ## 使用方法
 
 ### 1. 创建领域仓库
 ```bash
-cp -r templates/phase1/skills-finance my-skills-<domain>
+cp -r templates/phase1/skills-devtools my-skills-<domain>
 ```
 
 ### 2. 维护 Pack 清单

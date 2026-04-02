@@ -2,8 +2,8 @@
 
 ## 1. 目标与范围
 本文档定义 phase1 下 Agent 消费 Skill 的统一步骤，覆盖三类主流路径：
-- Copilot（`.github/skills` + `mode=prompt`）
-- OpenAI Tool（`tool.json` + `mode=tool`）
+- Copilot（`mode=prompt`，入口为 `SKILL.md`）
+- OpenAI Tool（`mode=tool`，入口为 `tool.json`）
 - MCP 客户端（`mode=mcp`，通用客户端路径）
 
 约束：
@@ -54,10 +54,10 @@ flowchart TD
 最小配置（pack 侧）：
 ```yaml
 skills:
-  - id: invoice-extractor
-    path: skills/invoice-extractor
+  - id: code-review
+    path: skills/code-review
     mode: prompt
-    entry: skills/invoice-extractor/SKILL.md
+    entry: skills/code-review/SKILL.md
 ```
 路由规则：
 - 解析 `mode=prompt`。
@@ -72,10 +72,10 @@ skills:
 最小配置（pack 侧）：
 ```yaml
 skills:
-  - id: invoice-extractor
-    path: skills/invoice-extractor
+  - id: code-review
+    path: skills/code-review
     mode: tool
-    entry: skills/invoice-extractor/adapters/tool/tool.json
+    entry: skills/code-review/adapters/tool/tool.json
 ```
 路由规则：
 - 解析 `mode=tool`。
@@ -90,10 +90,10 @@ skills:
 最小配置（pack 侧）：
 ```yaml
 skills:
-  - id: invoice-extractor
-    path: skills/invoice-extractor
+  - id: code-review
+    path: skills/code-review
     mode: mcp
-    entry: skills/invoice-extractor/adapters/mcp/server.json
+    entry: skills/code-review/adapters/mcp/server.json
 ```
 路由规则：
 - 解析 `mode=mcp`。
@@ -119,7 +119,7 @@ skills:
 - phase1 默认分发路径是 plugin，单 Skill 分发仅为可选能力。
 
 ## 8. 验收清单（文档级）
-- [ ] Copilot/OpenAI Tool/MCP 三类 Agent 均有最小配置示例。
-- [ ] 每类 Agent 均有路由规则与失败回退说明。
-- [ ] 默认 `plugin_ref` 与可选 `skill_ref` 行为可解释且一致。
-- [ ] 文档术语与 `docs/phase1` 其余文档一致（`pack.yaml`、plugin-first、`id/path/mode/entry`）。
+- [x] Copilot/OpenAI Tool/MCP 三类 Agent 均有最小配置示例。
+- [x] 每类 Agent 均有路由规则与失败回退说明。
+- [x] 默认 `plugin_ref` 与可选 `skill_ref` 行为可解释且一致。
+- [x] 文档术语与 `docs/phase1` 其余文档一致（`pack.yaml`、plugin-first、`id/path/mode/entry`）。
