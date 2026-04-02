@@ -14,7 +14,7 @@
 |------|------|----------|
 | **Skill** | 可复用的能力单元，AI 可自动检测激活 | [Agent Skills 标准](https://agentskills.io)、[Anthropic Skills](https://github.com/anthropics/skills)、[Claude Code Skills](https://code.claude.com/docs/en/skills)、[VS Code Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills) |
 | **Agent** | 执行任务的 AI 代理 | [Claude Code](https://code.claude.com/docs)、[VS Code Copilot](https://code.visualstudio.com/docs/copilot/overview) |
-| **Subagent** | 独立上下文的专业化代理 | [Claude Code Subagents](https://code.claude.com/docs/en/sub-agents) |
+| **Subagent** | 独立上下文的专业化代理 | [Claude Code Subagents](https://code.claude.com/docs/en/sub-agents)、[VS Code Subagents](https://code.visualstudio.com/docs/copilot/agents/subagents) |
 | **MCP** | Model Context Protocol，AI 与外部系统连接的开放标准 | [modelcontextprotocol.io](https://modelcontextprotocol.io/docs) |
 | **Plugin** | 打包扩展功能的分发单元 | [Claude Code Plugins](https://code.claude.com/docs/en/plugins)、[VS Code Agent Plugins](https://code.visualstudio.com/docs/copilot/customization/agent-plugins) |
 | **Adapter** | Skill 对特定工具/平台的适配层 | 通用概念 |
@@ -39,7 +39,14 @@
 
 **Skill** 是 AI 可复用的能力单元，定义"做什么"。
 
-> 参考：[Agent Skills 标准](https://agentskills.io) - 开放标准，多工具支持
+#### 简单理解
+
+Skill 就像一张"工作卡片"，告诉 AI：
+- 这个技能叫什么名字
+- 什么时候该用它（触发条件）
+- 怎么用它（步骤和示例）
+
+就像人类同事的"工作指南"：遇到发票处理时，找"发票专员"；遇到代码审查时，找"审查专员"。
 
 #### 核心特征
 
@@ -65,11 +72,32 @@ description: 清晰描述何时激活此技能
 使用场景、不适用场景、调用方式
 ```
 
-> 参考：[Anthropic Skills](https://github.com/anthropics/skills) - 官方示例仓库（109k stars）
+> 参考：[Agent Skills 标准](https://agentskills.io)、[Anthropic Skills](https://github.com/anthropics/skills)、[Claude Code Skills](https://code.claude.com/docs/en/skills)、[VS Code Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills)
 
 ### Agent
 
 **Agent** 是消耗 Skill 的 AI 代理，通过统一契约调用 Skill。
+
+#### 简单理解
+
+Agent 就像一个"AI 员工"，它可以：
+- 理解任务目标
+- 决定使用哪个 Skill
+- 调用工具执行任务
+- 自我纠错
+
+与普通 AI 对话不同，Agent 不是简单地回答问题，而是**主动规划、执行、检查结果**。
+
+#### 主流 Agent
+
+| Agent | 开发方 | 特点 |
+|-------|--------|------|
+| **Claude Code** | Anthropic | 终端/IDE 内使用的编码 Agent |
+| **GitHub Copilot** | Microsoft/GitHub | IDE 内集成，支持多种语言 |
+| **Cursor** | Anysphere | AI-first IDE，内置 Agent |
+| **Copilot Workspace** | Microsoft | 基于自然语言的开发环境 |
+| **Gemini CLI** | Google | 命令行 Agent，支持 MCP |
+| **Junie** | JetBrains | IDE 内嵌的 AI 编程助手 |
 
 #### Agent 类型
 
@@ -85,16 +113,21 @@ description: 清晰描述何时激活此技能
 
 **Subagent** 是在**独立上下文**中执行特定任务的专业化代理。
 
-> 参考：[Claude Code Subagents](https://code.claude.com/docs/en/sub-agents)
+#### 简单理解
+
+Subagent 是 Agent 团队中的"专业成员"。当一个大任务需要多种能力时，Agent 可以"委托"Subagent 去处理特定的子任务。
+
+就像项目经理把任务分配给专业团队成员：主 Agent 负责协调，Subagent 负责执行专业任务。
 
 #### 与 Skill 的区别
 
 | 维度 | Skill | Subagent |
 |------|-------|----------|
-| 定位 | 可复用能力单元 | 运行时委托机制 |
+| 定位 | 可复用能力单元（定义"怎么做"） | 运行时委托机制（执行者） |
 | 定义位置 | `SKILL.md` + `pack.yaml` | Agent 配置文件 |
-| 触发方式 | AI 自动检测 | 显式调用或策略触发 |
-| 上下文 | 依赖主对话 | 独立上下文 |
+| 触发方式 | AI 自动检测或手动调用 | Agent 显式委托 |
+| 上下文 | 依赖主对话 | 独立上下文，不污染主对话 |
+| 思考能力 | 按指令执行 | 可独立思考和决策 |
 
 #### 委托边界设计
 
@@ -103,6 +136,8 @@ description: 清晰描述何时激活此技能
 2. **任务输出**：返回什么格式、必需字段
 3. **禁止行为**：不可修改什么、不可访问什么
 4. **失败策略**：失败后返回什么、何时回退主流程
+
+> 参考：[Claude Code Subagents](https://code.claude.com/docs/en/sub-agents)、[VS Code Subagents](https://code.visualstudio.com/docs/copilot/agents/subagents)
 
 ### MCP (Model Context Protocol)
 
