@@ -48,9 +48,12 @@ flowchart TD
 | `catalog detail` | `skill_ref` | 否 | 可选单 Skill 产物 |
 | `runtime` | `mode + entry` | 是 | 最终执行定位 |
 
-## 5. 三类 Agent 最小配置与路由
+## 5. 三类消费模式与路由
 
-### 5.1 Copilot（prompt）
+> 消费模式定义详见 [CONCEPTS.md](./CONCEPTS.md#agent-消费模式)
+
+### 5.1 Prompt 模式（Copilot）
+
 最小配置（pack 侧）：
 ```yaml
 skills:
@@ -68,7 +71,7 @@ skills:
 - `entry` 缺失或不可读：执行失败并返回入口错误。
 - `skill_ref` 缺失：保持 plugin 默认路径，不切换。
 
-### 5.2 OpenAI Tool（tool）
+### 5.2 Tool 模式（OpenAI Tool）
 最小配置（pack 侧）：
 ```yaml
 skills:
@@ -86,7 +89,7 @@ skills:
 - `tool.json` 不存在或无效：返回配置错误。
 - `skill_ref` 缺失：回退 plugin 路径执行。
 
-### 5.3 MCP 客户端（mcp）
+### 5.3 MCP 模式（MCP 客户端）
 最小配置（pack 侧）：
 ```yaml
 skills:

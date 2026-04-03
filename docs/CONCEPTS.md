@@ -57,6 +57,18 @@ Skill 就像一张"工作卡片"，告诉 AI：
 | 有边界 | 明确适用场景和不适用场景 |
 | 可组合 | 多个 Skill 可协同完成复杂任务 |
 
+#### Progressive Disclosure（渐进式披露）
+
+Skill 采用三层渐进式架构，控制 Token 成本：
+
+| 层级 | 组件 | 加载时机 | 内容 |
+|------|------|---------|------|
+| **L1** | Metadata | 始终加载 | name + description（最小 Token 消耗） |
+| **L2** | Core Instructions | 触发时加载 | SKILL.md 正文 - 工作流、步骤、示例 |
+| **L3** | Resources | 按需加载 | Scripts、模板、参考文档 |
+
+> 详见：[SKILL_AUTHORING.md](./guides/SKILL_AUTHORING.md#四progressive-disclosure-实践)
+
 #### SKILL.md 格式
 
 Skill 的定义文件，包含：
@@ -294,6 +306,13 @@ flowchart LR
   PACK --> PR
   PACK --> SR
   PACK --> CAT
+
+  subgraph Agent 使用流程
+    A -->|发现| S
+    A -->|激活| S
+    A -->|执行| S
+  end
+
   S --> A
   S --> SA
   MCP --> A

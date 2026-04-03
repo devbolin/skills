@@ -3,6 +3,7 @@
 本文档说明如何在 Skill 体系中设计、配置和使用 Subagent。
 
 > **与 Phase 1 的关系**：Subagent 是 Skill 在运行时（Agent/Runtime 侧）的委托机制。Pack 侧定义 Skill 的入口和分发，Agent 侧通过 Subagent 模式实现复杂任务的分解与协作。
+> **相关概念**：[CONCEPTS.md](../CONCEPTS.md) - 核心概念与术语解释
 
 ---
 
