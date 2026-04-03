@@ -1,9 +1,11 @@
-# 跨平台 AI Agent Pack/Plugin 管理
+# 跨平台 AI Agent 能力管理
 
-> 版本：v2.1
-> 更新：2026-04-01
+> 版本：v2.2
+> 更新：2026-04-03
 
-以 **GitHub 为唯一控制面**，通过 **Domain Polyrepo** + **GitHub Actions** + **Release** + **Skill Catalog** 实现 Pack 的 plugin-first 分发与多 Agent 消费。
+让 AI Agent 的能力可以被多个平台复用和共享。
+
+基于 GitHub 管理能力生命周期，支持多种 Agent 即插即用。默认采用整仓分发，降低安装和更新复杂度。
 
 ## 当前规范（Normative）
 - 阶段一以 `pack.yaml` 作为仓库级唯一清单文件。
@@ -30,27 +32,25 @@
 
 > 详细概念解释见 [docs/CONCEPTS.md](./docs/CONCEPTS.md)
 
+### Skill（技能）
+- 单个可复用的 AI 能力，如"代码审查"、"发票识别"
+- Agent 可自动检测何时使用
+
+### Subagent（任务代理）
+- 专门处理特定任务的 AI 助手，运行在独立上下文
+- 与主 Agent 协作，处理复杂子任务
+
+### Hook（自动化钩子）
+- Agent 生命周期事件触发点，如任务开始、结束时的自动处理
+- 可用于日志记录、上下文收集、结果格式化等
+
+### Pack（能力包）
+- 包含 Skill、Subagent、Hook 等多种能力的集合
+- 打包发布后，多个 Agent 都能安装使用
+
 ### Polyrepo
-- 以 domain pack 为边界拆分仓库与模板，不是单一 skill 仓库。
-- phase1 模板目录同时包含：catalog、schema、多个 pack 示例。
-
-### Pack
-- 仓库级能力包，由 `pack.yaml` 描述。
-- 是维护、发布、回滚的最小治理边界。
-
-### Skill
-- Agent 可复用能力单元。
-- 模型消费入口为 `SKILL.md`。
-- 工具消费入口由 `pack.yaml` 的 `skills[*].entry/adapters` 声明。
-
-### Adapter
-- Skill 对特定工具的适配层。
-- 支持 `prompt/tool/workflow/mcp`。
-
-### Agent
-- Pack/Skill 的消费者。
-- 默认通过 catalog 的 `plugin_ref` 消费 plugin artifact。
-- 仅在显式开启并可用时使用 `skill_ref`。
+- 以 domain pack 为边界拆分仓库与模板，不是单一 skill 仓库
+- phase1 模板目录同时包含：catalog、schema、多个 pack 示例
 
 ---
 
