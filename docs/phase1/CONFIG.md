@@ -23,9 +23,26 @@
 最小必需字段口径：`skills[]` 仅要求 `id/path/mode/entry`。
 
 ## 2. `SKILL.md` 关键字段
-- `name`: Skill 名称（建议与目录一致）。
-- `description`: 激活描述与触发关键词。
-- 正文：使用场景、边界、调用方式。
+
+### 必需字段（frontmatter）
+| 字段 | 说明 |
+|------|------|
+| `name` | Skill 名称 |
+| `description` | 激活描述与触发关键词 |
+| `version` | 版本号（如 "1.0"） |
+
+### 可选字段（frontmatter）
+| 字段 | 说明 |
+|------|------|
+| `author` | 作者 |
+| `license` | 许可证 |
+
+### 正文内容（建议包含）
+- `## 使用场景`：适用场景列表
+- `## 不适用场景`：边界说明
+- `## 使用方法`：调用方式说明
+
+> frontmatter 为 Agent/Runtime 解析元数据，正文内容为模型消费指令。
 
 ## 3. catalog 字段手册
 
@@ -49,6 +66,7 @@
 | 字段 | 必需 | 说明 |
 |---|---|---|
 | `skill_id` | 是 | Skill 标识 |
+| `name` | 是 | Skill 可读名称（供 Agent 展示） |
 | `pack_id` | 建议 | 归属 Pack（推荐与 index 一致） |
 | `versions.<ver>.channel` | 是 | 所属通道 |
 | `versions.<ver>.plugin_artifact` | 是 | Plugin artifact 引用 |
