@@ -87,6 +87,6 @@ templates/phase1/
 | 阶段 | 解决的问题 | 核心交付物 | 状态 |
 |------|-----------|-----------|------|
 | **Phase 1** | 验证：单个 Pack 的 e2e 能否跑通？ | 单 Pack e2e 流程：编写→发布→Agent 消费 | 规划中 |
-| **Phase 2** | 如何支持多 Agent 平台的不同消费方式？ | 多模式适配（Prompt/Tool/MCP） | 规划中 |
-| **Phase 3** | 如何支持多 Pack 管理和内部分发？ | 多 Pack 管理、自托管 Registry | 规划中 |
+| **Phase 2** | 如何支持多 Pack 管理？ | 多 Pack 管理、自托管 Registry | 规划中 |
+| **Phase 3** | 如何支持多 Agent 平台的不同消费方式？ | 多模式适配（Prompt/Tool/MCP） | 规划中 |
 | **Phase 4** | 如何实现企业级治理能力？ | 权限、审计、合规、回滚 | 规划中 |
