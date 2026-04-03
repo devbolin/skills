@@ -9,14 +9,14 @@
 ## 2. 仓库模型
 
 ```text
-skills-finance/
+skills-devtools/
 ├── pack.yaml
 ├── .github/
 │   └── workflows/
 │       ├── ci.yml
 │       └── release.yml
 ├── skills/
-│   └── invoice-extractor/
+│   └── code-review/
 │       ├── SKILL.md
 │       ├── scripts/
 │       ├── adapters/
