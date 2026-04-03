@@ -14,6 +14,30 @@
       },
       "catalog_entry": "skills/code-review.json",
       "plugin_ref": "releases/devtools-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "pr-summary",
+      "pack_id": "devtools-pack",
+      "repo": "org/skills-devtools",
+      "path": "skills/pr-summary",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/pr-summary.json",
+      "plugin_ref": "releases/devtools-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "test-plan",
+      "pack_id": "devtools-pack",
+      "repo": "org/skills-devtools",
+      "path": "skills/test-plan",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/test-plan.json",
+      "plugin_ref": "releases/devtools-pack-1.0.0-plugin.zip"
     }
   ]
 }

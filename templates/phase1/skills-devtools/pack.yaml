@@ -19,3 +19,17 @@ skills:
     description: Automated code review for best practices, security, and performance
     mode: prompt
     entry: skills/code-review/SKILL.md
+  - id: pr-summary
+    path: skills/pr-summary
+    description: Summarize pull requests, highlight risk, and list follow-up checks
+    mode: prompt
+    entry: skills/pr-summary/SKILL.md
+  - id: test-plan
+    path: skills/test-plan
+    description: Generate focused test plans for code changes and release verification
+    mode: prompt
+    entry: skills/test-plan/SKILL.md
+
+agents:
+  - id: review-coordinator
+    path: agents/review-coordinator.md

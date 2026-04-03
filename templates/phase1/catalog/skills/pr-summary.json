@@ -1,12 +1,12 @@
 {
-  "skill_id": "code-review",
-  "name": "code-review",
+  "skill_id": "pr-summary",
+  "name": "pr-summary",
   "pack_id": "devtools-pack",
   "repo": "org/skills-devtools",
-  "path": "skills/code-review",
+  "path": "skills/pr-summary",
   "status": "active",
   "owners": ["devtools-team"],
-  "summary": "自动审查代码质量、安全性和最佳实践",
+  "summary": "生成 PR 摘要、风险说明和建议验证项",
   "versions": {
     "1.0.0": {
       "channel": "stable",
@@ -18,7 +18,7 @@
           {
             "name": "copilot-chat-agent",
             "mode": "prompt",
-            "entry": "skills/code-review/SKILL.md"
+            "entry": "skills/pr-summary/SKILL.md"
           }
         ]
       },
