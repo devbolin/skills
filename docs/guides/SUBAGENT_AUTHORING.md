@@ -2,7 +2,7 @@
 
 本文档说明如何在 Skill 体系中设计、配置和使用 Subagent。
 
-> **与 Phase 1 的关系**：Subagent 是 Skill 在运行时（Agent/Runtime 侧）的委托机制。Pack 侧定义 Skill 的入口和分发，Agent 侧通过 Subagent 模式实现复杂任务的分解与协作。
+> **与 Phase 1 的关系**：Subagent 是 Pack 内的一类能力对象，通过 `agents/<id>.md` 声明，并由 `pack.yaml` 的 `agents[]` 建立索引。运行时由 Agent/Runtime 按需委托执行。
 > **相关概念**：[CONCEPTS.md](../CONCEPTS.md) - 核心概念与术语解释
 
 ---
@@ -29,10 +29,10 @@ Subagent 是在**独立上下文**中执行特定任务的专业化代理。
 | 维度 | Skill | Subagent |
 |------|-------|----------|
 | 定位 | 可复用能力单元（Pack 侧） | 运行时委托机制（Agent 侧） |
-| 定义位置 | `SKILL.md` + `pack.yaml` | Agent 配置文件 |
+| 定义位置 | `SKILL.md` + `pack.yaml` | `agents/<id>.md` + `pack.yaml` |
 | 触发方式 | AI 自动检测 description | 显式调用或策略触发 |
 | 上下文 | 依赖主对话 | 独立上下文 |
-| 分发 | 通过 plugin artifact | Agent 本地配置 |
+| 分发 | 通过 plugin artifact | 随 Pack/plugin 一起分发 |
 
 **关系**：Skill 定义"能力是什么"，Subagent 决定"如何使用这个能力"。
 
@@ -85,58 +85,87 @@ Subagent 是在**独立上下文**中执行特定任务的专业化代理。
 
 ---
 
-## 五、配置模板
+## 五、文件布局与配置模板
 
-### 最小配置
+### Pack 内文件布局
 
-```json
-{
-  "subagents": {
-    "<subagent-name>": {
-      "description": "简短描述 Subagent 职责",
-      "model": "claude-sonnet-4",
-      "systemPrompt": "你是...，你负责...，你不能...",
-      "abilities": ["file_access", "search"],
-      "lifecycleHooks": {
-        "onStart": "collect-context",
-        "onEnd": "summarize-results"
-      }
-    }
-  }
-}
+```text
+pack-root/
+├── pack.yaml
+├── agents/
+│   └── review-coordinator.md
+└── skills/
+    └── code-review/SKILL.md
 ```
 
-### 完整配置示例
+### `pack.yaml` 索引方式
 
-```json
-{
-  "subagents": {
-    "code-reviewer": {
-      "description": "专注于发现 bug 和安全问题的代码审查专家",
-      "model": "claude-sonnet-4",
-      "systemPrompt": "你是代码审查专家。任务：分析 PR 变更，发现潜在 bug和安全漏洞。约束：只读模式，禁止修改文件，禁止执行git push。输出格式：JSON数组，每个元素包含file、line、severity、rule、message。",
-      "abilities": ["file_access:read", "search", "web_search"],
-      "permissions": {
-        "network": false,
-        "dangerousCommands": []
-      },
-      "lifecycleHooks": {
-        "onStart": "collect-pr-diff",
-        "onEnd": "format-review-report"
-      }
-    },
-    "test-writer": {
-      "description": "为变更生成单元测试",
-      "model": "claude-haiku-4",
-      "systemPrompt": "你是测试工程师。任务：为提供的代码变更生成单元测试。约束：只生成测试文件，不修改业务代码；测试应覆盖边界条件。",
-      "abilities": ["file_access:read", "file_access:write:tests/**"],
-      "permissions": {
-        "network": false,
-        "dangerousCommands": []
-      }
-    }
-  }
-}
+```yaml
+agents:
+  - id: review-coordinator
+    path: agents/review-coordinator.md
+```
+
+### `agents/<id>.md` 最小模板
+
+```markdown
+# review-coordinator
+
+## 职责
+- 负责协调代码审查类任务
+
+## 适用场景
+- 需要把代码审查拆成多个子步骤
+
+## 输入
+- 代码变更范围
+- 审查目标和边界
+
+## 输出
+- 审查结论
+- 风险列表
+- 后续建议
+
+## 禁止行为
+- 不直接发布
+- 不执行危险命令
+
+## 失败回退
+- 无法完成时返回失败原因，并交回主 Agent
+```
+
+### 完整示例
+
+```markdown
+# review-coordinator
+
+## 职责
+- 负责协调 PR 审查、测试计划整理和风险归类
+
+## 适用场景
+- 变更文件较多
+- 需要先总结 PR，再决定是否进入深度审查
+
+## 输入
+- PR diff 或变更文件列表
+- 用户关注点，例如安全、回归、测试缺口
+
+## 输出
+- `summary`: 变更摘要
+- `findings`: 风险与问题列表
+- `test_plan`: 建议补充的验证项
+
+## 协作方式
+- 需要变更摘要时调用 `pr-summary`
+- 需要详细审查时调用 `code-review`
+- 需要测试建议时调用 `test-plan`
+
+## 禁止行为
+- 不直接修改生产配置
+- 不执行发布或推送操作
+
+## 失败回退
+- 任一步骤失败时，返回已完成部分和失败原因，由主 Agent 决定是否继续
 ```
 
 ---

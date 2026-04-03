@@ -192,7 +192,7 @@ Subagent 是 Agent 团队中的"专业成员"。当一个大任务需要多种�
 | 维度 | Skill | Subagent |
 |------|-------|----------|
 | 定位 | 可复用能力单元（定义"怎么做"） | 运行时委托机制（执行者） |
-| 定义位置 | `SKILL.md` + `pack.yaml` | Agent 配置文件 |
+| 定义位置 | `SKILL.md` + `pack.yaml` | `agents/<id>.md` + `pack.yaml` |
 | 触发方式 | AI 自动检测 description 关键词 | Agent 显式分析后委托 |
 | 上下文 | 共享主对话 | 独立上下文，不污染主对话 |
 | 思考能力 | 按指令执行 | 可独立思考和决策 |
@@ -206,6 +206,29 @@ Subagent 是 Agent 团队中的"专业成员"。当一个大任务需要多种�
 4. **失败策略**：失败后返回什么、何时回退主流程
 
 > 参考：[Claude Code Subagents](https://code.claude.com/docs/en/sub-agents)、[VS Code Subagents](https://code.visualstudio.com/docs/copilot/agents/subagents)
+
+#### Pack 内声明方式
+
+当前规范下，Subagent 作为 Pack 的一类能力对象，与 Skill 并列维护：
+
+```text
+pack-root/
+├── pack.yaml
+├── skills/
+│   └── <skill-id>/SKILL.md
+└── agents/
+    └── <agent-id>.md
+```
+
+`pack.yaml` 中通过 `agents[]` 建立索引：
+
+```yaml
+agents:
+  - id: review-coordinator
+    path: agents/review-coordinator.md
+```
+
+`agents/<id>.md` 是 Subagent 的源码声明文件，描述职责、边界、输入输出和协作方式。
 
 ### MCP (Model Context Protocol)
 
@@ -238,7 +261,7 @@ AI 应用 ← MCP → 数据源（文件、数据库）
 | 特征 | 说明 |
 |------|------|
 | 单一真相源 | `pack.yaml` 是唯一的清单文件 |
-| 边界清晰 | 一个 Pack 包含多个相关的 Skill |
+| 边界清晰 | 一个 Pack 包含多个相关的 Skill 与 Subagent |
 | 版本统一 | Pack 级别版本号 |
 | 权限统一 | 默认 permissions |
 
@@ -249,12 +272,15 @@ AI 应用 ← MCP → 数据源（文件、数据库）
 - `distribution`（分发策略）
 - `defaults`（默认权限）
 - `skills[]`（Skill 列表）
+- `agents[]`（Subagent 列表）
 
 #### Pack 与 Skill 的关系
 
 ```
 Pack (仓库级)
 ├── pack.yaml          # 清单文件
+├── agents/
+│   └── review-coordinator.md
 └── skills/
     ├── skill-a/
     │   └── SKILL.md

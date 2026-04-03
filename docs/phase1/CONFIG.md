@@ -13,14 +13,17 @@
 | `distribution.default` | 是 | `plugin` | 发布、调用 | 默认分发模式 |
 | `distribution.enable_skill_artifacts` | 是 | `false` | 发布、catalog、调用 | 是否生成单 Skill 产物 |
 | `defaults.permissions` | 是 | 最小权限 | 执行、审计 | 默认权限边界 |
-| `skills[].id` | 是 | 无 | resolve、执行 | Skill 标识 |
+| `skills[].id` | 是 | 无 | catalog、执行 | Skill 标识 |
 | `skills[].path` | 是 | 无 | CI、打包 | Skill 目录 |
 | `skills[].mode` | 是 | 无 | 执行路由 | prompt/tool/workflow/mcp |
 | `skills[].entry` | 是 | 无 | 执行入口 | 入口文件路径 |
 | `skills[].description` | 否 | 无 | discoverability | 可读描述 |
 | `skills[].adapters` | 否 | 无 | 多工具接入 | 适配器路径映射 |
+| `agents[].id` | 否 | 无 | 委托、审计 | Subagent 标识 |
+| `agents[].path` | 否 | 无 | CI、打包、运行时委托 | Subagent 声明文件，固定为 `agents/<id>.md` |
 
 最小必需字段口径：`skills[]` 仅要求 `id/path/mode/entry`。
+如 Pack 包含 Subagent，则 `agents[]` 最小必需字段为 `id/path`。
 
 ## 2. `SKILL.md` 关键字段
 
@@ -43,6 +46,22 @@
 - `## 使用方法`：调用方式说明
 
 > frontmatter 为 Agent/Runtime 解析元数据，正文内容为模型消费指令。
+
+## 2.1 `agents/<id>.md` 约定
+
+Subagent 以单文件形式保存在 Pack 内：
+
+```text
+agents/
+  <id>.md
+```
+
+建议至少包含：
+- 职责说明
+- 适用场景与不适用场景
+- 输入约束
+- 输出约定
+- 失败回退策略
 
 ## 3. catalog 字段手册
 
@@ -95,6 +114,7 @@
 - 生产消费默认使用 plugin artifact。
 - 单 Skill 分发必须显式开关启用。
 - 所有入口路径必须可解析到仓库文件。
+- Subagent 路径固定指向 `agents/<id>.md`，不使用 `agent.yaml` 或嵌套 `AGENT.md`。
 
 
 ## 7. Agent 消费配置入口

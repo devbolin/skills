@@ -39,6 +39,7 @@
 ### Subagent（任务代理）
 - 专门处理特定任务的 AI 助手，运行在独立上下文
 - 与主 Agent 协作，处理复杂子任务
+- 在 Pack 内以 `agents/<id>.md` 形式声明，并由 `pack.yaml` 的 `agents[]` 索引
 
 ### Hook（自动化钩子）
 - Agent 生命周期事件触发点，如任务开始、结束时的自动处理
@@ -67,7 +68,7 @@ templates/phase1/
 
 说明：
 - `skills-*` 目录表示多个 domain pack，并非单一 skill。
-- 每个 pack 内再维护各自的 `skills/` 与 `pack.yaml`。
+- 每个 pack 内再维护各自的 `skills/`、`agents/` 与 `pack.yaml`。
 - 发布与消费通过 `catalog` 聚合索引。
 
 ---

@@ -93,11 +93,18 @@ flowchart TD
 - `distribution.enable_skill_artifacts`
 - `defaults.permissions`
 - `skills[]`：`id/path/mode/entry`
+- `agents[]`：`id/path`（有 Subagent 时必填）
 
 ### 6.2 可选字段
 - `skills[].description`
 - `skills[].adapters`
 - 其他扩展字段（保持向后兼容）
+
+### 6.3 Subagent 文件布局
+- Subagent 源码文件固定放在 `agents/<id>.md`。
+- `pack.yaml` 通过 `agents[].path` 指向对应文件。
+- `agents/<id>.md` 用于声明 Subagent 的职责、委托边界、输入输出和回退策略。
+- Phase1 中 Subagent 仍作为 Pack 内静态声明随 plugin 一起分发，不单独发布 artifact。
 
 ## 7. 安全与治理基线
 - 默认最小权限：`defaults.permissions.network=false`。
