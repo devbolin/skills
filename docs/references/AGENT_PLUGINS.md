@@ -1,6 +1,8 @@
 # Agent 插件文档参考
 
-本文档收集各主流 AI Agent 工具的插件/Skills 系统文档。
+> 本文档收集各主流 AI Agent 工具的插件/Skills 系统文档。
+> ⚠️ 版本信息基于调研时间 2026-04，建议以各工具官方文档为准。
+> 最近更新：2026-04-03
 
 ---
 
@@ -69,7 +71,7 @@ claude --plugin-dir ./my-plugin
 
 ### 最低版本要求
 
-- **Agent Mode**: VS Code **v1.99+** (v1.98 为预览版，仅 Insider)
+- **Agent Mode**: VS Code **v1.99+**
 - **Agent 插件**: VS Code **v1.98+** (预览)
 
 ### 概述
@@ -133,6 +135,8 @@ Copilot Extensions 允许扩展 GitHub Copilot 的功能，可与 Copilot Chat�
 
 - **Project Rules (.mdc)**: Cursor **v0.46+**
 - **User Rules**: Cursor **v0.45+** (原名 "Rules for AI")
+
+> 当前最新版本：v2.6.22+（2026-03）
 
 ### 概述
 
@@ -212,12 +216,12 @@ npm install -g @google/gemini-cli
 
 ## 工具支持对比
 
-| 工具 | 插件/Skills 系统 | 最低版本 | MCP 支持 | 发布时间 |
+| 工具 | 插件/Skills 系统 | 最低版本 | MCP 支持 | 更新时间 |
 |------|-----------------|---------|----------|---------|
 | Claude Code | Plugins | v1.0.33 | ✅ 原生 | 2024 |
-| VS Code Copilot | Agent Plugins | v1.99 | ✅ | 2025-04 |
+| VS Code Copilot | Agent Plugins | v1.99+ | ✅ | 2025-04 |
 | GitHub Copilot | Extensions | GA | 🔶 有限 | 2025-03 |
-| Cursor | Rules | v0.46 | ✅ | 2025-02 |
+| Cursor | Rules | v0.46+ | ✅ | 2025-02 |
 | Gemini CLI | MCP 扩展 | v0.1+ | ✅ 原生 | 2025-06 |
 
 ---
