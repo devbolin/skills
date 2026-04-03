@@ -61,7 +61,8 @@ templates/phase1/
 ├── .github/workflows/         # CI/Release
 ├── catalog/                   # index + skill entries
 ├── schemas/                   # schema 定义
-└── skills-devtools/           # domain pack 示例
+├── skills-devtools/           # domain pack 示例 A
+└── skills-<another-domain>/   # domain pack 示例 B
 ```
 
 说明：

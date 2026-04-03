@@ -33,19 +33,57 @@
 5. [FLOW.md](./FLOW.md)：再看发布、调用、回滚系统流程。
 6. [VALIDATION.md](./VALIDATION.md)：确认验证现状与重跑项。
 
+## Phase 边界说明
+- Phase1：单 Pack e2e 闭环（编写→发布→catalog→Agent 通过 plugin 路径消费）。
+- Phase3：多平台多模式适配（Prompt/Tool/MCP 的平台化强化与大规模验证）。
+- 本目录中的 Tool/MCP 内容用于兼容映射说明，不代表 Phase1 必选验收门槛。
+
 ## 里程碑
 
-| 周次 | 目标 |
-|------|------|
-| Week 1 | `pack.yaml` 契约与结构校验 |
-| Week 2 | Plugin-first CI/Release 与 catalog 更新 |
-| Week 3 | 至少 2 个 Agent 接入验证（Copilot + Tool Adapter） |
+| 周次 | Sprint | 目标 |
+|------|--------|------|
+| Week 1 | Sprint 1 | `pack.yaml` 契约与结构校验 |
+| Week 2 | Sprint 1 | Plugin-first CI/Release 与 catalog `plugin_ref` 更新 |
+| Week 3 | Sprint 2 | Agent plugin 路径消费验证（单 Pack e2e） |
+| Week 4 | Sprint 2 | 文档收敛与回滚链路验证 |
+
+## Sprint 划分
+
+### Sprint 1（Week 1-2）：基础校验 + 发布闭环
+**目标**：建立单 Pack 的发布闭环
+
+**Week 1 交付物**：
+- `pack.yaml` schema 校验集成到 CI
+- YAML 语法校验（yamllint）
+- 字段完整性校验（skills[].id/path/mode/entry）
+
+**Week 2 交付物**：
+- Plugin artifact 打包发布
+- catalog `plugin_ref` 更新
+- Catalog 一致性校验
+- 发布产物校验（manifest + checksum）
+
+### Sprint 2（Week 3-4）：Agent 消费验证 + 稳定化
+**目标**：验证 Agent 能通过 plugin 主路径完成消费并可回滚
+
+**Week 3 交付物**：
+- plugin 包落盘与入口可读验证
+- Agent plugin 主路径消费验证
+- 失败分支处理验证（入口缺失、权限冲突）
+
+**Week 4 交付物**：
+- catalog 回滚链路验证
+- 端到端链路测试（pack → release → catalog → Agent 发现）
+- 文档与术语收敛
 
 ## 验收标准
-- PR 能自动校验 pack 结构、入口与测试。
+- PR 能自动校验 pack 结构、入口与测试（YAML + Schema + 字段完整性）。
 - 发布默认生成 plugin artifact 与 manifest。
 - catalog 默认提供 `plugin_ref`。
 - 单 Skill artifact 仅在显式开启时生成。
+- **Agent 可通过 plugin 主路径成功调用 Skill**（`plugin_ref` + `mode/entry`）。
+- **端到端链路可追溯**：pack → release → catalog → Agent 发现。
+- Prompt/Tool/MCP 的平台化强约束验证属于 Phase3，不作为 Phase1 必选门槛。
 
 ## 相关资源
 - [模板目录](../../templates/phase1/) - Domain Polyrepo 模板

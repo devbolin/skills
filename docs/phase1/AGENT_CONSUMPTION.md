@@ -1,7 +1,7 @@
 # 阶段一 Agent 消费规范（Plugin-first）
 
 ## 1. 目标与范围
-本文档定义 phase1 下 Agent 消费 Skill 的统一步骤，覆盖三类主流路径：
+本文档定义 phase1 下 Agent 消费 Skill 的统一步骤，并给出三类主流消费模式映射：
 - Copilot（`mode=prompt`，入口为 `SKILL.md`）
 - OpenAI Tool（`mode=tool`，入口为 `tool.json`）
 - MCP 客户端（`mode=mcp`，通用客户端路径）
@@ -9,6 +9,7 @@
 约束：
 - 默认消费 `plugin_ref`。
 - `skill_ref` 为可选路径，仅在策略命中且引用存在时使用。
+- Phase1 验收以 plugin-first 主路径为准；Tool/MCP 在本阶段作为兼容映射说明，不作为必选验收门槛。
 
 ## 2. 统一消费步骤
 1. Agent/Runtime 根据 `skill_id + channel/version` 读取 catalog。
@@ -50,7 +51,7 @@ flowchart TD
 
 ## 5. 三类消费模式与路由
 
-> 消费模式定义详见 [CONCEPTS.md](./CONCEPTS.md#agent-消费模式)
+> 消费模式定义详见 [CONCEPTS.md](../CONCEPTS.md#agent-消费模式)
 
 ### 5.1 Prompt 模式（Copilot）
 
@@ -83,7 +84,7 @@ skills:
 路由规则：
 - 解析 `mode=tool`。
 - 读取 `tool.json` 作为工具定义。
-- runtime 按 `input_schema` 校验输入后执行。
+- runtime 按 `parameters`（符合 JSON Schema）校验输入后执行。
 
 失败回退：
 - `tool.json` 不存在或无效：返回配置错误。
@@ -122,7 +123,7 @@ skills:
 - phase1 默认分发路径是 plugin，单 Skill 分发仅为可选能力。
 
 ## 8. 验收清单（文档级）
-- [x] Copilot/OpenAI Tool/MCP 三类 Agent 均有最小配置示例。
-- [x] 每类 Agent 均有路由规则与失败回退说明。
+- [x] 明确 Phase1 必选主路径：`plugin_ref` + `mode/entry` 路由执行。
 - [x] 默认 `plugin_ref` 与可选 `skill_ref` 行为可解释且一致。
+- [x] Tool/MCP 模式在本阶段作为兼容映射说明，非强制验收门槛。
 - [x] 文档术语与 `docs/phase1` 其余文档一致（`pack.yaml`、plugin-first、`id/path/mode/entry`）。

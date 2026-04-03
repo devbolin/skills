@@ -42,8 +42,8 @@ flowchart LR
   F --> H[Manifest and Checksum]
   F --> I[Optional Skill Artifact]
   F --> J[Update Skill Catalog]
-  J --> K[Resolver]
-  K --> L[Agent Runtime]
+  J --> K[Agent or Runtime Read Catalog]
+  K --> L[Load plugin_ref and route by mode and entry]
 ```
 
 说明：
@@ -65,7 +65,7 @@ flowchart TD
   W --> D[optional skill artifact]
   A --> I[index.json plugin_ref]
   D --> X[skill_ref optional]
-  I --> Z[Resolver and Execute]
+  I --> Z[Agent or Runtime Route and Execute]
   X --> Z
 ```
 
@@ -79,8 +79,8 @@ flowchart TD
 |---|---|---|---|
 | 常规发布 | `distribution.default=plugin` | 启用 | 生成 plugin artifact |
 | 单 Skill 分发 | `distribution.enable_skill_artifacts=true` | 关闭 | 额外生成 skill artifact |
-| Agent resolve | 有 `plugin_ref` | 优先 | 走 plugin 执行 |
-| Agent resolve（可选） | 策略要求且有 `skill_ref` | 不默认 | 切换 skill artifact |
+| Agent/Runtime 读取 catalog | 有 `plugin_ref` | 优先 | 走 plugin 执行 |
+| Agent/Runtime 可选切换 | 策略要求且有 `skill_ref` | 不默认 | 切换 skill artifact |
 
 ## 6. `pack.yaml` 规范（阶段一）
 
@@ -109,13 +109,21 @@ flowchart TD
 - 每次调用至少记录：`pack_id`、`skill_id`、`version`、耗时、结果状态。
 - 错误统一分类：参数错误、执行错误、外部依赖错误。
 
-## 9. 里程碑（建议 2~3 周）
-1. Week 1：`pack.yaml` 契约落地 + CI 结构校验。
-2. Week 2：Plugin-first 发布流水线 + catalog `plugin_ref` 更新。
-3. Week 3：两个 Agent 验证（Copilot + Tool Adapter），并演示可选单 Skill 分发开关。
+## 9. 里程碑（4 周 / 2 Sprint）
+
+### Sprint 1：基础校验 + 发布闭环（Week 1-2）
+1. **Week 1**：`pack.yaml` 契约落地 + CI YAML/Schema 校验集成。
+2. **Week 2**：Plugin-first 发布流水线 + catalog `plugin_ref` 更新。
+
+### Sprint 2：Agent 消费验证 + 稳定化（Week 3-4）
+3. **Week 3**：Agent plugin 主路径消费验证（`plugin_ref` + `mode/entry`）。
+4. **Week 4**：回滚链路验证 + 端到端链路测试 + 文档收敛。
 
 ## 10. 验收标准
-- PR 能自动校验 pack 结构、入口与引用一致性。
+- PR 能自动校验 pack 结构、入口与引用一致性（YAML + Schema + 字段完整性）。
 - 合并后可发布 plugin artifact 与 manifest。
 - catalog 默认提供 `plugin_ref`。
 - 单 Skill artifact 仅在显式开启时生成。
+- **Agent 可通过 plugin 主路径成功调用 Skill**（`plugin_ref` + `mode/entry`）。
+- **端到端链路可追溯**：pack → release → catalog → Agent 发现。
+- Prompt/Tool/MCP 的平台化强约束验证属于 Phase3，不作为 Phase1 必选门槛。
