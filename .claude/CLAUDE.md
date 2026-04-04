@@ -128,7 +128,7 @@ Use `addBlockedBy` / `addBlocks` to establish dependencies between tasks.
 
 ### Example
 
-```markdown
+```
 创建: TaskCreate (subject, description, activeForm)
 更新: TaskUpdate (taskId, status, owner)
 依赖: TaskUpdate (taskId, addBlockedBy: ["task-id"])
