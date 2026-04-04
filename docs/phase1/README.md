@@ -10,7 +10,7 @@
 | [DESIGN.md](./DESIGN.md) | 阶段一架构设计与决策主文档 |
 | [FLOW.md](./FLOW.md) | 发布/调用/回滚流程规范（系统视角） |
 | [CONFIG.md](./CONFIG.md) | 配置字段操作手册 |
-| [VALIDATION.md](./VALIDATION.md) | 模板验证报告与差异说明 |
+| [VALIDATION_HISTORY.md](./VALIDATION_HISTORY.md) | 模板验证报告与差异说明 |
 | [AGENT_CONSUMPTION.md](./AGENT_CONSUMPTION.md) | Agent 消费规范与配置示例 |
 
 ## 图示索引
@@ -31,7 +31,7 @@
 3. [CONFIG.md](./CONFIG.md)：确认字段和参数语义。
 4. [AGENT_CONSUMPTION.md](./AGENT_CONSUMPTION.md)：确认各 Agent 消费配置与回退规则。
 5. [FLOW.md](./FLOW.md)：再看发布、调用、回滚系统流程。
-6. [VALIDATION.md](./VALIDATION.md)：确认验证现状与重跑项。
+6. [VALIDATION_HISTORY.md](./VALIDATION_HISTORY.md)：确认验证现状与重跑项。
 
 ## Phase 边界说明
 - Phase1：单 Pack e2e 闭环（编写→发布→catalog→Agent 通过 plugin 路径消费）。

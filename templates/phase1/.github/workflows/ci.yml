@@ -12,16 +12,310 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Basic structure check
-        run: |
-          test -f templates/phase1/skills-devtools/pack.yaml
-          test -f templates/phase1/skills-devtools/skills/code-review/SKILL.md
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
+      - name: Install dependencies
+        run: |
+          python3 -m pip install pyyaml yamllint
+
+      # ============================================
+      # 1. YAML Syntax Validation
+      # ============================================
+      - name: Validate YAML syntax
+        run: |
+          yamllint -d relaxed templates/phase1/**/*.yaml templates/phase1/**/.github/workflows/*.yml || true
+          yamllint templates/phase1/**/*.yaml templates/phase1/**/.github/workflows/*.yml
+
+      # ============================================
+      # 2. pack.yaml Structure Validation
+      # ============================================
+      - name: Validate pack.yaml structure
+        run: |
+          python3 << 'PYTHON_SCRIPT'
+          import yaml
+          import json
+          import os
+          import sys
+
+          pack_yaml_path = "templates/phase1/skills-devtools/pack.yaml"
+
+          if not os.path.exists(pack_yaml_path):
+              print(f"ERROR: {pack_yaml_path} not found")
+              sys.exit(1)
+
+          with open(pack_yaml_path, 'r') as f:
+              pack = yaml.safe_load(f)
+
+          errors = []
+
+          # Required top-level fields
+          required_fields = ['id', 'name', 'version', 'owners', 'distribution', 'defaults', 'skills']
+          for field in required_fields:
+              if field not in pack:
+                  errors.append(f"Missing required field: {field}")
+
+          # Distribution fields
+          if 'distribution' in pack:
+              dist = pack['distribution']
+              if 'default' not in dist:
+                  errors.append("Missing distribution.default")
+              if 'enable_skill_artifacts' not in dist:
+                  errors.append("Missing distribution.enable_skill_artifacts")
+              if dist.get('default') not in ['plugin', 'skill']:
+                  errors.append(f"distribution.default must be 'plugin' or 'skill', got: {dist.get('default')}")
+
+          # Skills array validation
+          if 'skills' in pack:
+              for i, skill in enumerate(pack['skills']):
+                  for field in ['id', 'path', 'mode', 'entry']:
+                      if field not in skill:
+                          errors.append(f"skills[{i}]: missing required field '{field}'")
+
+                  if 'mode' in skill and skill['mode'] not in ['prompt', 'workflow', 'tool', 'mcp']:
+                      errors.append(f"skills[{i}]: mode must be one of [prompt, workflow, tool, mcp], got: {skill.get('mode')}")
+
+          # Agents array validation (if present)
+          if 'agents' in pack:
+              for i, agent in enumerate(pack['agents']):
+                  for field in ['id', 'path']:
+                      if field not in agent:
+                          errors.append(f"agents[{i}]: missing required field '{field}'")
+
+          if errors:
+              print("PACK.YAML VALIDATION ERRORS:")
+              for e in errors:
+                  print(f"  - {e}")
+              sys.exit(1)
+          else:
+              print("pack.yaml structure validation PASSED")
+
+          # Output validated data for subsequent steps
+          with open('pack_validated.json', 'w') as f:
+              json.dump(pack, f)
+
+          PYTHON_SCRIPT
+
+      # ============================================
+      # 3. SKILL.md Frontmatter Validation
+      # ============================================
+      - name: Validate SKILL.md frontmatter
+        run: |
+          python3 << 'PYTHON_SCRIPT'
+          import yaml
+          import os
+          import sys
+          import re
+
+          pack_yaml_path = "templates/phase1/skills-devtools/pack.yaml"
+
+          with open(pack_yaml_path, 'r') as f:
+              pack = yaml.safe_load(f)
+
+          errors = []
+          warnings = []
+
+          for skill in pack.get('skills', []):
+              skill_id = skill['id']
+              entry = skill['entry']
+
+              # entry is relative to pack root, but we're in templates/phase1/skills-devtools
+              # so we need to construct the correct path
+              if entry.startswith('skills/'):
+                  skill_md_path = f"templates/phase1/skills-devtools/{entry}"
+              else:
+                  skill_md_path = f"templates/phase1/skills-devtools/{entry}"
+
+              if not os.path.exists(skill_md_path):
+                  errors.append(f"SKILL.md not found for skill '{skill_id}': {skill_md_path}")
+                  continue
+
+              # Read and parse frontmatter
+              with open(skill_md_path, 'r') as f:
+                  content = f.read()
+
+              # Extract frontmatter
+              fm_match = re.match(r'^---\n(.*?)\n---', content, re.DOTALL)
+              if not fm_match:
+                  errors.append(f"skill '{skill_id}': No frontmatter found in {entry}")
+                  continue
+
+              try:
+                  fm = yaml.safe_load(fm_match.group(1))
+              except Exception as e:
+                  errors.append(f"skill '{skill_id}': Invalid frontmatter YAML: {e}")
+                  continue
+
+              # Check required frontmatter fields
+              required_fm = ['name', 'description', 'version']
+              for field in required_fm:
+                  if field not in fm:
+                      errors.append(f"skill '{skill_id}': Missing frontmatter field '{field}'")
+
+              # Validate name matches
+              if 'name' in fm and fm['name'] != skill_id:
+                  warnings.append(f"skill '{skill_id}': frontmatter name '{fm['name']}' differs from skill id '{skill_id}'")
+
+              if errors:
+                  print("SKILL.MD VALIDATION ERRORS:")
+                  for e in errors:
+                      print(f"  - {e}")
+                  sys.exit(1)
+
+              print(f"SKILL.md validation PASSED for skill: {skill_id}")
+
+          if warnings:
+              print("WARNINGS:")
+              for w in warnings:
+                  print(f"  - {w}")
+
+          PYTHON_SCRIPT
+
+      # ============================================
+      # 4. Skill Path Existence Check
+      # ============================================
+      - name: Validate skill paths exist
+        run: |
+          python3 << 'PYTHON_SCRIPT'
+          import yaml
+          import os
+          import sys
+
+          pack_yaml_path = "templates/phase1/skills-devtools/pack.yaml"
+
+          with open(pack_yaml_path, 'r') as f:
+              pack = yaml.safe_load(f)
+
+          errors = []
+          base_path = "templates/phase1/skills-devtools"
+
+          for skill in pack.get('skills', []):
+              skill_id = skill['id']
+              path = skill['path']
+              full_path = os.path.join(base_path, path)
+
+              if not os.path.exists(full_path):
+                  errors.append(f"Skill '{skill_id}': path does not exist: {path}")
+
+              # Check entry file exists
+              entry = skill['entry']
+              if entry.startswith('skills/'):
+                  entry_path = os.path.join(base_path, entry)
+              else:
+                  entry_path = os.path.join(base_path, entry)
+
+              if not os.path.exists(entry_path):
+                  errors.append(f"Skill '{skill_id}': entry file does not exist: {entry}")
+
+          if errors:
+              print("PATH VALIDATION ERRORS:")
+              for e in errors:
+                  print(f"  - {e}")
+              sys.exit(1)
+
+          print("Skill paths validation PASSED")
+
+          PYTHON_SCRIPT
+
+      # ============================================
+      # 5. JSON Syntax Validation
+      # ============================================
       - name: Validate JSON files
         run: |
           python3 -m json.tool templates/phase1/catalog/index.json > /dev/null
-          python3 -m json.tool templates/phase1/catalog/skills/code-review.json > /dev/null
+          for f in templates/phase1/catalog/skills/*.json; do
+            python3 -m json.tool "$f" > /dev/null || exit 1
+          done
+          echo "JSON validation PASSED"
 
-      - name: Placeholder tests
+      # ============================================
+      # 6. Catalog Consistency Check
+      # ============================================
+      - name: Validate catalog consistency
         run: |
-          echo "Add per-pack and per-skill tests"
+          python3 << 'PYTHON_SCRIPT'
+          import yaml
+          import json
+          import os
+          import sys
+
+          pack_yaml_path = "templates/phase1/skills-devtools/pack.yaml"
+          catalog_index_path = "templates/phase1/catalog/index.json"
+
+          with open(pack_yaml_path, 'r') as f:
+              pack = yaml.safe_load(f)
+
+          with open(catalog_index_path, 'r') as f:
+              catalog = json.load(f)
+
+          pack_skill_ids = {s['id'] for s in pack.get('skills', [])}
+          catalog_skill_ids = {s['skill_id'] for s in catalog.get('skills', [])}
+
+          missing_in_catalog = pack_skill_ids - catalog_skill_ids
+          extra_in_catalog = catalog_skill_ids - pack_skill_ids
+
+          errors = []
+          if missing_in_catalog:
+              errors.append(f"Skills in pack.yaml but not in catalog: {missing_in_catalog}")
+          if extra_in_catalog:
+              errors.append(f"Skills in catalog but not in pack.yaml: {extra_in_catalog}")
+
+          if errors:
+              print("CATALOG CONSISTENCY ERRORS:")
+              for e in errors:
+                  print(f"  - {e}")
+              sys.exit(1)
+
+          print("Catalog consistency validation PASSED")
+
+          PYTHON_SCRIPT
+
+      # ============================================
+      # 7. Subagent Path Validation (if agents present)
+      # ============================================
+      - name: Validate subagent paths
+        run: |
+          python3 << 'PYTHON_SCRIPT'
+          import yaml
+          import os
+          import sys
+
+          pack_yaml_path = "templates/phase1/skills-devtools/pack.yaml"
+
+          with open(pack_yaml_path, 'r') as f:
+              pack = yaml.safe_load(f)
+
+          if 'agents' not in pack:
+              print("No agents defined, skipping validation")
+              sys.exit(0)
+
+          errors = []
+          base_path = "templates/phase1/skills-devtools"
+
+          for agent in pack.get('agents', []):
+              agent_id = agent['id']
+              path = agent['path']
+              full_path = os.path.join(base_path, path)
+
+              if not os.path.exists(full_path):
+                  errors.append(f"Agent '{agent_id}': file does not exist: {path}")
+
+          if errors:
+              print("AGENT PATH VALIDATION ERRORS:")
+              for e in errors:
+                  print(f"  - {e}")
+              sys.exit(1)
+
+          print("Agent paths validation PASSED")
+
+          PYTHON_SCRIPT
+
+      # ============================================
+      # 8. Placeholder for per-pack tests
+      # ============================================
+      - name: Run placeholder tests
+        run: |
+          echo "All structural validations PASSED"
+          echo "Add per-pack and per-skill tests here"

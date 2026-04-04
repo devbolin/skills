@@ -5,41 +5,205 @@ on:
     tags:
       - 'v*.*.*'
 
+env:
+  ENABLE_SKILL_ARTIFACTS: "false"
+
 jobs:
   release:
     runs-on: ubuntu-latest
-    env:
-      ENABLE_SKILL_ARTIFACTS: "false"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Package plugin artifact (default)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
         run: |
+          python3 -m pip install pyyaml
+
+      # ============================================
+      # 1. Extract metadata from tag and pack.yaml
+      # ============================================
+      - name: Extract version from tag
+        id: version
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          VERSION="${TAG#v}"
+          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Tag: $TAG, Version: $VERSION"
+
+      - name: Read pack.yaml for dynamic values
+        id: pack_info
+        run: |
+          python3 << 'PYTHON_SCRIPT'
+          import yaml
+          import os
+          import sys
+
+          pack_yaml_path = "templates/phase1/skills-devtools/pack.yaml"
+
+          with open(pack_yaml_path, 'r') as f:
+              pack = yaml.safe_load(f)
+
+          pack_id = pack.get('id', 'unknown')
+          pack_name = pack.get('name', 'Unknown Pack')
+          enable_skill_artifacts = pack.get('distribution', {}).get('enable_skill_artifacts', False)
+
+          print(f"Pack ID: {pack_id}")
+          print(f"Pack Name: {pack_name}")
+          print(f"Enable Skill Artifacts: {enable_skill_artifacts}")
+
+          # Output for subsequent steps
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f"PACK_ID={pack_id}\n")
+              f.write(f"PACK_NAME={pack_name}\n")
+              f.write(f"ENABLE_SKILL={str(enable_skill_artifacts).lower()}\n")
+
+          PYTHON_SCRIPT
+
+      # ============================================
+      # 2. Package plugin artifact
+      # ============================================
+      - name: Package plugin artifact
+        run: |
+          PACK_ID="${{ steps.pack_info.outputs.PACK_ID }}"
+          VERSION="${{ steps.version.outputs.VERSION }}"
           mkdir -p dist
-          zip -r dist/devtools-pack-1.0.0-plugin.zip templates/phase1/skills-devtools
+          zip -r "dist/${PACK_ID}-${VERSION}-plugin.zip" templates/phase1/skills-devtools
 
-      - name: Optional package skill artifact
-        if: env.ENABLE_SKILL_ARTIFACTS == 'true'
+      # ============================================
+      # 3. Optional: Package skill artifacts
+      # ============================================
+      - name: Optional package skill artifacts
+        if: env.ENABLE_SKILL_ARTIFACTS == 'true' || steps.pack_info.outputs.ENABLE_SKILL == 'true'
         run: |
-          zip -r dist/code-review-1.0.0.zip templates/phase1/skills-devtools/skills/code-review
+          PACK_ID="${{ steps.pack_info.outputs.PACK_ID }}"
+          VERSION="${{ steps.version.outputs.VERSION }}"
+          echo "Skill artifact packaging enabled"
 
-      - name: Generate manifest/checksum
+          # Package each skill individually
+          python3 << 'PYTHON_SCRIPT'
+          import yaml
+          import os
+          import zipfile
+
+          pack_yaml_path = "templates/phase1/skills-devtools/pack.yaml"
+
+          with open(pack_yaml_path, 'r') as f:
+              pack = yaml.safe_load(f)
+
+          for skill in pack.get('skills', []):
+              skill_id = skill['id']
+              skill_path = skill['path']
+
+              src_path = f"templates/phase1/skills-devtools/{skill_path}"
+              if os.path.exists(src_path):
+                  dest_zip = f"dist/{skill_id}-{VERSION}.zip"
+                  with zipfile.ZipFile(dest_zip, 'w', zipfile.ZIP_DEFLATED) as zf:
+                      for root, dirs, files in os.walk(src_path):
+                          for file in files:
+                              file_path = os.path.join(root, file)
+                              arcname = os.path.relpath(file_path, src_path)
+                              zf.write(file_path, arcname)
+                  print(f"Created skill artifact: {dest_zip}")
+              else:
+                  print(f"Warning: Skill path not found: {src_path}")
+
+          PYTHON_SCRIPT
+
+      # ============================================
+      # 4. Generate manifest and checksum
+      # ============================================
+      - name: Generate manifest and checksum
         run: |
-          cat > dist/manifest.json <<'MANIFEST'
+          PACK_ID="${{ steps.pack_info.outputs.PACK_ID }}"
+          VERSION="${{ steps.version.outputs.VERSION }}"
+          ENABLE_SKILL="${{ steps.pack_info.outputs.ENABLE_SKILL }}"
+
+          cat > dist/manifest.json << MANIFEST
           {
-            "pack_id": "devtools-pack",
-            "version": "1.0.0",
-            "plugin_artifact": "devtools-pack-1.0.0-plugin.zip",
-            "skill_artifacts_enabled": false
+            "pack_id": "${PACK_ID}",
+            "version": "${VERSION}",
+            "plugin_artifact": "${PACK_ID}-${VERSION}-plugin.zip",
+            "skill_artifacts_enabled": ${ENABLE_SKILL}
           }
           MANIFEST
-          (cd dist && shasum -a 256 devtools-pack-1.0.0-plugin.zip > checksums.txt)
 
+          (cd dist && shasum -a 256 *.zip > checksums.txt)
+
+          echo "Manifest generated:"
+          cat dist/manifest.json
+
+      # ============================================
+      # 5. Update catalog (plugin_ref only for Phase 1)
+      # ============================================
+      - name: Update catalog
+        run: |
+          PACK_ID="${{ steps.pack_info.outputs.PACK_ID }}"
+          VERSION="${{ steps.version.outputs.VERSION }}"
+          SKILLS="${{ steps.pack_info.outputs.ENABLE_SKILL }}"
+
+          python3 << 'PYTHON_SCRIPT'
+          import json
+          import os
+
+          catalog_index_path = "templates/phase1/catalog/index.json"
+
+          with open(catalog_index_path, 'r') as f:
+              catalog = json.load(f)
+
+          plugin_ref = f"releases/{PACK_ID}-{VERSION}-plugin.zip"
+
+          # Update plugin_ref for all skills in this pack
+          for skill in catalog.get('skills', []):
+              if skill.get('pack_id') == PACK_ID:
+                  skill['channels']['stable'] = VERSION
+                  skill['plugin_ref'] = plugin_ref
+
+                  # Update skill detail JSON if exists
+                  catalog_entry = skill.get('catalog_entry')
+                  if catalog_entry:
+                      detail_path = f"templates/phase1/catalog/{catalog_entry}"
+                      if os.path.exists(detail_path):
+                          with open(detail_path, 'r') as f:
+                              detail = json.load(f)
+
+                          if VERSION not in detail.get('versions', {}):
+                              detail['versions'][VERSION] = {}
+
+                          detail['versions'][VERSION]['channel'] = 'stable'
+                          detail['versions'][VERSION]['tag'] = f"v{VERSION}"
+                          detail['versions'][VERSION]['plugin_artifact'] = plugin_ref
+
+                          with open(detail_path, 'w') as f:
+                              json.dump(detail, f, indent=2)
+                          print(f"Updated catalog entry: {detail_path}")
+
+          # Write updated catalog index
+          with open(catalog_index_path, 'w') as f:
+              json.dump(catalog, f, indent=2)
+
+          print(f"Updated catalog index with plugin_ref: {plugin_ref}")
+
+          PYTHON_SCRIPT
+
+      - name: Show catalog changes
+        run: |
+          echo "Updated catalog/index.json:"
+          cat templates/phase1/catalog/index.json
+
+      # ============================================
+      # 6. Create GitHub Release
+      # ============================================
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/devtools-pack-1.0.0-plugin.zip
+            dist/*.zip
             dist/manifest.json
             dist/checksums.txt
+          draft: false
+          generate_release_notes: true
