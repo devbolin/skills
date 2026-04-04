@@ -12,7 +12,7 @@
 - 默认分发模式为 **Plugin-first（整仓分发）**。
 - 保留单 Skill 分发能力，但默认关闭，仅作为可选模式。
 - `skill.yaml` 不作为手工维护真相源，仅可作为生成产物。
-- **Polyrepo 目录模型保留**：`catalog/`、`schemas/` 与多个 domain pack（如 `skills-*`）并存。
+- **Polyrepo 目录模型保留**：`catalog/` 与多个 domain pack（如 `skills-*`）并存。
 
 > 当前权威规范文档：`docs/phase1/`。
 
@@ -51,17 +51,38 @@
 
 ### Polyrepo
 - 以 domain pack 为边界拆分仓库与模板，不是单一 skill 仓库
-- phase1 模板目录同时包含：catalog、schema、多个 pack 示例
+- phase1 模板目录同时包含：catalog、多个 pack 示例
 
 ---
 
-## Polyrepo 目录结构（阶段一模板）
+## 仓库结构
+
+本仓库包含两类不同用途的 Skill：
+
+### `.claude/skills/` - 本地能力（本文档仓库自用）
+
+本文档仓库（skill-management）自身使用的 Claude Code 能力，无需 `pack.yaml` 或发布流程，直接供本仓库的 Claude Code 使用。
+
+```text
+.claude/skills/                # 本地 Skill（18 个）
+├── architecture-evaluator/
+├── complexity-estimator/
+├── decision-recorder/
+└── ...（共 18 个）
+```
+
+**用途**：本文档仓库的 Claude Code 运行时直接加载这些 SKILL.md，无需 catalog 注册。
+
+---
+
+### `templates/phase1/` - Pack 模板（供其他 Agent 使用）
+
+阶段一验证用的完整 Pack 模板结构，用于创建可分发的能力包。
 
 ```text
 templates/phase1/
 ├── .github/workflows/         # CI/Release
-├── catalog/                   # index + skill entries
-├── schemas/                   # schema 定义
+├── catalog/                   # 静态注册（本地记账）
 ├── skills-devtools/           # domain pack 示例 A
 └── skills-<another-domain>/   # domain pack 示例 B
 ```
@@ -70,6 +91,8 @@ templates/phase1/
 - `skills-*` 目录表示多个 domain pack，并非单一 skill。
 - 每个 pack 内再维护各自的 `skills/`、`agents/` 与 `pack.yaml`。
 - 发布与消费通过 `catalog` 聚合索引。
+
+**Catalog 用途**：Phase 1 中 catalog 作为**静态注册**（仓库内记账），记录可用 Pack 及其 `plugin_ref`。Phase 2 的自托管 Registry 才是跨仓库分发机制。
 
 ---
 

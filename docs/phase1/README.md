@@ -53,7 +53,7 @@
 **目标**：建立单 Pack 的发布闭环
 
 **Week 1 交付物**：
-- `pack.yaml` schema 校验集成到 CI
+- `pack.yaml` 结构校验集成到 CI
 - YAML 语法校验（yamllint）
 - 字段完整性校验（skills[].id/path/mode/entry）
 
@@ -77,7 +77,7 @@
 - 文档与术语收敛
 
 ## 验收标准
-- PR 能自动校验 pack 结构、入口与测试（YAML + Schema + 字段完整性）。
+- PR 能自动校验 pack 结构、入口与测试（YAML + 字段完整性）。
 - 发布默认生成 plugin artifact 与 manifest。
 - catalog 默认提供 `plugin_ref`。
 - 单 Skill artifact 仅在显式开启时生成。
@@ -87,4 +87,3 @@
 
 ## 相关资源
 - [模板目录](../../templates/phase1/) - Domain Polyrepo 模板
-- [Schema 定义](../../templates/phase1/schemas/) - 兼容/扩展校验（当前阶段一以 `pack.yaml` 为主，schema 作为可选增强）

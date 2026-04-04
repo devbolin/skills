@@ -8,7 +8,6 @@
 templates/phase1/
 ├── .github/workflows/         # CI/Release
 ├── catalog/                   # index + skill entries
-├── schemas/                   # schema 定义
 └── skills-devtools/           # domain pack 示例
     ├── pack.yaml              # Pack 级清单（唯一真相源）
     └── skills/

@@ -6,7 +6,6 @@
 docs/
 ├── phase1/          # 阶段一实现文档
 ├── guides/          # 用户指南
-├── schemas/         # JSON Schema 参考
 ├── references/      # 参考资料
 └── CONCEPTS.md     # 基本概念（术语解释）
 ```
@@ -28,12 +27,6 @@ docs/
 | [SKILL_AUTHORING.md](./guides/SKILL_AUTHORING.md) | 技能编写与发布指南 |
 | [SUBAGENT_AUTHORING.md](./guides/SUBAGENT_AUTHORING.md) | Subagent 设计、配置与协作指南 |
 | [AGENT_CONFIGURATION.md](./guides/AGENT_CONFIGURATION.md) | Agent 侧 plugin 集成操作手册 |
-
-## Schema 参考
-
-| 文档 | 说明 |
-|------|------|
-| [skill.schema.json](../templates/phase1/schemas/skill.schema.json) | 技能定义 Schema |
 
 ## 参考资料
 
