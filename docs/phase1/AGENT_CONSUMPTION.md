@@ -38,10 +38,10 @@ flowchart TD
 |---|---|---|---|
 | `pack.yaml` | `skills[].id` | 是 | Skill 标识 |
 | `pack.yaml` | `skills[].path` | 是 | Skill 路径 |
-| `pack.yaml` | `skills[].mode` | 是 | 路由模式（prompt/workflow） |
+| `pack.yaml` | `skills[].mode` | 是 | 路由模式（Phase 1 仅 prompt） |
 | `pack.yaml` | `skills[].entry` | 是 | 执行入口 |
 | `pack.yaml` | `skills[].description` | 否 | 可发现性描述 |
-| `pack.yaml` | `skills[].adapters` | 否 | 多工具路径映射 |
+| `pack.yaml` | `skills[].adapters` | 否 | 多工具路径映射（Phase 3） |
 | `catalog index` | `plugin_ref` | 是 | 默认消费产物 |
 | `catalog detail` | `skill_ref` | 否 | 可选单 Skill 产物 |
 | `runtime` | `mode + entry` | 是 | 最终执行定位 |

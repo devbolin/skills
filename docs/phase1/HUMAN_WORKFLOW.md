@@ -73,7 +73,7 @@ defaults:
 skills:
   - id: <skill-id>      # 如 code-review
     path: skills/<skill-id>
-    mode: prompt         # prompt / workflow
+    mode: prompt         # Phase 1 仅 prompt
     entry: skills/<skill-id>/SKILL.md
 ```
 

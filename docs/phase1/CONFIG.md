@@ -15,10 +15,10 @@
 | `defaults.permissions` | 是 | 最小权限 | 执行、审计 | 默认权限边界 |
 | `skills[].id` | 是 | 无 | catalog、执行 | Skill 标识 |
 | `skills[].path` | 是 | 无 | CI、打包 | Skill 目录 |
-| `skills[].mode` | 是 | 无 | 执行路由 | prompt/workflow |
+| `skills[].mode` | 是 | 无 | 执行路由 | prompt |
 | `skills[].entry` | 是 | 无 | 执行入口 | 入口文件路径 |
 | `skills[].description` | 否 | 无 | discoverability | 可读描述 |
-| `skills[].adapters` | 否 | 无 | 多工具接入 | 适配器路径映射 |
+| `skills[].adapters` | 否 | 无 | 多工具接入（Phase 3） | 适配器路径映射 |
 | `agents[].id` | 否 | 无 | 委托、审计 | Subagent 标识 |
 | `agents[].path` | 否 | 无 | CI、打包、运行时委托 | Subagent 声明文件，固定为 `agents/<id>.md` |
 

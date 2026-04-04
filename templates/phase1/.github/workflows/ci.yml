@@ -74,8 +74,8 @@ jobs:
                       if field not in skill:
                           errors.append(f"skills[{i}]: missing required field '{field}'")
 
-                  if 'mode' in skill and skill['mode'] not in ['prompt', 'workflow', 'tool', 'mcp']:
-                      errors.append(f"skills[{i}]: mode must be one of [prompt, workflow, tool, mcp], got: {skill.get('mode')}")
+                  if 'mode' in skill and skill['mode'] not in ['prompt']:
+                      errors.append(f"skills[{i}]: mode must be 'prompt' for Phase 1, got: {skill.get('mode')}")
 
           # Agents array validation (if present)
           if 'agents' in pack:
