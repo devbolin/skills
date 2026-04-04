@@ -38,7 +38,7 @@ flowchart TD
   B --> C{plugin_ref exists}
   C -- No --> X[Fail with catalog error]
   C -- Yes --> D[Select Plugin Artifact]
-  D --> E{force skill mode and skill_ref exists}
+  D --> E{Policy allows skill_ref and skill_ref exists}
   E -- No --> F[Load Skill from Plugin]
   E -- Yes --> G[Load Skill Artifact]
   F --> H[Execute Skill]
@@ -77,7 +77,7 @@ flowchart TD
 | 失败点 | 处理策略 | 是否阻断 |
 |---|---|---|
 | 结构/引用校验失败 | PR 直接失败 | 是 |
-| 测试失败 | 阻断发布 | 是 |
+| 发布阶段验证失败 | 阻断发布 | 是 |
 | 发布构建失败 | release 失败告警 | 是 |
 | catalog 更新失败 | 标记 release 不完整并告警 | 是 |
 | 运行时权限冲突 | 拒绝执行并审计 | 否 |

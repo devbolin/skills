@@ -16,10 +16,10 @@
 <skill-id>/
 ├── SKILL.md                  # 必需：元数据 + 指令
 ├── scripts/                  # 可选：脚本实现
-├── adapters/                 # 可选：工具适配层
-│   ├── tool/tool.json
-│   ├── prompt/SKILL.md
-│   └── workflow/graph.yaml
+├── adapters/                 # 可选：工具适配层（Phase 1 仅 prompt）
+│   ├── prompt/SKILL.md      # Phase 1：Prompt 模式
+│   ├── tool/tool.json        # Phase 3：Tool 模式
+│   └── workflow/graph.yaml    # Phase 3：Workflow 模式
 ├── references/               # 可选：模板、参考资料
 └── tests/                    # 可选：测试
 ```

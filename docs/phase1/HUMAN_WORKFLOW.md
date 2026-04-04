@@ -73,7 +73,7 @@ defaults:
 skills:
   - id: <skill-id>      # 如 code-review
     path: skills/<skill-id>
-    mode: prompt         # prompt / tool / workflow / mcp
+    mode: prompt         # prompt / workflow
     entry: skills/<skill-id>/SKILL.md
 ```
 
@@ -257,26 +257,6 @@ unzip plugin.zip -d /opt/skills/plugins/<pack-id>/<version>
 }
 ```
 
-**OpenAI Tool：**
-```python
-plugin_root = "/opt/skills/plugins/devtools-pack/1.0.0"
-entry = "skills/code-review/adapters/tool/tool.json"
-with open(f"{plugin_root}/{entry}") as f:
-    tool_def = json.load(f)
-```
-
-**MCP：**
-```json
-{
-  "mcpServers": {
-    "code-review": {
-      "command": "node",
-      "args": ["/opt/skills/plugins/devtools-pack/1.0.0/skills/code-review/adapters/mcp/server.js"]
-    }
-  }
-}
-```
-
 **产物：** Agent 配置完成
 
 ---
@@ -286,17 +266,6 @@ with open(f"{plugin_root}/{entry}") as f:
 **人类动作：** 发起一次 skill 调用
 
 **Copilot：** 在 Chat 中触发 skill（如 "帮我审查这个 PR"）
-
-**OpenAI Tool：**
-```python
-response = openai.chat.completions.create(
-    model="gpt-4",
-    messages=[{"role": "user", "content": "..."}],
-    tools=[tool_def]
-)
-```
-
-**MCP：** 在客户端测试工具发现和调用
 
 **决策点：**
 - 调用是否成功？
