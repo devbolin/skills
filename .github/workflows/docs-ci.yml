@@ -1,0 +1,109 @@
+name: Docs CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check internal links
+        run: |
+          python3 << 'EOF'
+          import os
+          import re
+          import sys
+
+          broken = []
+          base_dir = os.getcwd()
+
+          for root, dirs, files in os.walk('.'):
+            if '.github' in root or 'node_modules' in root:
+              continue
+            for f in files:
+              if not f.endswith('.md'):
+                continue
+              filepath = os.path.join(root, f)
+              # Resolve to absolute path
+              abs_filepath = os.path.abspath(filepath)
+              with open(filepath, 'r') as fp:
+                content = fp.read()
+              links = re.findall(r'\[([^\]]+)\]\(([^)]+)\)', content)
+              for text, link in links:
+                if link.startswith('http') or link.startswith('#'):
+                  continue
+                # Resolve link relative to the file's directory
+                file_dir = os.path.dirname(abs_filepath)
+                target = os.path.normpath(os.path.join(file_dir, link))
+                target_no_anchor = target.split('#')[0]
+                if not os.path.exists(target_no_anchor):
+                  broken.append(f"{filepath} -> {link}")
+
+          if broken:
+            print("BROKEN LINKS:")
+            for b in broken:
+              print(f"  {b}")
+            sys.exit(1)
+          else:
+            print("All internal links OK!")
+          EOF
+
+      - name: Check CHANGELOG updated
+        run: |
+          # Check if CHANGELOG.md exists and has recent entries
+          if [ -f CHANGELOG.md ]; then
+            LATEST=$(head -5 CHANGELOG.md | grep -E "\[v[0-9]+\.[0-9]+\]")
+            if [ -n "$LATEST" ]; then
+              echo "CHANGELOG: $LATEST"
+            else
+              echo "WARNING: CHANGELOG may not be properly updated"
+            fi
+          else
+            echo "ERROR: CHANGELOG.md not found"
+            exit 1
+          fi
+
+      - name: Validate YAML frontmatter
+        run: |
+          python3 << 'EOF'
+          import os
+          import re
+          import sys
+
+          errors = []
+          for root, dirs, files in os.walk('.'):
+            if '.github' in root or 'templates' in root or 'node_modules' in root:
+              continue
+            for f in files:
+              if not f.endswith('.md'):
+                continue
+              filepath = os.path.join(root, f)
+              with open(filepath, 'r') as fp:
+                content = fp.read()
+
+              # Check for frontmatter
+              if content.startswith('---'):
+                parts = content[3:].split('---', 1)
+                if len(parts) >= 2:
+                  frontmatter = parts[0]
+                  # Check for name field in SKILL.md
+                  if filepath.endswith('SKILL.md'):
+                    if not re.search(r'^name:', frontmatter, re.MULTILINE):
+                      errors.append(f"{filepath}: SKILL.md missing name in frontmatter")
+
+          if errors:
+            print("ERRORS:")
+            for e in errors:
+              print(f"  {e}")
+            sys.exit(1)
+          else:
+            print("Frontmatter validation OK!")
+          EOF

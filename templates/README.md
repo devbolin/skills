@@ -39,8 +39,8 @@ cp -r templates/phase1/skills-devtools my-skills-<domain>
 
 ## 详细规范
 
-- [阶段一设计文档](../../docs/phase1/DESIGN.md) - 架构决策与边界
-- [阶段一流程文档](../../docs/phase1/FLOW.md) - 发布/调用/回滚流程
-- [阶段一配置手册](../../docs/phase1/CONFIG.md) - pack.yaml 字段详解
-- [人类视角工作流](../../docs/phase1/HUMAN_WORKFLOW.md) - 完整操作步骤
-- [Agent 配置指南](../../docs/guides/AGENT_CONFIGURATION.md) - 如何在 Agent 侧集成
+- [阶段一设计文档](../docs/phase1/DESIGN.md) - 架构决策与边界
+- [阶段一流程文档](../docs/phase1/FLOW.md) - 发布/调用/回滚流程
+- [阶段一配置手册](../docs/phase1/CONFIG.md) - pack.yaml 字段详解
+- [人类视角工作流](../docs/phase1/HUMAN_WORKFLOW.md) - 完整操作步骤
+- [Agent 配置指南](../docs/guides/AGENT_CONFIGURATION.md) - 如何在 Agent 侧集成
