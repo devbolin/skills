@@ -1,5 +1,18 @@
 # 文档变更日志
 
+## [v2.1] - 2026-04-06
+
+### 修复
+- 修复外部链接 404 问题（VS Code Copilot、GitHub Copilot Extensions、Cursor Rules）
+- 在 CONCEPTS.md 术语表中添加 Hook 定义
+- 澄清 CONFIG.md 中 skill_ref 字段的条件生成特性
+
+### 文档质量
+- 统一 SKILL_AUTHORING.md 和 CONTRIBUTING.md 中的模板占位符为英文
+- 模板示例与实际 templates/phase1/ 保持一致
+
+---
+
 ## [v2.0] - 2026-04-01
 
 ### 更新
