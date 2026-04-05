@@ -18,6 +18,7 @@
 | **MCP** | Model Context Protocol，AI 与外部系统连接的开放标准 | [modelcontextprotocol.io](https://modelcontextprotocol.io/docs) |
 | **Plugin** | 打包扩展功能的分发单元 | [Claude Code Plugins](https://code.claude.com/docs/en/plugins)、[VS Code Agent Plugins](https://code.visualstudio.com/docs/copilot/customization/agent-plugins) |
 | **Adapter** | Skill 对特定工具/平台的适配层 | 通用概念 |
+| **Hook** | 生命周期自动化触发点，Agent 任务开始/结束时的回调 | 通用概念 |
 | **Prompt Engineering** | 设计提示词以引导 AI 行为 | 通用概念 |
 
 ### 本项目私有术语

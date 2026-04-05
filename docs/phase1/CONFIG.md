@@ -89,7 +89,7 @@ agents/
 | `pack_id` | 建议 | 归属 Pack（推荐与 index 一致） |
 | `versions.<ver>.channel` | 是 | 所属通道 |
 | `versions.<ver>.plugin_artifact` | 是 | Plugin artifact 引用 |
-| `versions.<ver>.skill_ref` | 否 | 单 Skill 产物引用 |
+| `versions.<ver>.skill_ref` | 否 | 单 Skill 产物引用（仅当 `ENABLE_SKILL_ARTIFACTS=true` 时生成） |
 | `versions.<ver>.compatibility` | 建议 | Agent 兼容信息 |
 | `versions.<ver>.permissions` | 建议 | 运行权限声明 |
 

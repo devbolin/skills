@@ -23,9 +23,9 @@
 
 ```yaml
 ---
-name: <技能名>
-description: <描述>
-license: <许可证>
+name: <skill-name>
+description: <description>
+license: <license>
 ---
 ```
 
