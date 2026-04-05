@@ -60,24 +60,24 @@ tags: ["tag1", "tag2"]    # 可选
 ### 3.3 正文结构（推荐）
 
 ```markdown
-# <技能名>
+# <skill-name>
 
 ## 使用场景
-- <场景1>
-- <场景2>
+- <scenario-1>
+- <scenario-2>
 
 ## 不适用场景
-- <边界1>
-- <边界2>
+- <boundary-1>
+- <boundary-2>
 
 ## 使用方法
-~~~<语言>
-<示例代码>
+~~~<language>
+<example-code>
 ~~~
 
 ## 注意事项
-- <限制1>
-- <限制2>
+- <limitation-1>
+- <limitation-2>
 ```
 
 ## 四、Progressive Disclosure 实践
