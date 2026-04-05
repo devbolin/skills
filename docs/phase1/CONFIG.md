@@ -65,6 +65,18 @@ agents/
 
 ## 3. catalog 字段手册
 
+### pack.yaml vs catalog/ 架构关系
+
+| 文件 | 位置 | 作用域 | 职责 |
+|------|------|--------|------|
+| `pack.yaml` | 每个 pack 内 | 单个 pack | 真相源：声明这个 pack 有哪些 Skill |
+| `catalog/` | 外层（组织级别） | 所有 pack | 发布索引：聚合所有 pack 的 artifact 引用 |
+
+**为什么分离？**
+- `pack.yaml` 是源码清单，供开发者维护
+- `catalog/` 是运行时索引，供 Agent/Runtime 读取
+- Phase 2 Registry 跨仓库聚合，替代这个单一 catalog
+
 ### 3.1 `index.json`
 
 | 字段 | 必需 | 说明 |

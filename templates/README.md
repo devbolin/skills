@@ -5,14 +5,22 @@
 ## 目录结构
 
 ```text
-templates/phase1/
-├── .github/workflows/         # CI/Release
-├── catalog/                   # index + skill entries
-└── skills-devtools/           # domain pack 示例
-    ├── pack.yaml              # Pack 级清单（唯一真相源）
+templates/phase1/                    # 单一仓库（Phase 1 验证用）
+├── .github/workflows/               # CI/Release
+├── catalog/                        # 发布索引（聚合所有 pack）
+│   ├── index.json                 # catalog 入口
+│   └── skills/                    # skill 版本详情
+│       ├── code-review.json
+│       ├── pr-summary.json
+│       └── test-plan.json
+└── skills-devtools/               # pack 示例
+    ├── pack.yaml                   # 这个 pack 的真相源
+    ├── agents/
+    │   └── review-coordinator.md
     └── skills/
-        └── code-review/
-            └── SKILL.md
+        ├── code-review/SKILL.md
+        ├── pr-summary/SKILL.md
+        └── test-plan/SKILL.md
 ```
 
 ## 使用方法
