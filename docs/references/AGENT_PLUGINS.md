@@ -109,7 +109,7 @@ Agent 插件是预打包的聊天定制集合，单个插件可提供任意组�
 
 ## GitHub Copilot Extensions
 
-**官方文档**: https://docs.github.com/en/copilot/building-copilot-extensions
+**官方文档**: https://docs.github.com/en/copilot (Copilot Extensions 文档已迁移)
 
 ### 发布状态
 
@@ -129,7 +129,7 @@ Copilot Extensions 允许扩展 GitHub Copilot 的功能，可与 Copilot Chat�
 
 ## Cursor Rules
 
-**官方文档**: https://cursor.com/rules
+**官方文档**: https://cursor.com (Rules 文档已迁移至 IDE 内置帮助)
 
 ### 最低版本要求
 
@@ -231,8 +231,8 @@ npm install -g @google/gemini-cli
 | 工具 | 文档链接 |
 |------|---------|
 | Claude Code | code.claude.com/docs |
-| VS Code Copilot | code.visualstudio.com/docs/copilot |
-| GitHub Copilot Extensions | docs.github.com/copilot/building-copilot-extensions |
-| Cursor Rules | cursor.com/rules |
+| VS Code Copilot | code.visualstudio.com/docs/copilot/overview |
+| GitHub Copilot Extensions | docs.github.com/en/copilot |
+| Cursor Rules | cursor.com |
 | Gemini CLI | github.com/google/gemini-cli |
 | MCP | modelcontextprotocol.io |
