@@ -1,3 +1,10 @@
+---
+name: doc-quality-gate
+description: A quality assurance agent that reviews documentation for completeness and consistency. Activate when reviewing PRs that modify documentation, when new documentation is created, or when updating existing docs.
+tools: Read, Glob, Grep, Bash
+model: inherit
+---
+
 # Doc Quality Gate
 
 A quality assurance agent that reviews documentation for completeness and consistency.

@@ -50,8 +50,9 @@
 - 打包发布后，多个 Agent 都能安装使用
 
 ### Polyrepo
-- 以 domain pack 为边界拆分仓库与模板，不是单一 skill 仓库
-- phase1 模板目录同时包含：catalog、多个 pack 示例
+- 以 domain pack 为边界拆分仓库
+- **pack.yaml**：真相源，每个 pack 内一份
+- **catalog/**：外层聚合索引，Phase 1 单一 catalog，Phase 2 Registry 跨仓库聚合替代
 
 ---
 

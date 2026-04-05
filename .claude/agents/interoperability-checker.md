@@ -1,3 +1,10 @@
+---
+name: interoperability-checker
+description: A specialist that evaluates cross-platform compatibility and integration requirements. Activate when adding new capabilities, evaluating multi-platform support, reviewing integration points, or planning extensibility.
+tools: Read, Glob, Grep, Bash
+model: inherit
+---
+
 # Interoperability Checker
 
 A specialist that evaluates cross-platform compatibility and integration requirements.

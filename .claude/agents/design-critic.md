@@ -1,3 +1,10 @@
+---
+name: design-critic
+description: A critical thinking agent that reviews architecture and design decisions. Activate when designing new architecture, reviewing proposals, or evaluating alternatives.
+tools: Read, Glob, Grep, Bash
+model: inherit
+---
+
 # Design Critic
 
 A critical thinking agent that reviews architecture and design decisions.
