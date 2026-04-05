@@ -2,6 +2,15 @@
 
 ## [v2.1] - 2026-04-06
 
+### 架构澄清
+- 明确 pack.yaml 与 catalog/ 的分层职责与架构关系
+- pack.yaml：每个 pack 内一份，真相源
+- catalog/：外层聚合索引，Phase 2 Registry 替代
+
+### 文档结构
+- templates/README.md 更新目录结构（展示全部 3 个 skill 和 agents/）
+- .claude/agents/ 添加缺失的 frontmatter
+
 ### 修复
 - 修复外部链接 404 问题（VS Code Copilot、GitHub Copilot Extensions、Cursor Rules）
 - 在 CONCEPTS.md 术语表中添加 Hook 定义
