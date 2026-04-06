@@ -82,16 +82,18 @@ tags: ["tag1", "tag2"]    # 可选
 
 ## 四、Progressive Disclosure 实践
 
-| 层级 | 组件 | 加载时机 | 内容 |
-|------|------|---------|------|
-| L1 | Metadata | 始终加载 | `name + description` |
-| L2 | Core Instructions | 触发时加载 | SKILL.md 主体 |
-| L3 | Resources | 按需加载 | scripts/references/tests |
+| 层级 | 组件 | 内容 | 说明 |
+|------|------|------|------|
+| **L1** | Metadata | `name` + `description` | SKILL.md frontmatter，用于 AI 判断是否激活 |
+| **L2** | Core Instructions | SKILL.md 正文 | 工作流、步骤、示例，触发时完整加载 |
+| **L3** | Resources | `scripts/`、`references/`、模板等 | SKILL.md 正文中显式引用时才加载 |
+
+**实现方式**：文件分离 + 显式引用，而非 in-SKILL.md 标记。
 
 执行建议：
-- L1 保持短且具体，优先提高“是否触发”的准确率
-- L2 明确“何时用/何时不用”，减少误调用
-- L3 不在初始提示中全量展开，按任务再读
+- L1 保持短且具体，优先提高”是否触发”的准确率
+- L2 明确”何时用/何时不用”，减少误调用
+- L3 文件不会自动加载，SKILL.md 正文通过路径显式引用（如 `!cat scripts/xxx.sh`）
 
 ## 五、pack.yaml 中的 Skill 声明
 Pack 通过 `pack.yaml` 统一声明 Skill 入口，最小必需字段：

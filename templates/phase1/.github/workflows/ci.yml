@@ -57,6 +57,12 @@ jobs:
               if field not in pack:
                   errors.append(f"Missing required field: {field}")
 
+          # Pack ID format validation (prevent path traversal)
+          pack_id = pack.get('id', '')
+          import re
+          if not re.match(r'^[a-zA-Z0-9_-]+$', pack_id):
+              errors.append(f"Pack id must match '^[a-zA-Z0-9_-]+$', got: '{pack_id}'")
+
           # Distribution fields
           if 'distribution' in pack:
               dist = pack['distribution']
@@ -262,6 +268,15 @@ jobs:
           if extra_in_catalog:
               errors.append(f"Skills in catalog but not in pack.yaml: {extra_in_catalog}")
 
+          # Validate catalog_entry paths exist
+          catalog_dir = os.path.dirname(catalog_index_path)
+          for skill in catalog.get('skills', []):
+              catalog_entry = skill.get('catalog_entry')
+              if catalog_entry:
+                  entry_path = os.path.join(catalog_dir, catalog_entry)
+                  if not os.path.exists(entry_path):
+                      errors.append(f"catalog_entry not found: {catalog_entry} (for skill: {skill.get('skill_id')})")
+
           if errors:
               print("CATALOG CONSISTENCY ERRORS:")
               for e in errors:
@@ -281,6 +296,7 @@ jobs:
           import yaml
           import os
           import sys
+          import re
 
           pack_yaml_path = "templates/phase1/skills-devtools/pack.yaml"
 
@@ -297,6 +313,12 @@ jobs:
           for agent in pack.get('agents', []):
               agent_id = agent['id']
               path = agent['path']
+
+              # Validate path format: must be agents/<id>.md
+              if not re.match(r'^agents/[a-zA-Z0-9_-]+\.md$', path):
+                  errors.append(f"Agent '{agent_id}': path must match 'agents/<id>.md', got: '{path}'")
+                  continue
+
               full_path = os.path.join(base_path, path)
 
               if not os.path.exists(full_path):

@@ -38,7 +38,7 @@ flowchart TD
   B --> C{plugin_ref exists}
   C -- No --> X[Fail with catalog error]
   C -- Yes --> D[Select Plugin Artifact]
-  D --> E{Policy allows skill_ref and skill_ref exists}
+  D --> E{skill_ref exists}
   E -- No --> F[Load Skill from Plugin]
   E -- Yes --> G[Load Skill Artifact]
   F --> H[Execute Skill]
@@ -72,7 +72,21 @@ flowchart TD
 - 仅 `skill_ref` 回滚失败：保持 plugin 回滚结果为主。
 - catalog 发布失败：保留旧稳定通道并阻断切换。
 
-## 4. 失败处理总表
+## 4. Channel 管理
+
+`catalog/index.json` 中 `channels.stable` 记录当前稳定版本。
+
+**Phase 1 语义**：
+- `stable` = 每次 release 时自动更新为最新 tag
+- 无人工 promotion 流程
+- 无 beta/rc 等多通道
+
+**Phase 2 扩展方向**（暂不实现）：
+- 多通道：stable、beta、rc
+- 人工 promotion 审批
+- 分批发布控制
+
+## 5. 失败处理总表
 
 | 失败点 | 处理策略 | 是否阻断 |
 |---|---|---|

@@ -62,11 +62,15 @@ Skill 就像一张"工作卡片"，告诉 AI：
 
 Skill 采用三层渐进式架构，控制 Token 成本：
 
-| 层级 | 组件 | 加载时机 | 内容 |
-|------|------|---------|------|
-| **L1** | Metadata | 始终加载 | name + description（最小 Token 消耗） |
-| **L2** | Core Instructions | 触发时加载 | SKILL.md 正文 - 工作流、步骤、示例 |
-| **L3** | Resources | 按需加载 | Scripts、模板、参考文档 |
+| 层级 | 组件 | 内容 | 说明 |
+|------|------|------|------|
+| **L1** | Metadata | `name` + `description` | SKILL.md frontmatter，用于 AI 判断是否激活 |
+| **L2** | Core Instructions | SKILL.md 正文 | 工作流、步骤、示例，触发时完整加载 |
+| **L3** | Resources | `scripts/`、`references/`、模板等 | SKILL.md 正文中显式引用时才加载 |
+
+**实现方式**：文件分离 + 显式引用，而非 in-SKILL.md 标记。
+- L1 + L2 都在 `SKILL.md`（frontmatter 是 L1，正文是 L2）
+- L3 文件独立存在，**不会自动加载**，只有 SKILL.md 正文通过路径引用时才被使用
 
 > 详见：[SKILL_AUTHORING.md](./guides/SKILL_AUTHORING.md#四progressive-disclosure-实践)
 
@@ -112,7 +116,7 @@ Agent 就像一个"AI 员工"，它可以：
 | **Gemini CLI** | Google | 命令行 Agent，支持 MCP |
 | **Junie** | JetBrains | IDE 内嵌的 AI 编程助手 |
 
-#### Agent 消费模式
+#### Agent 消费模式 {#agent-consumption-mode}
 
 Agent 通过不同的模式接入 Skill：
 
@@ -228,6 +232,8 @@ agents:
   - id: review-coordinator
     path: agents/review-coordinator.md
 ```
+
+> **术语说明**：不同工具对 Subagent 的叫法不统一（VS Code Copilot Chat 叫 Agent，Claude Code/OpenCode 叫 Subagent），但存放路径统一使用 `agents/`。本项目 `pack.yaml` 中的 `agents[]` 字段和 `agents/` 目录指的是 **Subagent**（独立上下文的专业化代理），与业界通用术语 Subagent 一致。
 
 `agents/<id>.md` 是 Subagent 的源码声明文件，描述职责、边界、输入输出和协作方式。
 

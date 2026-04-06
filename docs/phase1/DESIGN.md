@@ -80,7 +80,9 @@ flowchart TD
 | 常规发布 | `distribution.default=plugin` | 启用 | 生成 plugin artifact |
 | 单 Skill 分发 | `distribution.enable_skill_artifacts=true` | 关闭 | 额外生成 skill artifact |
 | Agent/Runtime 读取 catalog | 有 `plugin_ref` | 优先 | 走 plugin 执行 |
-| Agent/Runtime 可选切换 | 策略要求且有 `skill_ref` | 不默认 | 切换 skill artifact |
+| Agent/Runtime 可选切换 | 有 `skill_ref` 且 `enable_skill_artifacts=true` | 不默认 | 切换 skill artifact |
+
+> **Catalog 并发说明**：Phase 1 使用 GitHub Actions `concurrency` 组防止同 ref 并发发布。多 writer append-only log 模式（适用于 Phase 2 多 Registry 场景）暂不做实现。
 
 ## 6. `pack.yaml` 规范（阶段一）
 
