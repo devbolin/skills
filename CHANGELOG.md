@@ -1,5 +1,35 @@
 # 文档变更日志
 
+## [v2.2] - 2026-04-07
+
+### 修复
+
+#### Critical
+- `release.yml`: 移除硬编码 `ENABLE_SKILL_ARTIFACTS`，修复 skill artifact 打包逻辑
+- `ci.yml`: 添加 `catalog_entry` 路径存在性校验
+- `CONCEPTS.md`/`SKILL_AUTHORING.md`: 修正 L1/L2/L3 渐进披露描述（实现方式是文件分离+显式引用）
+
+#### High
+- `FLOW.md`/`DESIGN.md`/`AGENT_CONSUMPTION.md`: 移除未定义的 Policy 机制，简化为 "有 skill_ref 且 enable_skill_artifacts=true"
+- `release.yml`: 添加 `concurrency` 组防止并发发布竞态条件
+- `CONCEPTS.md`: 添加术语说明，澄清 `agents/` 路径与 Subagent 概念对应
+- `release.yml`: catalog 写入时更新 `generated_at`
+
+#### Medium
+- `ci.yml`: 添加 `PACK_ID` 格式校验（`^[a-zA-Z0-9_-]+$`），防止路径遍历
+- `FLOW.md`: 新增 "Channel 管理" 章节，说明 Phase 1 语义（stable = latest tag）
+- `release.yml`: `enable_skill_artifacts=false` 时主动清理 catalog 中的 `skill_ref`
+- `CONCEPTS.md`/`AGENT_CONSUMPTION.md`: 修复损坏的跨引用（`#agent-consumption-mode`）
+- `ci.yml`: 强制 Subagent 路径格式 `agents/<id>.md`
+- `AGENT_CONSUMPTION.md`: 移除内联 Phase 3 特性引用
+
+### 文档质量
+
+- `ARCHITECTURE.md`: 分离架构设计与模板结构，移除 CI/Release 基线描述
+- `templates/README.md`: 扩展为完整模板结构文档
+
+---
+
 ## [v2.1] - 2026-04-06
 
 ### 架构澄清
