@@ -5,8 +5,9 @@ on:
     tags:
       - 'v*.*.*'
 
-env:
-  ENABLE_SKILL_ARTIFACTS: "false"
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   release:
@@ -78,7 +79,7 @@ jobs:
       # 3. Optional: Package skill artifacts
       # ============================================
       - name: Optional package skill artifacts
-        if: env.ENABLE_SKILL_ARTIFACTS == 'true' || steps.pack_info.outputs.ENABLE_SKILL == 'true'
+        if: steps.pack_info.outputs.ENABLE_SKILL == 'true'
         run: |
           PACK_ID="${{ steps.pack_info.outputs.PACK_ID }}"
           VERSION="${{ steps.version.outputs.VERSION }}"
@@ -149,6 +150,7 @@ jobs:
           python3 << 'PYTHON_SCRIPT'
           import json
           import os
+          from datetime import datetime, timezone
 
           catalog_index_path = "templates/phase1/catalog/index.json"
 
@@ -156,12 +158,19 @@ jobs:
               catalog = json.load(f)
 
           plugin_ref = f"releases/{PACK_ID}-{VERSION}-plugin.zip"
+          enable_skill = os.environ.get('ENABLE_SKILL', 'false').lower() == 'true'
 
           # Update plugin_ref for all skills in this pack
           for skill in catalog.get('skills', []):
               if skill.get('pack_id') == PACK_ID:
                   skill['channels']['stable'] = VERSION
                   skill['plugin_ref'] = plugin_ref
+
+                  # Manage skill_ref based on enable_skill_artifacts setting
+                  if enable_skill:
+                      skill['skill_ref'] = f"releases/{PACK_ID}-{VERSION}-{skill['skill_id']}-skill.zip"
+                  else:
+                      skill.pop('skill_ref', None)
 
                   # Update skill detail JSON if exists
                   catalog_entry = skill.get('catalog_entry')
@@ -177,10 +186,17 @@ jobs:
                           detail['versions'][VERSION]['channel'] = 'stable'
                           detail['versions'][VERSION]['tag'] = f"v{VERSION}"
                           detail['versions'][VERSION]['plugin_artifact'] = plugin_ref
+                          if enable_skill:
+                              detail['versions'][VERSION]['skill_artifact'] = f"releases/{PACK_ID}-{VERSION}-{skill['skill_id']}-skill.zip"
+                          else:
+                              detail['versions'][VERSION].pop('skill_artifact', None)
 
                           with open(detail_path, 'w') as f:
                               json.dump(detail, f, indent=2)
                           print(f"Updated catalog entry: {detail_path}")
+
+          # Update generated_at timestamp
+          catalog['generated_at'] = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
 
           # Write updated catalog index
           with open(catalog_index_path, 'w') as f:

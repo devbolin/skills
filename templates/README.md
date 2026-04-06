@@ -5,19 +5,21 @@
 ## 目录结构
 
 ```text
-templates/phase1/                    # 单一仓库（Phase 1 验证用）
-├── .github/workflows/               # CI/Release
-├── catalog/                        # 发布索引（聚合所有 pack）
-│   ├── index.json                 # catalog 入口
-│   └── skills/                    # skill 版本详情
+templates/phase1/                          # 单一仓库（Phase 1 验证用）
+├── .github/workflows/                     # CI/Release 配置
+│   ├── ci.yml                           # PR/合并校验：YAML 语法、pack.yaml 结构、SKILL.md 入口
+│   └── release.yml                       # Tag 触发：plugin artifact + manifest + checksum + catalog 更新
+├── catalog/                              # 发布索引（聚合所有 pack）
+│   ├── index.json                       # catalog 入口
+│   └── skills/                          # skill 版本详情
 │       ├── code-review.json
 │       ├── pr-summary.json
 │       └── test-plan.json
-└── skills-devtools/               # pack 示例
-    ├── pack.yaml                   # 这个 pack 的真相源
-    ├── agents/
+└── skills-devtools/                      # pack 示例
+    ├── pack.yaml                         # 这个 pack 的真相源
+    ├── agents/                           # Subagent 声明
     │   └── review-coordinator.md
-    └── skills/
+    └── skills/                           # Skill 定义
         ├── code-review/SKILL.md
         ├── pr-summary/SKILL.md
         └── test-plan/SKILL.md

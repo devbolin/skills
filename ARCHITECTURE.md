@@ -1,28 +1,23 @@
 # 架构概述
 
 ## 1. 设计原则
-- 单真相源：仓库级仅维护 `pack.yaml`。
-- Plugin-first：默认按 Pack 整体发布与消费。
-- Skill 可选独立分发：仅在显式开启时生成单 Skill artifact。
-- 多 Agent 统一消费：通过 `resolve/execute` 与 adapter 契约接入。
 
-## 2. 仓库模型
+- **单真相源**：仓库级仅维护 `pack.yaml`
+- **Plugin-first**：默认按 Pack 整体发布与消费
+- **Skill 可选独立分发**：仅在显式开启时生成单 Skill artifact
+- **多 Agent 统一消费**：通过 `resolve/execute` 与 adapter 契约接入
 
-```text
-skills-devtools/
-├── pack.yaml
-├── .github/
-│   └── workflows/
-│       ├── ci.yml
-│       └── release.yml
-├── skills/
-│   └── code-review/
-│       ├── SKILL.md
-│       ├── scripts/
-│       ├── adapters/
-│       └── tests/
-└── shared/
-```
+## 2. 核心概念
+
+| 概念 | 说明 |
+|------|------|
+| **Pack** | 仓库级能力包，是最小治理边界 |
+| **Skill** | 可复用 AI 能力单元，AI 可自动检测并激活 |
+| **Catalog** | 记录可用 Pack/Skill 及访问方式 |
+| **Plugin** | 包含 Skills/Commands/Agents 的分发包 |
+| **Subagent** | 运行在独立上下文的专业 Agent |
+
+详见 [CONCEPTS.md](docs/CONCEPTS.md)。
 
 ## 3. 核心文件职责
 
@@ -56,7 +51,13 @@ skills-devtools/
 3. 可选切换 `skill_ref`
 4. `execute(skill_id, version, input_payload)`
 
-## 5. CI/Release 基线
-- CI：校验 `pack.yaml`、技能入口存在性、测试执行
-- Release：tag 触发，默认产出 plugin artifact + manifest + checksum
-- Catalog：更新版本通道及 `plugin_ref`（可选 `skill_ref`）
+## 5. 阶段范围
+
+| 阶段 | 范围 |
+|------|------|
+| **Phase 1** | 单 Pack 端到端：author → publish → Agent consume |
+| **Phase 2** | 多 Pack 管理 + 自托管 Registry |
+| **Phase 3** | 多平台适配（Prompt/Tool/MCP） |
+| **Phase 4** | 企业治理（权限、审计、回滚） |
+
+详细流程见 [FLOW.md](docs/phase1/FLOW.md)。

@@ -23,7 +23,7 @@ flowchart TD
   B --> C{plugin_ref exists}
   C -- No --> X[Fail with catalog error]
   C -- Yes --> D[Load plugin_ref]
-  D --> E{Policy allows skill_ref and skill_ref exists}
+  D --> E{skill_ref exists}
   E -- Yes --> F[Switch to skill_ref]
   E -- No --> G[Keep plugin_ref]
   F --> H[Route by mode and entry]
@@ -41,16 +41,13 @@ flowchart TD
 | `pack.yaml` | `skills[].mode` | 是 | 路由模式（Phase 1 仅 prompt） |
 | `pack.yaml` | `skills[].entry` | 是 | 执行入口 |
 | `pack.yaml` | `skills[].description` | 否 | 可发现性描述 |
-| `pack.yaml` | `skills[].adapters` | 否 | 多工具路径映射（Phase 3） |
 | `catalog index` | `plugin_ref` | 是 | 默认消费产物 |
 | `catalog detail` | `skill_ref` | 否 | 可选单 Skill 产物 |
 | `runtime` | `mode + entry` | 是 | 最终执行定位 |
 
 ## 5. 消费模式与路由
 
-> 消费模式定义详见 [CONCEPTS.md](../CONCEPTS.md#agent-消费模式)
-
-> Phase3 将扩展 Tool/MCP 模式支持。
+> 消费模式定义详见 [CONCEPTS.md](../CONCEPTS.md#agent-consumption-mode)
 
 ### 5.1 Prompt 模式（Copilot）
 
