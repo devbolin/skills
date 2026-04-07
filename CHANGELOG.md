@@ -1,5 +1,18 @@
 # 文档变更日志
 
+## [v2.4] - 2026-04-07
+
+### 修复
+
+#### 文档一致性
+- `templates/README.md`: 重写为 packs 概览，同时介绍 skills-devtools 和 slc-pack
+- `ci.yml`: 改为遍历所有 pack（`templates/phase1/*/pack.yaml`）
+- `catalog/index.json`: 添加 packs[] 数组，包含 slc-pack 的 8 个 skill
+- `catalog/skills/`: 新增 8 个 slc-pack skill 的 JSON 文件
+- `DESIGN.md`: `skills[].adapters` 标记为"（未来版本）"
+
+---
+
 ## [v2.3] - 2026-04-07
 
 ### 新增
