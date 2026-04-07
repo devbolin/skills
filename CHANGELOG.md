@@ -1,5 +1,22 @@
 # 文档变更日志
 
+## [v2.3] - 2026-04-07
+
+### 新增
+
+#### Phase 1 模板
+- `templates/phase1/slc-pack/`: 新增 Software Development Lifecycle Pack
+  - 8 个 Skill：requirements, architecture-design, code-implementation, code-review, test-plan, deployment, operations, documentation
+  - 7 个 Agent：requirements-analyst, architect, developer, reviewer, test-engineer, sre, tech-writer
+  - 覆盖软件开发生命周期全阶段
+
+### 文档质量
+- 所有 Skill 和 Agent 内容统一为英文
+- 添加输出格式模板和具体示例
+- 修复触发词重叠问题
+
+---
+
 ## [v2.2] - 2026-04-07
 
 ### 修复
