@@ -1,0 +1,7 @@
+{
+  "skill_id": "documentation",
+  "pack_id": "slc-pack",
+  "version": "1.0.0",
+  "description": "Technical documentation skill",
+  "entry": "skills/documentation/SKILL.md"
+}

@@ -1,0 +1,7 @@
+{
+  "skill_id": "test-plan",
+  "pack_id": "slc-pack",
+  "version": "1.0.0",
+  "description": "Test planning skill for code changes and release verification",
+  "entry": "skills/test-plan/SKILL.md"
+}

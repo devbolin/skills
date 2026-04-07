@@ -1,7 +1,19 @@
 {
   "version": "1",
-  "generated_at": "2026-03-31T12:00:00Z",
+  "generated_at": "2026-04-07T00:00:00Z",
   "distribution_default": "plugin",
+  "packs": [
+    {
+      "pack_id": "devtools-pack",
+      "repo": "org/skills-devtools",
+      "skills": ["code-review", "pr-summary", "test-plan"]
+    },
+    {
+      "pack_id": "slc-pack",
+      "repo": "org/slc-pack",
+      "skills": ["requirements", "architecture-design", "code-implementation", "code-review", "test-plan", "deployment", "operations", "documentation"]
+    }
+  ],
   "skills": [
     {
       "skill_id": "code-review",
@@ -38,6 +50,102 @@
       },
       "catalog_entry": "skills/test-plan.json",
       "plugin_ref": "releases/devtools-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "requirements",
+      "pack_id": "slc-pack",
+      "repo": "org/slc-pack",
+      "path": "skills/requirements",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/requirements.json",
+      "plugin_ref": "releases/slc-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "architecture-design",
+      "pack_id": "slc-pack",
+      "repo": "org/slc-pack",
+      "path": "skills/architecture-design",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/architecture-design.json",
+      "plugin_ref": "releases/slc-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "code-implementation",
+      "pack_id": "slc-pack",
+      "repo": "org/slc-pack",
+      "path": "skills/code-implementation",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/code-implementation.json",
+      "plugin_ref": "releases/slc-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "code-review",
+      "pack_id": "slc-pack",
+      "repo": "org/slc-pack",
+      "path": "skills/code-review",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/code-review-slc.json",
+      "plugin_ref": "releases/slc-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "test-plan",
+      "pack_id": "slc-pack",
+      "repo": "org/slc-pack",
+      "path": "skills/test-plan",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/test-plan-slc.json",
+      "plugin_ref": "releases/slc-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "deployment",
+      "pack_id": "slc-pack",
+      "repo": "org/slc-pack",
+      "path": "skills/deployment",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/deployment.json",
+      "plugin_ref": "releases/slc-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "operations",
+      "pack_id": "slc-pack",
+      "repo": "org/slc-pack",
+      "path": "skills/operations",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/operations.json",
+      "plugin_ref": "releases/slc-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "documentation",
+      "pack_id": "slc-pack",
+      "repo": "org/slc-pack",
+      "path": "skills/documentation",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/documentation.json",
+      "plugin_ref": "releases/slc-pack-1.0.0-plugin.zip"
     }
   ]
 }
