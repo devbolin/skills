@@ -33,17 +33,17 @@
 
 ```mermaid
 flowchart LR
-  A[Author] --> B[Pull Request]
-  B --> C[GitHub CI]
-  C --> D[Merge Main]
-  D --> E[Tag Release]
-  E --> F[Release Workflow]
-  F --> G[Plugin Artifact]
-  F --> H[Manifest and Checksum]
-  F --> I[Optional Skill Artifact]
-  F --> J[Update Skill Catalog]
-  J --> K[Agent or Runtime Read Catalog]
-  K --> L[Load plugin_ref and route by mode and entry]
+    A[Author] -->|PR| B[CI]
+    B -->|merge| C[Main]
+    C -->|tag| D[Release]
+
+    D --> E[Plugin Artifact]
+    D --> F[Manifest + Checksum]
+    D -->|可选| G[Skill Artifact]
+    D -->|更新| H[Catalog]
+
+    H -->|读取| I[Agent Runtime]
+    I -->|加载| J[Skill by plugin_ref]
 ```
 
 说明：
@@ -54,19 +54,19 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-  P[pack.yaml] --> S[skills list]
-  S --> M[id path mode entry]
-  S --> O[optional description and adapters]
-  K[SKILL.md] --> R[Runtime Prompt Behavior]
-  P --> W[Release Workflow]
-  W --> A[plugin artifact]
-  W --> B[manifest.json]
-  W --> C[checksums.txt]
-  W --> D[optional skill artifact]
-  A --> I[index.json plugin_ref]
-  D --> X[skill_ref optional]
-  I --> Z[Agent or Runtime Route and Execute]
-  X --> Z
+    P[pack.yaml] --> S[skills list]
+    S --> M[id path mode entry]
+    S --> O[optional description]
+    P --> W[Release Workflow]
+    W --> A[plugin artifact]
+    W --> B[manifest.json]
+    W --> C[checksums.txt]
+    W -->|可选| D[skill artifact]
+
+    A --> I[index.json: plugin_ref]
+    D --> X[skill_ref: 可选]
+    I --> Z[Agent Runtime: route & execute]
+    X --> Z
 ```
 
 说明：

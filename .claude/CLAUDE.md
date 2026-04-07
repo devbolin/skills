@@ -8,13 +8,17 @@ This repository contains **design documents and specifications** for an AI Agent
 
 ## Branching Workflow
 
+**Before starting ANY work:** Check CHANGELOG.md to see if it needs updating for the current or upcoming version.
+
 All changes MUST follow this workflow:
 
+0. **Check CHANGELOG.md** — Run `grep -n "v2\." CHANGELOG.md | head -3` to confirm current version state
 1. Create a new branch from `main` before making changes
 2. Commit changes to the feature branch
-3. Open a Pull Request to merge into `main`
-4. Wait for CI checks and approval
-5. Merge via PR — never push directly to `main`
+3. Update CHANGELOG.md with new version entry (if applicable)
+4. Open a Pull Request to merge into `main`
+5. Wait for CI checks and approval
+6. Merge via PR — never push directly to `main`
 
 **Never:**
 - commit directly to `main`

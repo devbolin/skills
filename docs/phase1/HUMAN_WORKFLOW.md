@@ -9,42 +9,29 @@
 ```mermaid
 flowchart LR
     subgraph 开发阶段
-        A1[编辑 pack.yaml] --> A2[编写/更新 SKILL.md]
-        A2 --> A3[提交 PR]
-        A3 --> A4[等待 CI 通过]
-        A4 --> A5[Codeowners 审核]
-        A5 --> A6{通过?}
-        A6 -- No --> A7[修复问题] --> A3
-        A6 -- Yes --> A8[合并到 main]
+        A1[Edit pack.yaml] --> A2[Edit SKILL.md]
+        A2 --> A3[Submit PR]
+        A3 --> A4[CI Pass]
+        A4 --> A5[Review & Merge]
     end
 
     subgraph 发布阶段
-        A8 --> B1[创建 Git Tag v*.*.*]
-        B1 --> B2[GitHub Actions 自动构建]
-        B2 --> B3{构建成功?}
-        B3 -- No --> B4[修复并重新 push tag]
-        B3 -- Yes --> B5[生成 plugin artifact]
-        B5 --> B6[更新 catalog]
+        A5 --> B1[Create Tag v*.*.*]
+        B1 --> B2[Release Workflow]
+        B2 --> B3[Catalog Updated]
     end
 
-    subgraph Agent 集成阶段
-        B6 --> C1[获取 plugin_ref]
-        C1 --> C2[下载并解压 plugin artifact]
-        C2 --> C3[配置 Agent plugin 路径]
-        C3 --> C4[验证 skill 调用]
-        C4 --> C5{正常?}
-        C5 -- No --> C6[检查 permissions 和 entry]
-        C6 --> C4
-        C5 -- Yes --> C7[Skill 可用]
+    subgraph Agent 集成
+        B3 --> C1[Get plugin_ref]
+        C1 --> C2[Download & Configure]
+        C2 --> C3[Verify Skill]
     end
 
-    subgraph 回滚阶段
-        C7 --> D1{问题检测?}
-        D1 -- Yes --> D2[选择目标稳定版本]
-        D2 --> D3[更新 catalog 通道]
-        D3 --> D4[Agent 自动使用新版本]
-        D4 --> D5[验证回滚]
-        D1 -- No --> C7
+    subgraph 回滚
+        C3 --> D1{Issue?}
+        D1 -->|Yes| D2[Rollback Catalog]
+        D1 -->|No| C3
+        D2 --> D3[Agent Uses New Version]
     end
 ```
 

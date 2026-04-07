@@ -4,22 +4,23 @@
 
 ```mermaid
 flowchart TD
-  A[Developer Update pack.yaml and SKILL.md] --> B[Open PR]
-  B --> C[CI Validate Structure and References]
-  C --> D{CI Pass}
-  D -- No --> E[Block Merge and Return to PR]
-  D -- Yes --> F[Codeowners Review]
-  F --> G[Merge Main]
-  G --> H[Create Tag]
-  H --> I[Release Workflow]
-  I --> J[Build Plugin Artifact]
-  I --> K[Generate Manifest and Checksum]
-  I --> L{ENABLE_SKILL_ARTIFACTS=true?}
-  L -- true --> M[Build Skill Artifact]
-  L -- false --> N[Skip Skill Artifact]
-  J --> O[Update Catalog plugin_ref]
-  M --> P[Update Catalog skill_ref Optional]
-  N --> O
+    A[Update pack.yaml + SKILL.md] --> B[Open PR]
+    B --> C[CI Validate]
+    C --> D{CI Pass?}
+    D -->|No| E[Block Merge]
+    D -->|Yes| F[Codeowners Review]
+    F -->|merge| G[Create Tag]
+    G --> H[Release Workflow]
+
+    H --> I[Build Plugin]
+    H --> J[Generate Manifest]
+    H --> K{Enable Skill Artifacts?}
+    K -->|Yes| L[Build Skill Artifact]
+    K -->|No| M[Skip]
+
+    I --> N[Update Catalog: plugin_ref]
+    L --> O[Update Catalog: skill_ref]
+    M --> N
 ```
 
 失败分支规则：
@@ -34,16 +35,15 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[Agent Request skill_id and channel_or_version] --> B[Agent or Runtime Read Catalog]
-  B --> C{plugin_ref exists}
-  C -- No --> X[Fail with catalog error]
-  C -- Yes --> D[Select Plugin Artifact]
-  D --> E{skill_ref exists}
-  E -- No --> F[Load Skill from Plugin]
-  E -- Yes --> G[Load Skill Artifact]
-  F --> H[Execute Skill]
-  G --> H
-  H --> I[Return Result and Metrics]
+    A[Agent Request] --> B[Read Catalog]
+    B --> C{plugin_ref exists?}
+    C -->|No| X[Fail]
+    C -->|Yes| D[Load Plugin Artifact]
+    D --> E{skill_ref exists?}
+    E -->|No| F[Use plugin_ref]
+    E -->|Yes| G[Use skill_ref]
+    F --> H[Execute by mode/entry]
+    G --> H
 ```
 
 失败分支规则：
@@ -56,15 +56,13 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[Incident Detected] --> B[Choose Target Stable Version]
-  B --> C[Rollback Catalog plugin channel]
-  C --> D{skill artifacts enabled}
-  D -- true --> E[Rollback Related skill_ref]
-  D -- false --> F[Skip skill_ref rollback]
-  E --> G[Publish Updated Catalog]
-  F --> G
-  G --> H[Agent or Runtime Uses Rolled-back Version]
-  H --> I[Runtime Recovery]
+    A[Incident] --> B[Select Target Version]
+    B --> C[Update Catalog: stable channel]
+    C --> D{skill artifacts enabled?}
+    D -->|Yes| E[Rollback skill_ref]
+    D -->|No| F[Skip skill_ref]
+    E --> G[Agent Uses Rolled-back Version]
+    F --> G
 ```
 
 失败分支规则：
