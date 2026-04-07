@@ -17,19 +17,19 @@
 
 ## 3. Agent 消费总览图
 
+详细流程见 [FLOW.md](./FLOW.md#2-调用流程)。
+
 ```mermaid
 flowchart TD
-  A[Agent Request skill_id and channel_or_version] --> B[Agent or Runtime Read Catalog]
-  B --> C{plugin_ref exists}
-  C -- No --> X[Fail with catalog error]
-  C -- Yes --> D[Load plugin_ref]
-  D --> E{skill_ref exists}
-  E -- Yes --> F[Switch to skill_ref]
-  E -- No --> G[Keep plugin_ref]
-  F --> H[Route by mode and entry]
-  G --> H
-  H --> I[Execute]
-  I --> J[Return result and metrics]
+    A[Agent Request] --> B[Read Catalog]
+    B --> C{plugin_ref exists?}
+    C -->|No| X[Fail]
+    C -->|Yes| D[Load Plugin Artifact]
+    D --> E{skill_ref exists?}
+    E -->|No| F[Use plugin_ref]
+    E -->|Yes| G[Use skill_ref]
+    F --> H[Execute by mode/entry]
+    G --> H
 ```
 
 ## 4. 配置映射（pack -> catalog -> runtime）

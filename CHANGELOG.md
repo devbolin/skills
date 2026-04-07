@@ -1,5 +1,16 @@
 # 文档变更日志
 
+## [v2.5] - 2026-04-08
+
+### 优化
+
+#### 图表可读性
+- 简化 mermaid 图表：节点文字更短、分支标注更清晰
+- 统一风格：DESIGN.md、FLOW.md、AGENT_CONSUMPTION.md、HUMAN_WORKFLOW.md
+- 提升 GitHub 渲染兼容性
+
+---
+
 ## [v2.4] - 2026-04-07
 
 ### 修复
