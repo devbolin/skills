@@ -1,0 +1,72 @@
+id: slc-pack
+name: Software Development Lifecycle Pack
+version: 1.0.0
+owners:
+  - slc-team
+
+distribution:
+  default: plugin
+  enable_skill_artifacts: false
+
+defaults:
+  permissions:
+    network: false
+    connectors: []
+
+skills:
+  - id: requirements
+    path: skills/requirements
+    description: 需求分析与规格说明技能。触发词：需求分析、需求文档、User Story、PRD、SRS。当用户需要分析、整理、验证或审查软件需求时激活。
+    mode: prompt
+    entry: skills/requirements/SKILL.md
+  - id: architecture-design
+    path: skills/architecture-design
+    description: 架构设计与技术决策技能。触发词：架构设计、技术方案、系统设计、ADR、架构评审。当用户需要设计系统架构、评估技术选型或记录架构决策时激活。
+    mode: prompt
+    entry: skills/architecture-design/SKILL.md
+  - id: code-implementation
+    path: skills/code-implementation
+    description: 代码实现与编程技能。触发词：写代码、实现功能、代码生成、Refactor。当用户需要实现功能、生成代码或进行重构时激活。
+    mode: prompt
+    entry: skills/code-implementation/SKILL.md
+  - id: code-review
+    path: skills/code-review
+    description: Automated code review for best practices, security, and performance
+    mode: prompt
+    entry: skills/code-review/SKILL.md
+  - id: test-plan
+    path: skills/test-plan
+    description: Generate focused test plans for code changes and release verification
+    mode: prompt
+    entry: skills/test-plan/SKILL.md
+  - id: deployment
+    path: skills/deployment
+    description: 部署与发布技能。触发词：部署、发布、上线、CI/CD、CD流水线、Rollback。当用户需要规划部署流程、执行发布或处理回滚时激活。
+    mode: prompt
+    entry: skills/deployment/SKILL.md
+  - id: operations
+    path: skills/operations
+    description: 运维与监控技能。触发词：运维、监控、日志、告警、巡检、故障排查、SRE。当用户需要分析系统运行状态、排查故障或优化运维流程时激活。
+    mode: prompt
+    entry: skills/operations/SKILL.md
+  - id: documentation
+    path: skills/documentation
+    description: 技术文档生成技能。触发词：写文档、技术文档、API文档、README、用户手册。当用户需要生成或更新技术文档时激活。
+    mode: prompt
+    entry: skills/documentation/SKILL.md
+
+agents:
+  - id: requirements-analyst
+    path: agents/requirements-analyst.md
+  - id: architect
+    path: agents/architect.md
+  - id: developer
+    path: agents/developer.md
+  - id: reviewer
+    path: agents/reviewer.md
+  - id: test-engineer
+    path: agents/test-engineer.md
+  - id: sre
+    path: agents/sre.md
+  - id: tech-writer
+    path: agents/tech-writer.md
