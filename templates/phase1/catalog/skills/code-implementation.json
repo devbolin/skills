@@ -1,0 +1,7 @@
+{
+  "skill_id": "code-implementation",
+  "pack_id": "slc-pack",
+  "version": "1.0.0",
+  "description": "Code implementation and programming skill",
+  "entry": "skills/code-implementation/SKILL.md"
+}

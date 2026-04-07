@@ -1,0 +1,7 @@
+{
+  "skill_id": "architecture-design",
+  "pack_id": "slc-pack",
+  "version": "1.0.0",
+  "description": "Architecture design and technical decision skill",
+  "entry": "skills/architecture-design/SKILL.md"
+}

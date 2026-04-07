@@ -1,0 +1,7 @@
+{
+  "skill_id": "code-review",
+  "pack_id": "slc-pack",
+  "version": "1.0.0",
+  "description": "Code review skill for best practices, security, and performance",
+  "entry": "skills/code-review/SKILL.md"
+}

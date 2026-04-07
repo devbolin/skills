@@ -99,7 +99,7 @@ flowchart TD
 
 ### 6.2 可选字段
 - `skills[].description`
-- `skills[].adapters`
+- `skills[].adapters`（未来版本）
 - 其他扩展字段（保持向后兼容）
 
 ### 6.3 Subagent 文件布局

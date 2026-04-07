@@ -1,0 +1,7 @@
+{
+  "skill_id": "requirements",
+  "pack_id": "slc-pack",
+  "version": "1.0.0",
+  "description": "Requirements analysis and specification skill",
+  "entry": "skills/requirements/SKILL.md"
+}

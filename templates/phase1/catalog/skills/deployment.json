@@ -1,0 +1,7 @@
+{
+  "skill_id": "deployment",
+  "pack_id": "slc-pack",
+  "version": "1.0.0",
+  "description": "Deployment and release skill",
+  "entry": "skills/deployment/SKILL.md"
+}
