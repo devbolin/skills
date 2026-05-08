@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "skill-toolkit-team"
-  tags: ["validation", "lint", "compliance", "quality-check"]
+  tags: "validation, lint, compliance, quality-check"
 compatibility: "Optional online validation requires network access and `skills-ref` CLI tool."
 ---
 

@@ -39,7 +39,7 @@ compatibility: ""           # 可选：环境依赖说明
 metadata:                   # 可选：附加元数据
   version: "1.0"
   author: "team-name"
-  tags: ["tag1", "tag2"]
+  tags: "tag1, tag2"
 ---
 ```
 

@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "devtools-team"
-  tags: ["pr-summary", "changelog", "release-notes"]
+  tags: "pr-summary, changelog, release-notes"
 ---
 
 # PR Summary

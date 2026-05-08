@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "slc-team"
-  tags: ["deployment", "CI/CD", "release", "rollback"]
+  tags: "deployment, CI/CD, release, rollback"
 ---
 
 # Deployment

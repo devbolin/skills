@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "devtools-team"
-  tags: ["code-review", "security", "quality"]
+  tags: "code-review, security, quality"
 ---
 
 # Code Review

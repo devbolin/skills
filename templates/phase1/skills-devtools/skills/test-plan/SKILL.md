@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "devtools-team"
-  tags: ["test-plan", "regression", "verification"]
+  tags: "test-plan, regression, verification"
 ---
 
 # Test Plan

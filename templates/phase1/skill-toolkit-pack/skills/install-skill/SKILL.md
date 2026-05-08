@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "skill-toolkit-team"
-  tags: ["installation", "catalog", "registry", "download"]
+  tags: "installation, catalog, registry, download"
 compatibility: "Requires network access to download artifacts from GitHub Releases or a registry."
 ---
 

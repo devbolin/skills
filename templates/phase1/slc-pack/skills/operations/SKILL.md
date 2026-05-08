@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "slc-team"
-  tags: ["operations", "monitoring", "incident", "SRE"]
+  tags: "operations, monitoring, incident, SRE"
 ---
 
 # Operations

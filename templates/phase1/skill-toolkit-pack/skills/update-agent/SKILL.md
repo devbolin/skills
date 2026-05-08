@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "skill-toolkit-team"
-  tags: ["agent-update", "maintenance", "modification"]
+  tags: "agent-update, maintenance, modification"
 ---
 
 # Update Agent

@@ -30,7 +30,7 @@ license: "MIT"              # 可选：许可证
 metadata:                   # 可选：附加元数据
   version: "1.0"
   author: "Name"
-  tags: ["tag1", "tag2"]
+  tags: "tag1, tag2"
 ---
 ```
 

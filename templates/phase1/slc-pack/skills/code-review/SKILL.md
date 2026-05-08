@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "slc-team"
-  tags: ["code-review", "security", "quality", "best-practices"]
+  tags: "code-review, security, quality, best-practices"
 ---
 
 # Code Review

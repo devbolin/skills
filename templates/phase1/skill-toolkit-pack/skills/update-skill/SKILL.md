@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "skill-toolkit-team"
-  tags: ["skill-update", "maintenance", "modification"]
+  tags: "skill-update, maintenance, modification"
 ---
 
 # Update Skill

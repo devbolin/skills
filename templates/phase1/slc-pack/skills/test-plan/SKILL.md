@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "slc-team"
-  tags: ["testing", "test-plan", "regression", "verification"]
+  tags: "testing, test-plan, regression, verification"
 ---
 
 # Test Plan

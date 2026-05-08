@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "slc-team"
-  tags: ["documentation", "API", "README", "guide"]
+  tags: "documentation, API, README, guide"
 ---
 
 # Documentation

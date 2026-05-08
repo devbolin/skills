@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "skill-toolkit-team"
-  tags: ["skill-creation", "scaffold", "generation"]
+  tags: "skill-creation, scaffold, generation"
 ---
 
 # Create Skill
@@ -58,8 +58,7 @@ name: pdf--processing     # invalid: consecutive hyphens
 ├── scripts/                  # Optional: executable code
 ├── references/               # Optional: reference documentation
 ├── assets/                   # Optional: templates, resources
-└── adapters/                 # Optional: multi-platform adapters
-    └── prompt/               # Prompt mode (default)
+└── assets/                   # Optional: templates, resources
 ```
 
 ### Step 4: Generate SKILL.md

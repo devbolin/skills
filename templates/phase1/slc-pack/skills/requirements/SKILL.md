@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "slc-team"
-  tags: ["requirements", "analysis", "user-story", "PRD"]
+  tags: "requirements, analysis, user-story, PRD"
 ---
 
 # Requirements

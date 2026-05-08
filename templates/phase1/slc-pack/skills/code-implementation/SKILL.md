@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "slc-team"
-  tags: ["code", "implementation", "refactor", "programming"]
+  tags: "code, implementation, refactor, programming"
 ---
 
 # Code Implementation

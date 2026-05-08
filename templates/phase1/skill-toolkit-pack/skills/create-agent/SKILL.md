@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "skill-toolkit-team"
-  tags: ["agent-creation", "subagent", "scaffold", "generation"]
+  tags: "agent-creation, subagent, scaffold, generation"
 ---
 
 # Create Agent

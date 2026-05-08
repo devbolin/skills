@@ -5,7 +5,7 @@ license: "MIT"
 metadata:
   version: "1.0"
   author: "slc-team"
-  tags: ["architecture", "design", "ADR", "technical-decision"]
+  tags: "architecture, design, ADR, technical-decision"
 ---
 
 # Architecture Design
