@@ -74,14 +74,9 @@ For renames:
 - Rename the file: `agents/<old-id>.md` → `agents/<new-id>.md`
 - Update `pack.yaml` agents entry: `path: agents/<new-id>.md`
 
-### Step 4: Apply Changes
 
-Edit the agent file. For renames:
-- Change the `name` field in frontmatter
-- Rename the file: `agents/<old-id>.md` → `agents/<new-id>.md`
-- Update `pack.yaml` agents entry: `path: agents/<new-id>.md`
 
-### Step 5: Validate
+### Step 4: Validate
 
 - Frontmatter is valid YAML
 - `name` matches the file name (without extension)
@@ -92,7 +87,7 @@ Edit the agent file. For renames:
 
 If validation fails, fix and re-validate before confirming.
 
-### Step 6: Confirm
+### Step 5: Confirm
 
 ## Output Format Example
 

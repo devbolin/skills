@@ -38,10 +38,6 @@ ls <skill-path>/SKILL.md
 
 ### Step 2: Run Local Validation
 
-Check each item in order:
-
-### Step 2: Run Local Validation
-
 Check each item (agent knows how to verify these):
 - SKILL.md exists
 - YAML frontmatter is valid (no duplicate keys)

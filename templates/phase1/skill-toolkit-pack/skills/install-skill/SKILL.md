@@ -85,10 +85,7 @@ cat <target-dir>/pack.yaml
 
 ### Step 6: Confirm
 
-## Output Format Example
-
-```markdown
-## Installation Report
+Summarize what was installed and ask for confirmation.
 
 ### Source
 - **Type**: Plugin artifact
