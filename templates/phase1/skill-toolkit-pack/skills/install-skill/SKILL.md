@@ -83,6 +83,8 @@ ls <target-dir>/skills/<skill-id>/SKILL.md
 cat <target-dir>/pack.yaml
 ```
 
+If verification fails, fix the issues and re-verify before proceeding.
+
 ### Step 6: Confirm
 
 Summarize what was installed and ask for confirmation.
