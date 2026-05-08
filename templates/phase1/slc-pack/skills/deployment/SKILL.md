@@ -1,10 +1,11 @@
 ---
 name: deployment
 description: Deployment and release skill. Activate when user says "deploy", "release", "launch", "CI/CD", "pipeline", or "rollback".
-version: "1.0"
-author: "slc-team"
 license: "MIT"
-tags: ["deployment", "CI/CD", "release", "rollback"]
+metadata:
+  version: "1.0"
+  author: "slc-team"
+  tags: ["deployment", "CI/CD", "release", "rollback"]
 ---
 
 # Deployment

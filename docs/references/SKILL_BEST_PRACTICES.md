@@ -20,14 +20,17 @@ my-skill/
 
 ### 1.2 YAML Frontmatter
 
+依据 [Agent Skills 规范](https://agentskills.io/specification)，仅 `name` 和 `description` 为必需字段：
+
 ```yaml
 ---
-name: skill-name            # 必需：小写、数字、连字符
+name: skill-name            # 必需：小写字母、数字、连字符
 description: 清晰描述何时激活此技能
-version: "1.0"              # 可选
-author: "Name"              # 可选
-license: "MIT"              # 可选
-tags: ["tag1", "tag2"]     # 可选
+license: "MIT"              # 可选：许可证
+metadata:                   # 可选：附加元数据
+  version: "1.0"
+  author: "Name"
+  tags: ["tag1", "tag2"]
 ---
 ```
 
@@ -37,9 +40,10 @@ tags: ["tag1", "tag2"]     # 可选
 ---
 name: invoice-extractor
 description: 从发票 PDF 或图片中提取结构化信息。当用户说"提取发票信息"、"报销扫描"、"发票识别"时触发。
-version: "1.0"
-author: "finance-platform"
 license: "Apache-2.0"
+metadata:
+  version: "1.0"
+  author: "finance-platform"
 ---
 
 # Invoice Extractor

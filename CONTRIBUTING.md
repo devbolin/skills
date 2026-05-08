@@ -21,11 +21,17 @@
 
 ### SKILL.md 必需 frontmatter
 
+依据 [Agent Skills 规范](https://agentskills.io/specification)，仅 `name` 和 `description` 为必需字段：
+
 ```yaml
 ---
-name: <skill-name>
-description: <description>
-license: <license>
+name: <skill-name>         # 必需：小写字母、数字、连字符
+description: <description> # 必需：描述何时激活
+license: <license>         # 可选：许可证
+metadata:                  # 可选：附加元数据
+  version: "1.0"
+  author: "<author>"
+  tags: ["tag1", "tag2"]
 ---
 ```
 

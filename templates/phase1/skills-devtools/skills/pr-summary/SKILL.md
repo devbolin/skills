@@ -1,9 +1,11 @@
 ---
 name: pr-summary
 description: PR 总结技能。触发词：PR 总结、变更摘要、合并说明、风险摘要。当用户要求概括代码变更、整理 review 背景或输出发布摘要时激活。
-version: "1.0"
-author: "devtools-team"
 license: "MIT"
+metadata:
+  version: "1.0"
+  author: "devtools-team"
+  tags: ["pr-summary", "changelog", "release-notes"]
 ---
 
 # PR Summary

@@ -6,13 +6,13 @@
 
 1. 检查 `pack.yaml` 里有目标 skill：
 ```bash
-sed -n '1,240p' <your-pack>/pack.yaml
+cat <your-pack>/pack.yaml
 ```
 必须有最小字段：`id/path/mode/entry`。
 
 2. 检查 catalog 有可消费版本：
 ```bash
-sed -n '1,260p' templates/phase1/catalog/index.json
+cat templates/phase1/catalog/index.json
 ```
 默认必须有 `plugin_ref`。`skill_ref` 可选。
 

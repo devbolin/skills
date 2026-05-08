@@ -10,6 +10,7 @@ Phase 1 提供以下 Pack：
 |------|------|--------|--------|
 | `skills-devtools` | 开发者工具集 | code-review, pr-summary, test-plan | review-coordinator |
 | `slc-pack` | 软件开发生命周期 | requirements, architecture-design, code-implementation, code-review, test-plan, deployment, operations, documentation | requirements-analyst, architect, developer, reviewer, test-engineer, sre, tech-writer |
+| `skill-toolkit-pack` | Skill/Agent 管理工具包 | create-skill, update-skill, validate-skill, install-skill, create-agent, update-agent | skill-manager |
 
 ## 目录结构
 
@@ -48,6 +49,17 @@ templates/phase1/                          # 单一仓库（Phase 1 验证用）
         ├── deployment/SKILL.md
         ├── operations/SKILL.md
         └── documentation/SKILL.md
+└── skill-toolkit-pack/                    # pack：Skill/Agent 管理工具
+    ├── pack.yaml                          # pack 真相源
+    ├── agents/                            # Agent 声明
+    │   └── skill-manager.md
+    └── skills/                            # Skill 定义
+        ├── create-skill/SKILL.md
+        ├── update-skill/SKILL.md
+        ├── validate-skill/SKILL.md
+        ├── install-skill/SKILL.md
+        ├── create-agent/SKILL.md
+        └── update-agent/SKILL.md
 ```
 
 ## 使用方法
@@ -61,6 +73,9 @@ cp -r templates/phase1/skills-devtools my-devtools-pack
 
 # 复制 slc-pack
 cp -r templates/phase1/slc-pack my-slc-pack
+
+# 复制 skill-toolkit-pack
+cp -r templates/phase1/skill-toolkit-pack my-skill-toolkit
 ```
 
 **创建新 Pack**：
@@ -83,7 +98,7 @@ cp -r templates/phase1/slc-pack my-slc-pack
 ### 4. 维护 Agent 文档
 
 - 编辑 `agents/<agent-id>.md`
-- 使用 YAML frontmatter + Markdown 正文格式
+- 使用 YAML frontmatter（`name`/`description`/`tools`/`model`）+ Markdown 正文格式
 
 ### 5. 发布
 

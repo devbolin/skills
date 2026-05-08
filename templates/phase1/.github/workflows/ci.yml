@@ -173,11 +173,15 @@ jobs:
                       all_errors.append(f"[{pack_name}] skill '{skill_id}': Invalid frontmatter YAML: {e}")
                       continue
 
-                  # Check required frontmatter fields
-                  required_fm = ['name', 'description', 'version']
+                  # Check required frontmatter fields (per agentskills.io spec)
+                  required_fm = ['name', 'description']
                   for field in required_fm:
                       if field not in fm:
                           all_errors.append(f"[{pack_name}] skill '{skill_id}': Missing frontmatter field '{field}'")
+
+                  # Validate optional version in metadata (not top-level)
+                  if 'version' not in fm and ('metadata' not in fm or 'version' not in fm.get('metadata', {})):
+                      all_warnings.append(f"[{pack_name}] skill '{skill_id}': version not found in frontmatter or metadata")
 
                   # Validate name matches
                   if 'name' in fm and fm['name'] != skill_id:

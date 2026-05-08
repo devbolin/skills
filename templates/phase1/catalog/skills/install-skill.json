@@ -1,0 +1,18 @@
+{
+  "skill_id": "install-skill",
+  "name": "Install Skill",
+  "pack_id": "skill-toolkit-pack",
+  "versions": {
+    "1.0.0": {
+      "channel": "stable",
+      "tag": "v1.0.0",
+      "plugin_artifact": "releases/skill-toolkit-pack-1.0.0-plugin.zip"
+    }
+  },
+  "compatibility": {
+    "agents": ["claude-code", "github-copilot", "opencode"]
+  },
+  "permissions": {
+    "network": true
+  }
+}

@@ -1,9 +1,11 @@
 ---
 name: code-review
 description: 代码审查技能。触发词：代码审查、PR review、代码检查、安全扫描。当用户要求审查代码、检查潜在问题或分析 PR 时激活。
-version: "1.0"
-author: "devtools-team"
 license: "MIT"
+metadata:
+  version: "1.0"
+  author: "devtools-team"
+  tags: ["code-review", "security", "quality"]
 ---
 
 # Code Review

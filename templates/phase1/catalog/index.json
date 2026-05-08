@@ -12,6 +12,11 @@
       "pack_id": "slc-pack",
       "repo": "org/slc-pack",
       "skills": ["requirements", "architecture-design", "code-implementation", "code-review", "test-plan", "deployment", "operations", "documentation"]
+    },
+    {
+      "pack_id": "skill-toolkit-pack",
+      "repo": "org/skill-toolkit-pack",
+      "skills": ["create-skill", "update-skill", "validate-skill", "install-skill", "create-agent", "update-agent"]
     }
   ],
   "skills": [
@@ -146,6 +151,78 @@
       },
       "catalog_entry": "skills/documentation.json",
       "plugin_ref": "releases/slc-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "create-skill",
+      "pack_id": "skill-toolkit-pack",
+      "repo": "org/skill-toolkit-pack",
+      "path": "skills/create-skill",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/create-skill.json",
+      "plugin_ref": "releases/skill-toolkit-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "update-skill",
+      "pack_id": "skill-toolkit-pack",
+      "repo": "org/skill-toolkit-pack",
+      "path": "skills/update-skill",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/update-skill.json",
+      "plugin_ref": "releases/skill-toolkit-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "validate-skill",
+      "pack_id": "skill-toolkit-pack",
+      "repo": "org/skill-toolkit-pack",
+      "path": "skills/validate-skill",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/validate-skill.json",
+      "plugin_ref": "releases/skill-toolkit-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "install-skill",
+      "pack_id": "skill-toolkit-pack",
+      "repo": "org/skill-toolkit-pack",
+      "path": "skills/install-skill",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/install-skill.json",
+      "plugin_ref": "releases/skill-toolkit-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "create-agent",
+      "pack_id": "skill-toolkit-pack",
+      "repo": "org/skill-toolkit-pack",
+      "path": "skills/create-agent",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/create-agent.json",
+      "plugin_ref": "releases/skill-toolkit-pack-1.0.0-plugin.zip"
+    },
+    {
+      "skill_id": "update-agent",
+      "pack_id": "skill-toolkit-pack",
+      "repo": "org/skill-toolkit-pack",
+      "path": "skills/update-agent",
+      "status": "active",
+      "channels": {
+        "stable": "1.0.0"
+      },
+      "catalog_entry": "skills/update-agent.json",
+      "plugin_ref": "releases/skill-toolkit-pack-1.0.0-plugin.zip"
     }
   ]
 }

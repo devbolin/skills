@@ -30,15 +30,17 @@
 ### 必需字段（frontmatter）
 | 字段 | 说明 |
 |------|------|
-| `name` | Skill 名称 |
+| `name` | Skill 名称，必须与父目录名一致 |
 | `description` | 激活描述与触发关键词 |
-| `version` | 版本号（如 "1.0"） |
 
 ### 可选字段（frontmatter）
 | 字段 | 说明 |
 |------|------|
-| `author` | 作者 |
 | `license` | 许可证 |
+| `compatibility` | 环境依赖说明 |
+| `metadata` | 附加元数据（如 `version`、`author`、`tags`） |
+
+> 依据 [Agent Skills 规范](https://agentskills.io/specification)，仅 `name` 和 `description` 为必需字段。`version`、`author`、`tags` 建议放在 `metadata` 映射中。
 
 ### 正文内容（建议包含）
 - `## 使用场景`：适用场景列表

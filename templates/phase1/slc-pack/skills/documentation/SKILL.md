@@ -1,10 +1,11 @@
 ---
 name: documentation
 description: Technical documentation skill. Activate when user says "write docs", "API docs", "README", "user manual", or "update documentation".
-version: "1.0"
-author: "slc-team"
 license: "MIT"
-tags: ["documentation", "API", "README", "guide"]
+metadata:
+  version: "1.0"
+  author: "slc-team"
+  tags: ["documentation", "API", "README", "guide"]
 ---
 
 # Documentation

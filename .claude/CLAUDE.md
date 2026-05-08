@@ -92,7 +92,7 @@ Refs: #1
 - [ ] All CI checks pass
 - [ ] At least 1 approval
 - [ ] No unresolved conversations
-- [ ] Commit messages follow规范
+- [ ] Commit messages follow conventions
 - [ ] CHANGELOG.md updated
 
 ### Reviewer Responsibilities
