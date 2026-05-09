@@ -1,10 +1,11 @@
 ---
 name: code-implementation
 description: Code implementation and programming skill. Activate when user says "write code", "implement feature", "generate code", "code completion", or "refactor code".
-version: "1.0"
-author: "slc-team"
 license: "MIT"
-tags: ["code", "implementation", "refactor", "programming"]
+metadata:
+  version: "1.0"
+  author: "slc-team"
+  tags: "code, implementation, refactor, programming"
 ---
 
 # Code Implementation

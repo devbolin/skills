@@ -1,10 +1,11 @@
 ---
 name: requirements
 description: Requirements analysis and specification skill. Activate when user says "analyze requirements", "write requirements", "User Story", "PRD", "SRS", or "gather requirements".
-version: "1.0"
-author: "slc-team"
 license: "MIT"
-tags: ["requirements", "analysis", "user-story", "PRD"]
+metadata:
+  version: "1.0"
+  author: "slc-team"
+  tags: "requirements, analysis, user-story, PRD"
 ---
 
 # Requirements

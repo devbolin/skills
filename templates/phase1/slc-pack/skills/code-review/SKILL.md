@@ -1,10 +1,11 @@
 ---
 name: code-review
 description: Code review skill for best practices, security, and performance. Activate when user says "code review", "review code", "PR review", or "analyze pull request".
-version: "1.0"
-author: "slc-team"
 license: "MIT"
-tags: ["code-review", "security", "quality", "best-practices"]
+metadata:
+  version: "1.0"
+  author: "slc-team"
+  tags: "code-review, security, quality, best-practices"
 ---
 
 # Code Review

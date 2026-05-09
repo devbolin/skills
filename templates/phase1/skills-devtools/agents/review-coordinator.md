@@ -1,3 +1,10 @@
+---
+name: review-coordinator
+description: A coordinating subagent for code change analysis. Activate when orchestrating code review, pr-summary, and test-plan skills together for pull request workflows.
+tools: Read, Glob, Grep, Bash
+model: inherit
+---
+
 # Review Coordinator
 
 面向代码变更分析的协调型 Subagent。

@@ -43,16 +43,32 @@
 
 | 资源 | 链接 |
 |------|------|
-| 官网 | modelcontextprotocol.io |
-| 官方 SDKs | Python, TypeScript, Go, Java, C# |
-| MCP Servers | github.com/modelcontextprotocol/servers |
-| MCP Directory | model-context-protocol.com |
+| 官网 | [modelcontextprotocol.io](https://modelcontextprotocol.io) |
+| 官方 SDKs | [Python](https://github.com/modelcontextprotocol/python-sdk), [TypeScript](https://github.com/modelcontextprotocol/typescript-sdk), [Go](https://github.com/modelcontextprotocol/golang-sdk), [Java](https://github.com/modelcontextprotocol/java-sdk), [C#](https://github.com/modelcontextprotocol/csharp-sdk) |
+| MCP Servers | [github.com/modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) |
+| MCP Directory | [model-context-protocol.com](https://model-context-protocol.com) |
+
+## Agent Skills 开放标准
+
+本地存档的 [agentskills.io](https://agentskills.io) 文档：
+
+| 文档 | 说明 |
+|------|------|
+| [概述](agentskills/overview.md) | Agent Skills 概览与核心理念 |
+| [规范说明](agentskills/specification.md) | 完整格式规范 (frontmatter、目录结构、渐进式加载) |
+| [最佳实践](agentskills/best-practices.md) | 编写高质量 Skill 的最佳实践 |
+| [描述优化](agentskills/optimizing-descriptions.md) | 测试并优化 description 字段以提高触发准确率 |
+| [输出质量评估](agentskills/evaluating-skills.md) | 通过 eval 驱动迭代测试 Skill 输出质量 |
+| [脚本使用指南](agentskills/using-scripts.md) | 在 Skill 中运行命令和打包可执行脚本 |
+| [快速入门](agentskills/quickstart.md) | 创建第一个 Agent Skill |
+| [客户端支持](agentskills/clients.md) | 支持 Agent Skills 格式的产品列表 |
+| [Agent 集成指南](agentskills/adding-skills-support.md) | 为你的 Agent 添加 Skills 支持 |
 
 ## Skills 市场
 
 | 市场 | 说明 |
 |------|------|
-| **anthropics/skills** | Claude Code 官方技能 (16+) |
-| **agentskills/agentskills** | 规范 (14.5k stars) |
-| **skillhub.club** | 36k+ Skills 语义搜索 |
-| **awesome-agent-skills** | 1000+ VoltAgent 整理 |
+| [**anthropics/skills**](https://github.com/anthropics/skills) | Claude Code 官方技能 (16+) |
+| [**agentskills/agentskills**](https://github.com/agentskills/agentskills) | 规范 (14.5k stars) |
+| [**skillhub.club**](https://skillhub.club) | 36k+ Skills 语义搜索 |
+| [**awesome-agent-skills**](https://github.com/VoltAgent/awesome-agent-skills) | 1000+ VoltAgent 整理 |

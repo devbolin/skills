@@ -1,9 +1,11 @@
 ---
 name: test-plan
 description: 测试计划技能。触发词：测试计划、验证方案、回归检查、上线检查。当用户要求为代码变更制定测试范围和验证步骤时激活。
-version: "1.0"
-author: "devtools-team"
 license: "MIT"
+metadata:
+  version: "1.0"
+  author: "devtools-team"
+  tags: "test-plan, regression, verification"
 ---
 
 # Test Plan

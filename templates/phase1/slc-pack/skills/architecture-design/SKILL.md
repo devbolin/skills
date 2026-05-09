@@ -1,10 +1,11 @@
 ---
 name: architecture-design
 description: Architecture design and technical decision skill. Activate when user says "architecture design", "system design", "technical proposal", "ADR", "architecture review", or "design review".
-version: "1.0"
-author: "slc-team"
 license: "MIT"
-tags: ["architecture", "design", "ADR", "technical-decision"]
+metadata:
+  version: "1.0"
+  author: "slc-team"
+  tags: "architecture, design, ADR, technical-decision"
 ---
 
 # Architecture Design

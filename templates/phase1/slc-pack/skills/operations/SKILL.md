@@ -1,10 +1,11 @@
 ---
 name: operations
 description: Operations and monitoring skill. Activate when user says "operations", "monitoring", "log analysis", "alert handling", "troubleshooting", or "SRE".
-version: "1.0"
-author: "slc-team"
 license: "MIT"
-tags: ["operations", "monitoring", "incident", "SRE"]
+metadata:
+  version: "1.0"
+  author: "slc-team"
+  tags: "operations, monitoring, incident, SRE"
 ---
 
 # Operations

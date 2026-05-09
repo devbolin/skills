@@ -294,8 +294,7 @@ unzip plugin.zip -d /opt/skills/plugins/<pack-id>/<version>
 ```json
 {
   "channels": {
-    "stable": "1.0.0",
-    "beta": "1.1.0"
+    "stable": "1.0.0"
   }
 }
 ```

@@ -1,10 +1,11 @@
 ---
 name: test-plan
 description: Test planning skill for code changes and release verification. Activate when user says "test plan", "verification plan", "regression check", or "release testing".
-version: "1.0"
-author: "slc-team"
 license: "MIT"
-tags: ["testing", "test-plan", "regression", "verification"]
+metadata:
+  version: "1.0"
+  author: "slc-team"
+  tags: "testing, test-plan, regression, verification"
 ---
 
 # Test Plan

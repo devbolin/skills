@@ -1,0 +1,50 @@
+id: skill-toolkit-pack
+name: Skill Toolkit Pack
+version: 1.0.0
+owners:
+  - skill-management-team
+
+distribution:
+  default: plugin
+  enable_skill_artifacts: false
+
+defaults:
+  permissions:
+    network: true
+    connectors: []
+
+skills:
+  - id: create-skill
+    path: skills/create-skill
+    description: Create new Agent Skills with valid frontmatter and standard directory structure. Use when scaffolding a new skill from scratch.
+    mode: prompt
+    entry: skills/create-skill/SKILL.md
+  - id: update-skill
+    path: skills/update-skill
+    description: Update existing Agent Skills — frontmatter, body content, or resource files — while maintaining spec compliance. Use when modifying a skill.
+    mode: prompt
+    entry: skills/update-skill/SKILL.md
+  - id: validate-skill
+    path: skills/validate-skill
+    description: Validate Agent Skill format against the specification with local frontmatter checks and optional online skills-ref validation. Use to check skill compliance.
+    mode: prompt
+    entry: skills/validate-skill/SKILL.md
+  - id: install-skill
+    path: skills/install-skill
+    description: Install skills from a catalog or registry by plugin_ref or skill_ref, including download and verification. Use when deploying skills.
+    mode: prompt
+    entry: skills/install-skill/SKILL.md
+  - id: create-agent
+    path: skills/create-agent
+    description: Create new subagent declaration files with proper frontmatter, role definition, and output format. Use when scaffolding a subagent.
+    mode: prompt
+    entry: skills/create-agent/SKILL.md
+  - id: update-agent
+    path: skills/update-agent
+    description: Update existing subagent files — frontmatter, system prompt, and boundary definitions. Use when modifying a subagent.
+    mode: prompt
+    entry: skills/update-agent/SKILL.md
+
+agents:
+  - id: skill-manager
+    path: agents/skill-manager.md
