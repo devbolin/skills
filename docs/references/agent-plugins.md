@@ -1,8 +1,17 @@
+---
+sources:
+  - Claude Code 官方文档
+  - VS Code Copilot 官方文档
+  - GitHub Copilot Extensions 文档
+  - Cursor 文档
+  - Gemini CLI 文档
+last_updated: 2026-04-03
+type: compilation
+---
+
 # Agent 插件文档参考
 
-> 本文档收集各主流 AI Agent 工具的插件/Skills 系统文档。
 > ⚠️ 版本信息基于调研时间 2026-04，建议以各工具官方文档为准。
-> 最近更新：2026-04-03
 
 ---
 
@@ -72,7 +81,7 @@ claude --plugin-dir ./my-plugin
 ### 最低版本要求
 
 - **Agent Mode**: VS Code **v1.99+**
-- **Agent 插件**: VS Code **v1.98+** (预览)
+- **Agent 插件**: VS Code **v1.98+** (预览，当前仍为预览状态)
 
 ### 概述
 
@@ -218,10 +227,10 @@ npm install -g @google/gemini-cli
 
 | 工具 | 插件/Skills 系统 | 最低版本 | MCP 支持 | 更新时间 |
 |------|-----------------|---------|----------|---------|
-| Claude Code | Plugins | v1.0.33 | ✅ 原生 | 2024 |
-| VS Code Copilot | Agent Plugins | v1.99+ | ✅ | 2025-04 |
+| Claude Code | Plugins | v1.0.33 | ✅ 原生 | 2026-05 |
+| VS Code Copilot | Agent Plugins | v1.98+ (预览) | ✅ | 2026-05 |
 | GitHub Copilot | Extensions | GA | 🔶 有限 | 2025-03 |
-| Cursor | Rules | v0.46+ | ✅ | 2025-02 |
+| Cursor | Rules | v0.46+ | ✅ | 2026-03 |
 | Gemini CLI | MCP 扩展 | v0.1+ | ✅ 原生 | 2025-06 |
 
 ---

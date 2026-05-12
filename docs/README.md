@@ -32,8 +32,8 @@ docs/
 
 | 文档 | 说明 | 原始文档 |
 |------|------|----------|
-| [AGENT_PLUGINS.md](./references/AGENT_PLUGINS.md) | 主流 Agent 工具插件系统对比 | - |
-| [SKILL_BEST_PRACTICES.md](./references/SKILL_BEST_PRACTICES.md) | SKILL.md 编写最佳实践 | [Claude Code 最佳实践](https://code.claude.com/docs/en/best-practices)、[Anthropic Skills](https://github.com/anthropics/skills)、[MCP 规范](https://modelcontextprotocol.io) |
+| [agent-plugins.md](./references/agent-plugins.md) | 主流 Agent 工具插件系统对比 | - |
+| [skill-best-practices.md](./references/skill-best-practices.md) | SKILL.md 编写最佳实践 | [Claude Code 最佳实践](https://code.claude.com/docs/en/best-practices)、[Anthropic Skills](https://github.com/anthropics/skills)、[MCP 规范](https://modelcontextprotocol.io) |
 | [Model Context Protocol](https://modelcontextprotocol.io) | MCP 官方规范和实现指南 | modelcontextprotocol.io |
 | [Claude Code 文档](https://code.claude.com/docs) | Claude Code 官方文档 | code.claude.com/docs |
 | [VS Code Copilot](https://code.visualstudio.com/docs/copilot/overview) | VS Code Copilot 和 Agent 插件文档 | code.visualstudio.com/docs/copilot/overview |

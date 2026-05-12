@@ -1,3 +1,9 @@
+---
+source: https://agentskills.io/docs/evaluating-skills
+retrieved: 2026-05
+type: standard
+---
+
 # Evaluating skill output quality
 
 > How to test whether your skill produces good outputs using eval-driven iteration.

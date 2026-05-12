@@ -1,3 +1,9 @@
+---
+source: https://agentskills.io/docs/clients
+retrieved: 2026-05
+type: standard
+---
+
 # Client Showcase
 
 > Agent products that support the Agent Skills format.

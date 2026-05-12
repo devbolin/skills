@@ -1,3 +1,9 @@
+---
+source: https://agentskills.io
+retrieved: 2026-05
+type: standard
+---
+
 # Agent Skills Overview
 
 > A standardized way to give AI agents new capabilities and expertise.

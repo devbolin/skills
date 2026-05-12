@@ -1,7 +1,10 @@
-# 多 Agent 能力包管理方案汇报
+---
+status: 历史调研材料（非当前规范）
+superseded_by: docs/phase1/
+type: historical
+---
 
-> 状态：历史调研材料（非当前规范）。
-> 当前规范以 `docs/phase1/` 为准，阶段一采用 `pack.yaml` + Plugin-first 分发。
+# 多 Agent 能力包管理方案汇报
 
 ## 1. 背景与目标
 

@@ -1,3 +1,9 @@
+---
+source: https://agentskills.io/specification
+retrieved: 2026-05
+type: standard
+---
+
 # Specification
 
 > The complete format specification for Agent Skills.

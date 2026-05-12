@@ -1,3 +1,9 @@
+---
+source: https://agentskills.io/docs/best-practices
+retrieved: 2026-05
+type: standard
+---
+
 # Best practices for skill creators
 
 > How to write skills that are well-scoped and calibrated to the task.

@@ -1,3 +1,9 @@
+---
+source: https://agentskills.io/docs/optimizing-descriptions
+retrieved: 2026-05
+type: standard
+---
+
 # Optimizing skill descriptions
 
 > How to improve your skill's description so it triggers reliably on relevant prompts.
