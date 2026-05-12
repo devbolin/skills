@@ -1,6 +1,13 @@
-# Skill 与 Subagent 编写最佳实践
+---
+sources:
+  - Claude Code 官方文档
+  - Agent Skills 开放标准 (agentskills.io)
+  - 社区最佳实践
+last_updated: 2026-05
+type: compilation
+---
 
-> 本文档收集 Skill 和 Subagent 的编写规范与最佳实践，来源：Claude Code 官方文档、Agent Skills 开放标准、社区最佳实践。
+# Skill 与 Subagent 编写最佳实践
 
 ---
 

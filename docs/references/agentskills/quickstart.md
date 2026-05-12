@@ -1,3 +1,9 @@
+---
+source: https://agentskills.io/docs/quickstart
+retrieved: 2026-05
+type: standard
+---
+
 # Quickstart
 
 > Create your first Agent Skill and see it work in VS Code.

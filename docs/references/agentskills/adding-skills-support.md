@@ -1,3 +1,9 @@
+---
+source: https://agentskills.io/docs/adding-skills-support
+retrieved: 2026-05
+type: standard
+---
+
 # How to add skills support to your agent
 
 > A guide for adding Agent Skills support to an AI agent or development tool.

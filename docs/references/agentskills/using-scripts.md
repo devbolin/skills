@@ -1,3 +1,9 @@
+---
+source: https://agentskills.io/docs/using-scripts
+retrieved: 2026-05
+type: standard
+---
+
 # Using scripts in skills
 
 > How to run commands and bundle executable scripts in your skills.
