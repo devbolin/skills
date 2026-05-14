@@ -11,6 +11,8 @@
 - `HUMAN_WORKFLOW.md`: 修正 SKILL.md 示例中 `version`/`author` 从顶层改为 `metadata` 嵌套
 - `subagent-authoring.md`: 新增 §五 Subagent Frontmatter 规范，标注各平台字段支持矩阵
 - `subagent-authoring.md`: 补充 VS Code `.agent.md` 兼容性说明及构建期转换策略
+- `subagent-authoring.md`: 展开 §五 field matrix 增加 OpenCode 列，新增 Tools 跨平台差异说明
+- `skill-authoring.md`: 新增 §七跨平台 Frontmatter 差异（Claude Code / VS Code / OpenCode / agentskills.io 字段矩阵）
 
 ---
 
