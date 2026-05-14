@@ -140,7 +140,36 @@ skills:
 5. 若显式开启 `enable_skill_artifacts=true`，额外产出单 Skill artifact
 6. 更新 catalog（默认 `plugin_ref`，可选 `skill_ref`）
 
-## 七、编写检查清单
+## 七、跨平台 Frontmatter 差异
+
+除 agentskills.io 开放标准的公共字段外，各平台扩展了专属 frontmatter 字段。
+源码层可共存声明，各平台自动忽略不认识的字段。
+
+| 字段 | agentskills.io | Claude Code | VS Code | OpenCode | 说明 |
+|------|---------------|-------------|---------|----------|------|
+| `name` | 必需 | 可选（缺省用目录名） | 必需 | 必需 | 唯一标识 |
+| `description` | 必需 | 推荐 | 必需 | 必需 | 何时激活 |
+| `license` | 可选 | — | — | 可选 | 许可证 |
+| `compatibility` | 可选 | — | — | 可选 | 环境依赖 |
+| `metadata` | 可选 | — | — | 可选 | 附加元数据 |
+| `allowed-tools` | 可选(exp.) | 可选 | — | — | 预授权工具列表 |
+| `disable-model-invocation` | — | 可选 | 可选 | — | 禁止 AI 自动激活 |
+| `user-invocable` | — | 可选 | 可选 | — | 是否显示在 `/` 菜单 |
+| `argument-hint` | — | 可选 | 可选 | — | 斜杠命令参数提示 |
+| `context` | — | 可选(`fork`) | 可选(`fork`,exp.) | — | 是否在 Subagent 中执行 |
+| `when_to_use` | — | 可选 | — | — | 额外触发上下文 |
+| `model` | — | 可选 | — | — | 激活时切换模型 |
+| `effort` | — | 可选 | — | — | 激活时 effort 级别 |
+| `paths` | — | 可选 | — | — | 按文件路径自动激活 |
+| `agent` | — | 可选 | — | — | `context: fork` 时指定 Subagent |
+| `hooks` | — | 可选 | — | — | 生命周期钩子 |
+| `shell` | — | 可选 | — | — | 内联命令 shell 类型 |
+
+**权限模型差异**：Claude Code 和 VS Code 通过 `allowed-tools` / `disable-model-invocation` 控制 Skill 的权限行为；OpenCode 通过全局 `permission` 配置（`allow`/`ask`/`deny`）外加 `tools.skill` 开关控制，不在 frontmatter 内。
+
+> 构建期转换逻辑（`scripts/build.py`）负责按目标平台提取所需字段、丢弃其余字段。
+
+## 八、编写检查清单
 
 ### SKILL.md
 - [ ] frontmatter 正确（`name` 与目录匹配）

@@ -45,7 +45,18 @@
 - 当 `enable_skill_artifacts=true` 时生成单 Skill artifact
 - catalog 在对应 skill 条目附加 `skill_ref`
 
-### 4.3 Agent 消费
+### 4.3 平台适配（Adapter 契约）
+`resolve/execute` 返回平台中立的 catalog 引用，各平台的 adapter 层负责将 `agents/<id>.md` 等源码格式转换为目标平台原生格式：
+
+| 转换内容 | Claude Code | VS Code | OpenCode |
+|---------|-------------|---------|----------|
+| Agent 文件扩展名 | `.md`（不变） | `.md`→`.agent.md` | `.md`（不变） |
+| 工具命名 | PascalCase（不变） | PascalCase→kebab-case | 映射为 `permission` 配置 |
+| 目录路径 | `.claude/agents/` | `.github/agents/` | `.claude/agents/`（兼容） |
+
+> 转换逻辑在构建阶段（`scripts/build.py`）执行。源码层始终维护平台中立格式。参见 Phase 3 的多模式适配（Prompt/Tool/MCP）规划。
+
+### 4.4 Agent 消费
 1. `resolve(skill_id, channel|version)`
 2. 默认返回/使用 `plugin_ref`
 3. 可选切换 `skill_ref`

@@ -1,5 +1,20 @@
 # 文档变更日志
 
+## [v2.8] - 2026-05-14
+
+### 修复
+
+#### 跨平台兼容性文档覆盖
+
+- P0: `agent-configuration.md`: 新增 §4 Claude Code / §5 OpenCode 配置章节（原仅覆盖 VS Code）
+- P1: `DESIGN.md` §6.3: 补充跨平台注意事项（`.agent.md` 扩展名、`tools` 命名差异、构建期转换）
+- P1: `AGENT_CONSUMPTION.md`: 新增 §5.2 各平台 plugin 安装方式表 + §5.3 Subagent 声明格式差异表
+- P1: `templates/README.md`: 注明 `tools` 字段为 Claude Code PascalCase 格式
+- P2: `FLOW.md`: 发布流程中增加 Platform Transform 步骤（`.md`→`.agent.md` + tools 重映射）
+- P2: `ARCHITECTURE.md` §4.3: 新增平台适配层说明（文件扩展名/工具命名/目录路径转换表）
+
+---
+
 ## [v2.7] - 2026-05-14
 
 ### 修复
@@ -11,6 +26,8 @@
 - `HUMAN_WORKFLOW.md`: 修正 SKILL.md 示例中 `version`/`author` 从顶层改为 `metadata` 嵌套
 - `subagent-authoring.md`: 新增 §五 Subagent Frontmatter 规范，标注各平台字段支持矩阵
 - `subagent-authoring.md`: 补充 VS Code `.agent.md` 兼容性说明及构建期转换策略
+- `subagent-authoring.md`: 展开 §五 field matrix 增加 OpenCode 列，新增 Tools 跨平台差异说明
+- `skill-authoring.md`: 新增 §七跨平台 Frontmatter 差异（Claude Code / VS Code / OpenCode / agentskills.io 字段矩阵）
 
 ---
 

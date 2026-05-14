@@ -87,62 +87,89 @@ Subagent 是在**独立上下文**中执行特定任务的专业化代理。
 
 ## 五、Subagent Frontmatter 规范
 
-Subagent 通过文件头 YAML frontmatter 声明配置元数据。以下字段覆盖 Claude Code 和 VS Code Copilot 的主流支持：
+Subagent 通过文件头 YAML frontmatter 声明配置元数据。以下字段覆盖 Claude Code、VS Code Copilot 和 OpenCode 的主流支持：
 
-| 字段 | 必需 | Claude Code | VS Code | 说明 |
-|------|------|-------------|---------|------|
-| `name` | 是 | ✅ | ✅ | 小写字母+连字符，唯一标识 |
-| `description` | 是 | ✅ | ✅ | 何时委托给此 Subagent |
-| `tools` | 否 | ✅ | ✅ | 可用工具列表（allowlist） |
-| `model` | 否 | ✅ | ✅ | 模型偏好（`sonnet`/`opus`/`haiku`/`inherit`） |
-| `disallowedTools` | 否 | ✅ | ❌ | 禁止的工具列表（denylist） |
-| `permissionMode` | 否 | ✅ | ❌ | 权限模式（`auto`/`acceptEdits` 等） |
-| `handoffs` | 否 | ❌ | ✅ | VS Code 工作流转移（`label`/`agent`/`prompt`） |
-| `mcpServers` | 否 | ✅ | ✅ | MCP 服务器引用或内联定义 |
-| `memory` | 否 | ✅ | ❌ | 持久记忆作用域（`user`/`project`） |
-| `maxTurns` | 否 | ✅ | ❌ | 最大 agentic 轮次 |
+| 字段 | 必需 | Claude Code | VS Code | OpenCode | 说明 |
+|------|------|-------------|---------|----------|------|
+| `name` | 是 | ✅ | ✅ | ✅ | 小写字母+连字符，唯一标识 |
+| `description` | 是 | ✅ | ✅ | ✅ | 何时委托给此 Subagent |
+| `tools` / `permissions` | 否 | ✅ tools | ✅ tools | ✅ permissions | 详见下文"Tools 跨平台差异" |
+| `model` | 否 | ✅ | ✅ | ✅ | 模型偏好 |
+| `disallowedTools` | 否 | ✅ | ❌ | ❌ | 禁止的工具列表（denylist） |
+| `permissionMode` | 否 | ✅ | ❌ | ❌ | 权限模式（`auto`/`acceptEdits` 等） |
+| `handoffs` | 否 | ❌ | ✅ | ❌ | VS Code 工作流转移（`label`/`agent`/`prompt`） |
+| `mcpServers` | 否 | ✅ | ✅ | ✅ | MCP 服务器引用或内联定义 |
+| `memory` | 否 | ✅ | ❌ | ❌ | 持久记忆作用域（`user`/`project`） |
+| `maxTurns` | 否 | ✅ | ❌ | ✅ | 最大 agentic 轮次 |
+| `temperature` | 否 | ❌ | ❌ | ✅ | 采样温度 |
+| `mode` | 否 | ❌ | ❌ | ✅ | `primary`/`subagent`/`all` |
 
-未列出的字段（如 `hooks`、`isolation`、`background` 等）由各平台按需支持，不同平台自动忽略不认 识的字段。
+未列出的字段（如 `hooks`、`isolation`、`background`、`model` 等）由各平台按需支持，不同平台自动忽略不认识的字段。
 
-**最小示例（Claude Code + OpenCode）：**
+### Tools 跨平台差异
+
+`tools` / `permissions` 字段是跨平台差异最大的部分——字段名、工具命名规则、控制粒度均不同：
+
+| 维度 | Claude Code | VS Code | OpenCode |
+|------|-------------|---------|----------|
+| **字段名** | `tools` (allowlist) + `disallowedTools` (denylist) | `tools` (allowlist only) | `permissions` (allow/ask/deny 三态) |
+| **工具命名** | PascalCase (`Read`, `Grep`, `Bash`, `WebFetch`) | kebab-case + 命名空间 (`search/codebase`) | 全小写 (`read`, `grep`, `bash`, `webfetch`) |
+| **复合词风格** | PascalCase 拼接 (`AskUserQuestion`, `ExitPlanMode`) | 斜杠命名空间 (`search/codebase`) | 全小写拼接 (`webfetch`, `websearch`) |
+| **输入级过滤** | `Bash(git:*)`, `Read(path:...)` | 不支持 | `"git *": "allow"` 通配符 |
+| **Spawning 限制** | `Agent(name)` 语法 | 不支持 | 不支持 |
+| **未设置默认** | 继承父会话所有工具 | 默认工具集 | 大部分 `allow` |
+
+**最小示例（Claude Code + OpenCode 兼容）：**
 ```yaml
 ---
 name: code-reviewer
 description: Reviews code for quality and best practices
-tools: Read, Glob, Grep
-model: sonnet
 ---
 ```
 
-**兼容 VS Code 的示例：**
+> 此类示例省略 `tools`/`permissions`，因为两平台该字段不可共用。OpenCode 通过全局 `permission` 配置控制权限，不在 frontmatter 声明。
+
+**Claude Code 写法（PascalCase）：**
 ```yaml
----
-name: code-reviewer
-description: Reviews code for quality and best practices
-tools: Read, Glob, Grep
-model: sonnet
-handoffs:
-  - label: Start Fix
-    agent: implementer
-    prompt: Implement the fixes suggested above.
----
+tools: Read, Grep, Glob, Bash
+```
+
+**OpenCode 写法（全小写，通过 `permission` 配置）：**
+```json
+{
+  "permission": {
+    "edit": "deny",
+    "bash": "allow"
+  }
+}
+```
+
+**VS Code 写法（kebab-case + namespace）：**
+```yaml
+tools: ['search/codebase', 'search/web']
 ```
 
 ### VS Code 兼容性说明
 
-VS Code 的 custom agents 要求文件扩展名为 `.agent.md`（而非 `.md`），存放目录为 `.github/agents/`。
-`agents/` 目录下的裸 `.md` 文件不会被 VS Code 自动发现。
+VS Code 的 custom agents 存在两处与 Claude Code/OpenCode 不兼容：
+
+1. **文件扩展名**：`.agent.md`（而非 `.md`），存放目录为 `.github/agents/`
+2. **工具命名规则**：kebab-case + 命名空间（如 `search/codebase`），非 PascalCase
 
 **推荐策略**（与 Phase 1 Plugin-first 理念一致）：
 - 源码层统一使用 `agents/<id>.md`（Claude Code / OpenCode 原生格式）
-- 构建期转换为 VS Code 格式：`<id>.md` → `.github/agents/<id>.agent.md`
+- 构建期转换为 VS Code 格式：
+  - `<id>.md` → `.github/agents/<id>.agent.md`
+  - 工具名重映射（PascalCase → kebab-case）
 - 转换逻辑在 `scripts/build.py` 中实现
 
 ```
 源码（平台中立）                 构建产物（平台专属）
   agents/                      
     reviewer.md    ──→  Claude Plugin: agents/reviewer.md
+                       OpenCode: agents/reviewer.md
                   ──→  VS Code Plugin: .github/agents/reviewer.agent.md
+                                       (tools 名重映射)
 ```
 
 ## 六、文件布局与配置模板
