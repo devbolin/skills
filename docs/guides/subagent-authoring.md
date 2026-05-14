@@ -85,7 +85,67 @@ Subagent 是在**独立上下文**中执行特定任务的专业化代理。
 
 ---
 
-## 五、文件布局与配置模板
+## 五、Subagent Frontmatter 规范
+
+Subagent 通过文件头 YAML frontmatter 声明配置元数据。以下字段覆盖 Claude Code 和 VS Code Copilot 的主流支持：
+
+| 字段 | 必需 | Claude Code | VS Code | 说明 |
+|------|------|-------------|---------|------|
+| `name` | 是 | ✅ | ✅ | 小写字母+连字符，唯一标识 |
+| `description` | 是 | ✅ | ✅ | 何时委托给此 Subagent |
+| `tools` | 否 | ✅ | ✅ | 可用工具列表（allowlist） |
+| `model` | 否 | ✅ | ✅ | 模型偏好（`sonnet`/`opus`/`haiku`/`inherit`） |
+| `disallowedTools` | 否 | ✅ | ❌ | 禁止的工具列表（denylist） |
+| `permissionMode` | 否 | ✅ | ❌ | 权限模式（`auto`/`acceptEdits` 等） |
+| `handoffs` | 否 | ❌ | ✅ | VS Code 工作流转移（`label`/`agent`/`prompt`） |
+| `mcpServers` | 否 | ✅ | ✅ | MCP 服务器引用或内联定义 |
+| `memory` | 否 | ✅ | ❌ | 持久记忆作用域（`user`/`project`） |
+| `maxTurns` | 否 | ✅ | ❌ | 最大 agentic 轮次 |
+
+未列出的字段（如 `hooks`、`isolation`、`background` 等）由各平台按需支持，不同平台自动忽略不认 识的字段。
+
+**最小示例（Claude Code + OpenCode）：**
+```yaml
+---
+name: code-reviewer
+description: Reviews code for quality and best practices
+tools: Read, Glob, Grep
+model: sonnet
+---
+```
+
+**兼容 VS Code 的示例：**
+```yaml
+---
+name: code-reviewer
+description: Reviews code for quality and best practices
+tools: Read, Glob, Grep
+model: sonnet
+handoffs:
+  - label: Start Fix
+    agent: implementer
+    prompt: Implement the fixes suggested above.
+---
+```
+
+### VS Code 兼容性说明
+
+VS Code 的 custom agents 要求文件扩展名为 `.agent.md`（而非 `.md`），存放目录为 `.github/agents/`。
+`agents/` 目录下的裸 `.md` 文件不会被 VS Code 自动发现。
+
+**推荐策略**（与 Phase 1 Plugin-first 理念一致）：
+- 源码层统一使用 `agents/<id>.md`（Claude Code / OpenCode 原生格式）
+- 构建期转换为 VS Code 格式：`<id>.md` → `.github/agents/<id>.agent.md`
+- 转换逻辑在 `scripts/build.py` 中实现
+
+```
+源码（平台中立）                 构建产物（平台专属）
+  agents/                      
+    reviewer.md    ──→  Claude Plugin: agents/reviewer.md
+                  ──→  VS Code Plugin: .github/agents/reviewer.agent.md
+```
+
+## 六、文件布局与配置模板
 
 ### Pack 内文件布局
 

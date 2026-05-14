@@ -28,19 +28,20 @@
 ## 2. `SKILL.md` 关键字段
 
 ### 必需字段（frontmatter）
-| 字段 | 说明 |
-|------|------|
-| `name` | Skill 名称，必须与父目录名一致 |
-| `description` | 激活描述与触发关键词 |
+| 字段 | 约束 | 说明 |
+|------|------|------|
+| `name` | ≤64字符，小写字母、数字、连字符，须与父目录名一致 | Skill 标识 |
+| `description` | ≤1024字符，非空 | 激活描述与触发关键词 |
 
 ### 可选字段（frontmatter）
-| 字段 | 说明 |
-|------|------|
-| `license` | 许可证 |
-| `compatibility` | 环境依赖说明 |
-| `metadata` | 附加元数据（如 `version`、`author`、`tags`） |
+| 字段 | 约束 | 说明 |
+|------|------|------|
+| `license` | — | 许可证 |
+| `compatibility` | ≤500字符 | 环境依赖说明 |
+| `metadata` | — | 附加元数据（`version`、`author`、`tags` 建议放在此映射内） |
+| `allowed-tools` | Experimental，空格分隔 | 预先授权的工具列表 |
 
-> 依据 [Agent Skills 规范](https://agentskills.io/specification)，仅 `name` 和 `description` 为必需字段。`version`、`author`、`tags` 建议放在 `metadata` 映射中。
+> 依据 [Agent Skills 规范](https://agentskills.io/specification)，仅 `name` 和 `description` 为必需字段。
 
 ### 正文内容（建议包含）
 - `## 使用场景`：适用场景列表

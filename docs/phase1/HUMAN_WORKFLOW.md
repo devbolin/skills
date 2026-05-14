@@ -77,9 +77,10 @@ skills:
 ---
 name: <skill-name>
 description: <描述和触发词>
-version: "1.0"
-author: "<owner>"
 license: "MIT"
+metadata:
+  version: "1.0"
+  author: "<owner>"
 ---
 
 # <Skill 名称>

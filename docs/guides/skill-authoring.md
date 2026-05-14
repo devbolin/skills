@@ -30,13 +30,22 @@
 
 依据 [Agent Skills 规范](https://agentskills.io/specification)，仅 `name` 和 `description` 为必需字段：
 
+| 字段 | 必需 | 约束 |
+|------|------|------|
+| `name` | 是 | ≤64字符，小写字母、数字、连字符，须与父目录名一致 |
+| `description` | 是 | ≤1024字符，非空 |
+| `license` | 否 | — |
+| `compatibility` | 否 | ≤500字符 |
+| `metadata` | 否 | `version`、`author`、`tags` 建议放在此映射内 |
+| `allowed-tools` | 否 | Experimental，空格分隔的预授权工具列表 |
+
 ```yaml
 ---
-name: skill-name            # 必需：小写字母、数字、连字符
-description: 清晰描述何时激活此技能
-license: "Apache-2.0"      # 可选：许可证
-compatibility: ""           # 可选：环境依赖说明
-metadata:                   # 可选：附加元数据
+name: skill-name            # 必需：小写字母、数字、连字符，≤64
+description: 清晰描述何时激活此技能  # 必需：≤1024
+license: "Apache-2.0"      # 可选
+compatibility: ""           # 可选：≤500字符
+metadata:                   # 可选
   version: "1.0"
   author: "team-name"
   tags: "tag1, tag2"
