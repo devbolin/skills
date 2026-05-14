@@ -1,5 +1,19 @@
 # 文档变更日志
 
+## [v2.7] - 2026-05-14
+
+### 修复
+
+#### Skill/Agent 格式规范一致性
+- `CONFIG.md`: 补充 SKILL.md frontmatter 字段约束（`name`≤64, `description`≤1024, `compatibility`≤500）
+- `CONFIG.md`: 补充 `allowed-tools` experimental 字段
+- `skill-authoring.md`: 补充字段约束表及 `allowed-tools` 说明
+- `HUMAN_WORKFLOW.md`: 修正 SKILL.md 示例中 `version`/`author` 从顶层改为 `metadata` 嵌套
+- `subagent-authoring.md`: 新增 §五 Subagent Frontmatter 规范，标注各平台字段支持矩阵
+- `subagent-authoring.md`: 补充 VS Code `.agent.md` 兼容性说明及构建期转换策略
+
+---
+
 ## [v2.6] - 2026-05-14
 
 ### 修复
