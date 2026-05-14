@@ -4,9 +4,9 @@
 
 | 文档 | 说明 |
 |------|------|
-| [AGENT_CONFIGURATION.md](./AGENT_CONFIGURATION.md) | Agent 端接入与配置操作手册（Copilot/OpenAI Tool/MCP） |
-| [SKILL_AUTHORING.md](./SKILL_AUTHORING.md) | Skill 编写与发布指南（pack.yaml + plugin-first） |
-| [SUBAGENT_AUTHORING.md](./SUBAGENT_AUTHORING.md) | Subagent 设计、配置与协作指南 |
+| [agent-configuration.md](./agent-configuration.md) | Agent 端接入与配置操作手册（Copilot/OpenAI Tool/MCP） |
+| [skill-authoring.md](./skill-authoring.md) | Skill 编写与发布指南（pack.yaml + plugin-first） |
+| [subagent-authoring.md](./subagent-authoring.md) | Subagent 设计、配置与协作指南 |
 
 ## 快速链接
 

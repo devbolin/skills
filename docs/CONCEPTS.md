@@ -72,7 +72,7 @@ Skill 采用三层渐进式架构，控制 Token 成本：
 - L1 + L2 都在 `SKILL.md`（frontmatter 是 L1，正文是 L2）
 - L3 文件独立存在，**不会自动加载**，只有 SKILL.md 正文通过路径引用时才被使用
 
-> 详见：[SKILL_AUTHORING.md](./guides/SKILL_AUTHORING.md#四progressive-disclosure-实践)
+> 详见：[skill-authoring.md](./guides/skill-authoring.md#四progressive-disclosure-实践)
 
 #### SKILL.md 格式
 
@@ -362,5 +362,5 @@ flowchart LR
 | [DESIGN.md](./phase1/DESIGN.md) | Phase 1 架构设计与决策 |
 | [CONFIG.md](./phase1/CONFIG.md) | 配置字段详解 |
 | [AGENT_CONSUMPTION.md](./phase1/AGENT_CONSUMPTION.md) | Agent 消费规范 |
-| [SKILL_AUTHORING.md](./guides/SKILL_AUTHORING.md) | Skill 编写指南 |
-| [SUBAGENT_AUTHORING.md](./guides/SUBAGENT_AUTHORING.md) | Subagent 设计指南 |
+| [skill-authoring.md](./guides/skill-authoring.md) | Skill 编写指南 |
+| [subagent-authoring.md](./guides/subagent-authoring.md) | Subagent 设计指南 |

@@ -23,8 +23,8 @@
 - [阶段一设计](./docs/phase1/DESIGN.md) - Plugin-first 架构
 - [阶段一流程](./docs/phase1/FLOW.md) - 开发到发布流程
 - [阶段一配置](./docs/phase1/CONFIG.md) - pack.yaml 与发布配置
-- [Agent 配置指南](./docs/guides/AGENT_CONFIGURATION.md) - Agent 侧 plugin 消费与配置步骤
-- [技能编写指南](./docs/guides/SKILL_AUTHORING.md) - 如何编写 SKILL.md
+- [Agent 配置指南](./docs/guides/agent-configuration.md) - Agent 侧 plugin 消费与配置步骤
+- [技能编写指南](./docs/guides/skill-authoring.md) - 如何编写 SKILL.md
 
 ---
 
@@ -102,9 +102,9 @@ templates/phase1/
 - [ARCHITECTURE.md](./ARCHITECTURE.md) - 架构详细说明
 - [docs/guides/README.md](./docs/guides/README.md) - 操作指南总入口（Agent 配置 / Skill 编写 / Subagent）
 - [templates/README.md](./templates/README.md) - 模板使用指南
-- [docs/references/SKILL_BEST_PRACTICES.md](./docs/references/SKILL_BEST_PRACTICES.md) - SKILL.md 最佳实践
-- [docs/references/AGENT_PLUGINS.md](./docs/references/AGENT_PLUGINS.md) - 各工具插件支持
-- [docs/references/agent_capability_platform_report.md](./docs/references/agent_capability_platform_report.md) - 需求调研报告
+- [docs/references/skill-best-practices.md](./docs/references/skill-best-practices.md) - SKILL.md 最佳实践
+- [docs/references/agent-plugins.md](./docs/references/agent-plugins.md) - 各工具插件支持
+- [docs/references/agent-capability-platform-report.md](./docs/references/agent-capability-platform-report.md) - 需求调研报告
 
 ---
 

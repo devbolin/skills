@@ -24,9 +24,9 @@ docs/
 
 | 文档 | 说明 |
 |------|------|
-| [SKILL_AUTHORING.md](./guides/SKILL_AUTHORING.md) | 技能编写与发布指南 |
-| [SUBAGENT_AUTHORING.md](./guides/SUBAGENT_AUTHORING.md) | Subagent 设计、配置与协作指南 |
-| [AGENT_CONFIGURATION.md](./guides/AGENT_CONFIGURATION.md) | Agent 侧 plugin 集成操作手册 |
+| [skill-authoring.md](./guides/skill-authoring.md) | 技能编写与发布指南 |
+| [subagent-authoring.md](./guides/subagent-authoring.md) | Subagent 设计、配置与协作指南 |
+| [agent-configuration.md](./guides/agent-configuration.md) | Agent 侧 plugin 集成操作手册 |
 
 ## 参考资料
 

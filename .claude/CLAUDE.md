@@ -32,7 +32,7 @@ GitHub Branch Protection rules enforce this on the repository.
 ## Writing Conventions
 
 ### File Naming
-- Use kebab-case for documentation files (e.g., `SKILL_AUTHORING.md`, `AGENT_CONFIGURATION.md`)
+- Use kebab-case for documentation files (e.g., `skill-authoring.md`, `agent-configuration.md`)
 - Skill definition files use `SKILL.md` (uppercase)
 - Subagent declarations use `agents/<id>.md`
 

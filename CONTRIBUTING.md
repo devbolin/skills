@@ -6,7 +6,7 @@
 
 - 所有项目文档使用中文
 - 文档文件使用 Markdown 格式
-- 文件名使用 kebab-case（如 `SKILL_AUTHORING.md`）
+- 文件名使用 kebab-case（如 `skill-authoring.md`）
 
 ## Skill 编写规范
 
