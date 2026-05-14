@@ -112,4 +112,4 @@ cp -r templates/phase1/skill-toolkit-pack my-skill-toolkit
 - [Phase 1 流程文档](../docs/phase1/FLOW.md) - 发布/调用/回滚流程
 - [Phase 1 配置手册](../docs/phase1/CONFIG.md) - pack.yaml 字段详解
 - [人类视角工作流](../docs/phase1/HUMAN_WORKFLOW.md) - 完整操作步骤
-- [Agent 配置指南](../docs/guides/AGENT_CONFIGURATION.md) - 如何在 Agent 侧集成
+- [Agent 配置指南](../docs/guides/agent-configuration.md) - 如何在 Agent 侧集成

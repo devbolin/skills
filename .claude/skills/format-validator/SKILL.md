@@ -10,7 +10,7 @@ Validates documents conform to project standards.
 ## Standards Reference
 
 ### File Naming
-- Use kebab-case: `SKILL_AUTHORING.md`
+- Use kebab-case: `skill-authoring.md`
 - No spaces or underscores in filenames
 
 ### Markdown Format

@@ -194,7 +194,7 @@ git push origin v1.0.0
 
 ## 4. Agent 集成阶段
 
-> 详细操作步骤见 [AGENT_CONFIGURATION.md](../guides/AGENT_CONFIGURATION.md)
+> 详细操作步骤见 [agent-configuration.md](../guides/agent-configuration.md)
 
 ### 4.1 获取 plugin_ref
 

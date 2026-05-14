@@ -396,6 +396,12 @@ Cursor、Amazon Q、Codex CLI 这类工具，第一阶段不需要专门的 pack
 
 ---
 
+> **内容注记**：本附录中的目录结构（`skill.yaml` + `AGENT.md` + 嵌套 `agent.yaml`）是早期设计方案，与实际 Phase 1 当前规范存在差异。当前规范已演进为：
+> - `skills/<id>/SKILL.md`（无 `skill.yaml`，后者仅为可选生成产物）
+> - `agents/<id>.md`（平面单文件，无嵌套目录和 `agent.yaml`）
+>
+> 最新规范请参考 `docs/phase1/` 目录下的文档。
+
 ## 10. 附录：第一阶段最小示例
 
 ```text

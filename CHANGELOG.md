@@ -1,5 +1,17 @@
 # 文档变更日志
 
+## [v2.6] - 2026-05-14
+
+### 修复
+
+#### 文件命名一致性
+- 统一 `docs/guides/` 下文件名从 SCREAMING_SNAKE_CASE 改为 kebab-case
+- 修复 README.md 中 3 处损坏的文件引用链接
+- 在历史调研文档中补充结构差异注记
+- 更新所有 12 个文件中的对应路径引用
+
+---
+
 ## [v2.5] - 2026-04-08
 
 ### 优化
@@ -48,7 +60,7 @@
 #### Critical
 - `release.yml`: 移除硬编码 `ENABLE_SKILL_ARTIFACTS`，修复 skill artifact 打包逻辑
 - `ci.yml`: 添加 `catalog_entry` 路径存在性校验
-- `CONCEPTS.md`/`SKILL_AUTHORING.md`: 修正 L1/L2/L3 渐进披露描述（实现方式是文件分离+显式引用）
+- `CONCEPTS.md`/`skill-authoring.md`: 修正 L1/L2/L3 渐进披露描述（实现方式是文件分离+显式引用）
 
 #### High
 - `FLOW.md`/`DESIGN.md`/`AGENT_CONSUMPTION.md`: 移除未定义的 Policy 机制，简化为 "有 skill_ref 且 enable_skill_artifacts=true"
@@ -88,7 +100,7 @@
 - 澄清 CONFIG.md 中 skill_ref 字段的条件生成特性
 
 ### 文档质量
-- 统一 SKILL_AUTHORING.md 和 CONTRIBUTING.md 中的模板占位符为英文
+- 统一 skill-authoring.md 和 CONTRIBUTING.md 中的模板占位符为英文
 - 模板示例与实际 templates/phase1/ 保持一致
 
 ---
