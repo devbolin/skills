@@ -102,11 +102,17 @@ flowchart TD
 - `skills[].adapters`（未来版本）
 - 其他扩展字段（保持向后兼容）
 
-### 6.3 Subagent 文件布局
+### 6.3 Subagent 文件布局与跨平台说明
 - Subagent 源码文件固定放在 `agents/<id>.md`。
 - `pack.yaml` 通过 `agents[].path` 指向对应文件。
 - `agents/<id>.md` 用于声明 Subagent 的职责、委托边界、输入输出和回退策略。
 - Phase1 中 Subagent 仍作为 Pack 内静态声明随 plugin 一起分发，不单独发布 artifact。
+
+**跨平台注意事项**：
+- Claude Code / OpenCode 原生识别 `agents/<id>.md`（`.md` 扩展名，`.claude/agents/` 目录）。
+- VS Code 要求扩展名为 `.agent.md`，存放目录为 `.github/agents/`。
+- `tools` 字段的值在不同平台命名规则不同（Claude Code: PascalCase, VS Code: kebab-case+namespace, OpenCode: `permissions` 配置）。
+- 构建期转换（`scripts/build.py`）负责处理所有上述差异，源码层保持 `agents/<id>.md` 格式。详见 [subagent-authoring.md](../guides/subagent-authoring.md#五subagent-frontmatter-规范)。
 
 ## 7. 安全与治理基线
 - 默认最小权限：`defaults.permissions.network=false`。

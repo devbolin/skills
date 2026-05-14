@@ -49,7 +49,7 @@ flowchart TD
 
 > 消费模式定义详见 [CONCEPTS.md](../CONCEPTS.md#agent-consumption-mode)
 
-### 5.1 Prompt 模式（Copilot）
+### 5.1 Prompt 模式
 
 最小配置（pack 侧）：
 ```yaml
@@ -67,6 +67,26 @@ skills:
 失败回退：
 - `entry` 缺失或不可读：执行失败并返回入口错误。
 - `skill_ref` 缺失：保持 plugin 默认路径，不切换。
+
+### 5.2 各平台 plugin 安装方式
+
+| 平台 | 安装命令 / 配置 | Agent 配置文件位置 |
+|------|----------------|-------------------|
+| Claude Code | `claude --plugin-dir <path>` 或 `/plugin install` | `.claude/agents/<id>.md` |
+| VS Code (Copilot) | `settings.json` 中配置 `chat.pluginLocations` | `.github/agents/<id>.agent.md` |
+| OpenCode | plugin 解压到项目目录，或 `opencode.json` 配置 MCP | `.claude/agents/<id>.md`（兼容） |
+
+### 5.3 Subagent 声明格式差异
+
+不同平台对 Subagent frontmatter 中 `tools`/`permissions` 字段的处理不同：
+
+| 平台 | 字段 | 工具命名 | 示例 |
+|------|------|---------|------|
+| Claude Code | `tools` (allowlist) + `disallowedTools` (denylist) | PascalCase | `tools: Read, Grep, Bash` |
+| VS Code | `tools` (allowlist only) | kebab-case+namespace | `tools: ['search/codebase']` |
+| OpenCode | `permissions` (allow/ask/deny) | 全小写 | `permission: {bash: "allow"}` |
+
+> 构建期转换（`scripts/build.py`）负责将源码层的 `agents/<id>.md` 转换为各平台所需格式。详见 [subagent-authoring.md](../guides/subagent-authoring.md#五subagent-frontmatter-规范)。
 
 ## 6. 错误语义
 

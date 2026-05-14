@@ -99,6 +99,7 @@ cp -r templates/phase1/skill-toolkit-pack my-skill-toolkit
 
 - 编辑 `agents/<agent-id>.md`
 - 使用 YAML frontmatter（`name`/`description`/`tools`/`model`）+ Markdown 正文格式
+- `tools` 字段在模板中使用 Claude Code PascalCase 格式（如 `tools: Read, Glob, Grep, Bash`）。VS Code 需要构建期转换为 kebab-case 格式。参见 [subagent-authoring.md](../docs/guides/subagent-authoring.md#tools-跨平台差异)
 
 ### 5. 发布
 

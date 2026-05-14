@@ -73,15 +73,87 @@ ls -l /opt/skills/plugins/<pack-id>/<version>/skills
 1. 配置失效或效果变差时，切回上一版本 artifact 目录。
 2. 保持 `plugin_ref` 路径，不依赖 `skill_ref`。
 
-## 4. 常见故障
+## 4. Claude Code
+
+### 4.1 从本地 plugin 目录安装
+
+```bash
+claude --plugin-dir /opt/skills/plugins/<pack-id>/<version>
+```
+
+### 4.2 从 GitHub 安装（需先发布 GitHub Release）
+
+```bash
+/plugin install <org>/<repo>@v1.0.0
+```
+
+### 4.3 Agent 声明（Subagent）
+
+Claude Code 原生识别 `.claude/agents/<id>.md` 文件。plugin 包中的 `agents/<id>.md` 会自动注册为可用 Subagent。
+
+```yaml
+---
+name: review-coordinator
+description: Coordinates code review tasks
+tools: Read, Glob, Grep, Bash    # PascalCase 格式
+model: sonnet
+---
+```
+
+> `tools` 字段使用 PascalCase 命名（如 `Read`, `Grep`, `Bash`），与 VS Code 的 kebab-case 格式不兼容。参见 [subagent-authoring.md](./subagent-authoring.md#tools-跨平台差异)。
+
+### 4.4 验证
+在 Claude Code 中输入触发词测试 Skill 是否命中。
+
+### 4.5 回滚
+```bash
+claude --plugin-dir /opt/skills/plugins/<pack-id>/<previous-version>
+```
+
+## 5. OpenCode
+
+### 5.1 安装 plugin
+
+OpenCode 兼容 `.claude/` 目录结构，可直接使用 Claude Code 的 plugin 包：
+
+```bash
+# 将 plugin 解压到项目目录
+cp -r /opt/skills/plugins/<pack-id>/<version>/* ./
+```
+
+或配置 `opencode.json` 的 MCP 服务器指向 plugin 路径。
+
+### 5.2 Agent 声明（Subagent）
+
+OpenCode 读取 `.claude/agents/<id>.md` 格式，与 Claude Code 兼容。权限控制通过全局 `permission` 配置而非 frontmatter：
+
+```json
+{
+  "permission": {
+    "read": "allow",
+    "edit": "deny",
+    "bash": "allow"
+  }
+}
+```
+
+> 与 Claude Code 不同，OpenCode 不在 agent frontmatter 中声明 `tools`/`permissions`——所有权限通过 `opencode.json` 的 `permission` 块集中管理。参见 [subagent-authoring.md](./subagent-authoring.md#tools-跨平台差异)。
+
+### 5.3 验证
+在 OpenCode 中输入触发词测试 Skill 是否命中。
+
+## 6. 常见故障
 
 | 现象 | 处理 |
 |---|---|
 | Agent 找不到 skill | 先看 catalog 是否有该 `skill_id` 与版本，再确认 plugin 是否已解压到目标目录 |
 | 能找到 skill 但执行失败 | 查 `entry` 文件是否存在、是否与 `mode` 匹配 |
 | 只有 `plugin_ref` 没 `skill_ref` | 正常，phase1 默认 plugin-first |
+| VS Code 识别不到 agents | 确认文件扩展名为 `.agent.md`（非 `.md`），目录为 `.github/agents/` |
+| Claude Code 识别不到 agents | 确认文件扩展名为 `.md`（非 `.agent.md`），目录为 `.claude/agents/` |
 
-## 5. `pack.yaml` 和 Agent 配置的关系
+## 7. `pack.yaml` 和 Agent 配置的关系
 
-- `pack.yaml` 只定义”发布后可消费的入口元数据”（`id/path/mode/entry`）。
-- Agent 真正运行时配置在各客户端（Copilot 等）完成。
+- `pack.yaml` 只定义"发布后可消费的入口元数据"（`id/path/mode/entry`）。
+- Agent 真正运行时配置在各客户端（Claude Code / VS Code / OpenCode 等）完成。
+- `defaults.permissions` 等字段是 `pack.yaml` 的发布契约，各 Agent 执行时按自有机制翻译：Claude Code 直接读取，OpenCode 映射为 `permission` 配置，VS Code 由 `settings.json` 控制。

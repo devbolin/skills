@@ -12,7 +12,10 @@ flowchart TD
     F -->|merge| G[Create Tag]
     G --> H[Release Workflow]
 
-    H --> I[Build Plugin]
+    H --> I[Build Plugin Artifact]
+    I --> I2[Platform Transform]
+    I2 --> I3[Claude: .md files]
+    I2 --> I4[VS Code: .agent.md + kebab tools]
     H --> J[Generate Manifest]
     H --> K{Enable Skill Artifacts?}
     K -->|Yes| L[Build Skill Artifact]
