@@ -1,19 +1,28 @@
-# 参考资料
+# 参考资料 — 主索引
 
-## 文件组织规范
+本文档是 `docs/references/` 目录的主入口。包含三大部分：
 
-### 目录分类
+> **Part A** — [能力体系目录](./references/README.md)（当前文档：工具生态与官方文档索引）
+> **Part B** — [调研产出总览](./references/CATALOG.md)（本次深度调研的全部原创文档索引）
+
+---
+
+## Part A: 能力体系目录
+
+### 文件组织规范
+
+#### 目录分类
 
 | 目录/文件 | 内容 | 来源 |
 |-----------|------|------|
 | `agentskills/` | Agent Skills 开放标准文档（格式规范无关具体工具） | [agentskills.io](https://agentskills.io) |
-| `vscode-copilot/` | VS Code Copilot 官方文档存档（仅限 `code.visualstudio.com/docs/copilot/` 页面） | [code.visualstudio.com](https://code.visualstudio.com/docs/copilot/overview) |
+| `vscode-copilot/` | VS Code Copilot 官方文档存档 | [code.visualstudio.com](https://code.visualstudio.com/docs/copilot/overview) |
 | `opencode/` | OpenCode 官方文档存档 | [opencode.ai/docs](https://opencode.ai/docs) |
 | `agent-plugins.md` | 多工具插件/Skills 系统横向对比 | 多源汇总 |
 | `skill-best-practices.md` | Skill 与 Subagent 编写最佳实践 | 多源汇总 |
 | `agent-capability-platform-report.md` | 历史调研材料（阶段一之前的技术调研） | 内部 |
 
-### 命名规范
+#### 命名规范
 
 1. 所有文件名使用 **kebab-case**（连字符分隔），禁止 snake_case
 2. `vscode-copilot/` 内文件名 = 官方 URL 页面 slug（如 `custom-agents.md` 对应 `/copilot/customization/custom-agents`）；若 slug 过于通用（如 `overview`），则前加所属 section 名（如 `customization-overview.md`）
@@ -385,3 +394,24 @@
 | [**agentskills/agentskills**](https://github.com/agentskills/agentskills) | 规范 (14.5k stars) |
 | [**skillhub.club**](https://skillhub.club) | 36k+ Skills 语义搜索 |
 | [**awesome-agent-skills**](https://github.com/VoltAgent/awesome-agent-skills) | 1000+ VoltAgent 整理 |
+
+---
+
+## Part B: 调研产出总览
+
+> 本轮深度调研的全部原创文档索引，见 [CATALOG.md](./CATALOG.md)。
+
+| 层级 | 文档 | 行数 | 内容 |
+|------|------|------|------|
+| **Superpowers 核心** | `superpowers-design-philosophy.md` | 156 | 10 条核心理念 |
+| | `deep-dive-superpowers.md` | 448 | 完整架构与工作流 |
+| **竞品对比** | `deep-dive-bmad.md` | 440 | BMAD 21 角色 · 4 阶段 |
+| | `deep-dive-speckit.md` | 448 | Spec Kit Spec/Plan 分离 |
+| | `deep-dive-gstack.md` | 540 | gstack 28 命令 · 跨模型审计 |
+| | `methodology-frameworks-deep-dive.md` | 709 | 四框架横向对比 |
+| **全局方法论** | `methodology-landscape.md` | 779 | 从 Waterfall 到 AI 时代的全景 |
+| | `pm-dev-tools-catalog.md` | 805 | 60+ 常用工具图谱 |
+| | `skill-analysis-tools-principles.md` | 629 | 12 类技能设计原理 |
+| | `agentic-skills-framework-landscape.md` | 239 | 11+ 框架生态全景 |
+| **底层思维** | `first-principles-mental-models.md` | 752 | 15 个核心思维模型 |
+| | `ai-domain-cross-models.md` | 749 | 12 个跨域模型在 AI 中的应用 |
