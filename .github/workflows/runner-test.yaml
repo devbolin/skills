@@ -1,0 +1,14 @@
+name: Runner Test
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: [self-hosted, k8s, buildah]
+    steps:
+      - name: Hello
+        run: echo "Runner test passed from $(hostname) at $(date)"
+      - name: Check tools
+        run: |
+          echo "=== buildah ===" && buildah --version 2>/dev/null || echo "buildah not found"
+          echo "=== git ===" && git --version
